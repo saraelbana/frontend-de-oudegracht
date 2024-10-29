@@ -7,11 +7,12 @@ function LoginForm(){
         <form className="login-form">
             <label htmlFor="username-field" id="username-label">
                 username:
-                <input type='text' id="username-field"/>
+                <input type='text' id="username-field"  name="username" placeholder = "Username"  />
+                {/*onChange={( e : ChangeEvent<HTMLInputElement>) => console.log(e.target.value)}*/}
             </label>
             <label htmlFor="password-field" id="password-label">
                 Password:
-                <input type='text' id="password-field"/>
+                <input type='password' id="password-field"/>
             </label>
             <Button buttonName = "Log In"/>
             <p>

@@ -5,7 +5,6 @@ import FooterWrap from "./components/footerWrap/FooterWrap.jsx";
 import MainHeader from "./components/mainHeader/MainHeader.jsx";
 import RestPortalLogin from "./pages/staffPortal/restPortalLogin/RestPortalLogin.jsx";
 import EmployeeMain from "./pages/staffPortal/employeeMain/EmployeeMain.jsx";
-import React from "react";
 import NotFound from "./pages/notFound/NotFound.jsx";
 
 function App() {
@@ -15,7 +14,7 @@ function App() {
             <Routes>
                 <Route path="/*" element={<Home/>}/>
                 {/*this is the correct path*/}
-                <Route path="/rest-login" element={<RestPortalLogin/>}/>
+                <Route path="/portal-login" element={<RestPortalLogin/>}/>
                 {/*although let's navigate to this so that we can implement later the securely authentic authorised user login module*/}
                 <Route path="/portal" element={<EmployeeMain/>}/>
                 <Route path="*" element={<NotFound/>}/>
