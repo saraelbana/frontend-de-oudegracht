@@ -1,0 +1,26 @@
+/* Styles for the mainMenu component */
+.main-menu-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+ul{
+     list-style: none;
+     display: flex;
+}
+li{
+    margin: 0 15px;
+    font-size: 18px;
+    cursor: pointer;
+}
+li:hover {
+    color: #ddd;
+    text-decoration: underline;
+}
+.active-menu-link{
+    text-decoration: underline;
+}
+.default-menu-link{
+    text-decoration: none;
+}
