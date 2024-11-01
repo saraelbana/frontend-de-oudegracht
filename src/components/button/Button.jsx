@@ -1,5 +1,5 @@
 import "./Button.css";
 function Button(prop){
-    return <button>{prop.buttonName}</button>
+    return <button disabled={prop.disable}>{prop.buttonName}</button>
 }
 export default Button;

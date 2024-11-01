@@ -3,9 +3,10 @@ import {Routes, Route} from 'react-router-dom'
 import Home from "./pages/customerPortal/home/Home.jsx";
 import FooterWrap from "./components/footerWrap/FooterWrap.jsx";
 import MainHeader from "./components/mainHeader/MainHeader.jsx";
-import RestPortalLogin from "./pages/staffPortal/restPortalLogin/RestPortalLogin.jsx";
+import PortalLogin from "./pages/staffPortal/portalLogin/PortalLogin.jsx";
 import EmployeeMain from "./pages/staffPortal/employeeMain/EmployeeMain.jsx";
 import NotFound from "./pages/notFound/NotFound.jsx";
+import axios from "axios";
 
 function App() {
     return (
@@ -14,9 +15,9 @@ function App() {
             <Routes>
                 <Route path="/*" element={<Home/>}/>
                 {/*this is the correct path*/}
-                <Route path="/portal-login" element={<RestPortalLogin/>}/>
+                <Route path="/portal" element={<PortalLogin/>}/>
                 {/*although let's navigate to this so that we can implement later the securely authentic authorised user login module*/}
-                <Route path="/portal" element={<EmployeeMain/>}/>
+                {/*<Route path="/portal" element={<EmployeeMain/>}/>*/}
                 <Route path="*" element={<NotFound/>}/>
             </Routes>
             <FooterWrap/>

@@ -1,11 +1,11 @@
-import "./RestPortalLogin.css";
+import "./PortalLogin.css";
 import LoginPopup from "../../../components/loginPopup/LoginPopup.jsx";
 
-function RestPortalLogin(){
+function PortalLogin(){
     return(
         <div className="rest-portal">
             <LoginPopup/>
         </div>
     );
 }
-export default RestPortalLogin;
+export default PortalLogin;
