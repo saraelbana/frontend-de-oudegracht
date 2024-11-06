@@ -4,6 +4,7 @@ import Button from "../button/Button.jsx";
 import MandatoryTag from "../mandatoryTag/MandatoryTag.jsx";
 import {deoudegrachtApi, employeeEndpoint, rolesEndpoint} from "../../deoudegrachtApi.js";
 import {createRequestData} from "../../helpers/CreateNewEmployeeRequest.js";
+import {Default_Employee_Role} from "../../constants/EmployeesConstants.js";
 
 function NewEmployeeForm(){
 
@@ -12,7 +13,7 @@ function NewEmployeeForm(){
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
-    const [role, setRole] = useState("");
+    const [role, setRole] = useState(Default_Employee_Role);
     const [roles, setRoles] = useState([]);
     const [phone, setPhone] = useState("");
     const [success, setSuccess] = useState("");
@@ -128,14 +129,13 @@ function NewEmployeeForm(){
                 <label id="role-label">
                     role:
                     <select id="role-field" name="role" onChange={(event) => setRole(event.target.value)}>
-                        <option value="">Select Role</option>
                         {roles.map((role) => (
                             <option key={role} value={role}>{role}</option>
                         ))}
                     </select>
                 </label>
             </div>
-            <Button buttonName="Submit" disable={!(firstname && lastname && username && password && role)}/>
+            <Button buttonName="Submit" disable={!(firstname && lastname && username && password)}/>
             {error && <p className="error-message">{error}</p>}
             {success && <p className="success-message">{success}</p>}
         </form>

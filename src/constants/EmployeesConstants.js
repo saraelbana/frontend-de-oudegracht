@@ -1,0 +1,1 @@
+export const Default_Employee_Role = "EMPLOYEE";
