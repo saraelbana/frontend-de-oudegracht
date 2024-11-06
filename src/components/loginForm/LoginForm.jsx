@@ -12,7 +12,7 @@ function LoginForm(){
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post("https://localhost:5432/login", {username, password});
+            const response = await axios.post("http://localhost:5432/login", {username, password});
             console.log("Successful login",response.data);
         } catch (e) {
             console.log("Error logging in",e.data);
