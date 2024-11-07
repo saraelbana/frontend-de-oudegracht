@@ -1,7 +1,7 @@
-import "./DisplayEmployeeDataForm.css"
+import "./EmployeeDetailsForm.css"
 
 // eslint-disable-next-line react/prop-types
-function DisplayEmployeeDataForm({employeeData}){
+function EmployeeDetailsForm({employeeData}){
     return (
         <form className= "display-employee">
             <div className="new-employee-name">
@@ -42,4 +42,4 @@ function DisplayEmployeeDataForm({employeeData}){
 
     )
 }
-export default DisplayEmployeeDataForm;
+export default EmployeeDetailsForm;

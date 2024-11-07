@@ -9,7 +9,8 @@ function Dashboard() {
                     <h1>Dashboard</h1>
                 <Routes>
                     {/*<Route path="/employees" element={<h1>Hello world</h1>}/>*/}
-                    <Route path="/employees" element={<AddNewEmployee/>}/>
+                    <Route path="/new-employee" element={<AddNewEmployee/>}/>
+                    <Route path="/employee-details" element={<EmployeesPersonalData/>}/>
                 </Routes>
 
             </section>
