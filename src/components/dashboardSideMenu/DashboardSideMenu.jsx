@@ -2,7 +2,7 @@ import "./DashboardSideMenu.css";
 function DashboardSideMenu() {
     return(
         <div className="dashboard-side-menu">
-            <ul>
+            <ul className="dashboard-side-menu-items">
                 <li>Dashboard</li>
                 <li>Recipes</li>
                 <li>Daily Specials</li>
