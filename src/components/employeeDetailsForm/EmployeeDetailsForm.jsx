@@ -1,35 +1,34 @@
 import "./EmployeeDetailsForm.css"
+import Button from "../button/Button.jsx";
 
-// eslint-disable-next-line react/prop-types
 function EmployeeDetailsForm({employeeData}){
     return (
         <form className= "display-employee">
             <div className="new-employee-name">
                 <div className="new-employee-firstname">
                     <label id="firstname-label">
-                        firstname: {employeeData.firstname}
+                        Firstname: {employeeData.firstname}
                     </label>
                 </div>
                 <div className="new-employee-lastname">
                     <label id="lastname-label">
-                        lastname: {employeeData.lastname}
+                        Lastname: {employeeData.lastname}
                     </label>
                 </div>
             </div>
             <div className="new-employee-contact">
                 <label id="email-label">
-                    email: {employeeData.email}
+                    Email: {employeeData.email}
                 </label>
                 <label id="phone-number-label">
-                    Mobile Number: {employeeData.phone}
+                    Phone Number: {employeeData.phone}
                 </label>
             </div>
             <div className="new-employee-credentials">
                 <div className="new-employee-username">
                     <label id="username-label">
-                        username: {employeeData.username}
+                        Username: {employeeData.username}
                     </label>
-
                 </div>
 
             </div>
@@ -38,6 +37,7 @@ function EmployeeDetailsForm({employeeData}){
                     role: {employeeData.role}
                 </label>
             </div>
+            <Button buttonName="Edit Profile" />
         </form>
 
     )

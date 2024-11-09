@@ -1,7 +1,10 @@
 .main-header {
     background-color: #ffffff;
-    padding: 20px;
+
 /*/ / createna flex to display compponents in same row shown to the left display: flex;*/
     justify-content: space-between;
     align-items: flex-start;
+    /*/ / height is 15%;*/
+
+
 }

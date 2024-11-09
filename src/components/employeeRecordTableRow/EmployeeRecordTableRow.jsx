@@ -1,4 +1,7 @@
+import "./EmployeeRecordTableRow.css";
 import PropTypes from 'prop-types';
+import Button from "../button/Button.jsx";
+import {NavLink} from "react-router-dom";
 
 function EmployeeRecordTableRow({employee}){
     console.log("Employee data " + employee);
@@ -9,7 +12,11 @@ function EmployeeRecordTableRow({employee}){
             <td>{employee.lastname}</td>
             <td>{employee.email}</td>
             <td>{employee.phone}</td>
-            <td>{employee.username}</td>
+            <td className="username-navlink">
+                <NavLink to="/portal/employees-details" className ={({isActive})=> isActive ? 'active-menu-link' : 'default-menu-link'} >
+                    {employee.username}
+                </NavLink>
+            </td>
             <td>{employee.role}</td>
         </tr>
 

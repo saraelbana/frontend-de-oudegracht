@@ -1,13 +1,13 @@
 import  "./ProfileSettingsMenu.css";
 
-function ProfileSettingsMenu() {
+function ProfileSettingsMenu(prop) {
     return(
         <div className="settings-menu-overlay">
             <div className="settings-menu">
               <div className="settings-list">
                     <ul className="list-items">
-                        <li>Profile</li>
-                        <li>Logout</li>
+                        <li onClick={prop.onClick}>Profile</li>
+                        <li onClick={prop.onClick}>Logout</li>
                     </ul>
                 </div>
             </div>
