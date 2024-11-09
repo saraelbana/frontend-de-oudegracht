@@ -1,19 +1,20 @@
 import "./MainDisplay.css";
 import ImageContainer from "../../../components/imageContainer/ImageContainer.jsx";
-import React from "react";
+import {CoverImage, SignatureDish} from "../../../constants/AssetsFilesNames.js";
+
 
 function MainDisplay(){
     return(
         <div className="main-display">
             <section className="cover-image">
-                <ImageContainer source="/src/assets/cover-image.jpg" alt="restaurant vibes"/>
+                <ImageContainer source={CoverImage} alt="restaurant vibes"/>
             </section>
             <section className="signature-dish-section">
-                <ImageContainer className="image-container" source="/src/assets/signature-dish-250x250.jpeg"
+                <ImageContainer className="image-container" source={SignatureDish}
                                 alt="signature dish"/>
-                <ImageContainer className="image-container" source="/src/assets/signature-dish-250x250.jpeg"
+                <ImageContainer className="image-container" source={SignatureDish}
                                 alt="signature dish"/>
-                <ImageContainer className="image-container" source="/src/assets/signature-dish-250x250.jpeg"
+                <ImageContainer className="image-container" source={SignatureDish}
                                 alt="signature dish"/>
             </section>
         </div>

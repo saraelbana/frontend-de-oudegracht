@@ -1,5 +1,6 @@
 import "./FooterWrap.css";
 import ImageContainer from "../imageContainer/ImageContainer.jsx";
+import {FooterWrapLogo} from "../../constants/AssetsFilesNames.js";
 
 function FooterWrap(){
     return(
@@ -12,7 +13,7 @@ function FooterWrap(){
                 </p>
             </div>
             <div className="midlle-footer-info">
-                <ImageContainer source="/src/assets/logo-50x50.png" alt="restaurant logo"/>
+                <ImageContainer source={FooterWrapLogo} alt="restaurant logo"/>
             </div>
             <div className="right-footer-info">
                 <p>

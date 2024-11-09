@@ -1,0 +1,24 @@
+.employee-dashboard{
+    width: 100%;
+}
+.employee-settings-section{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+    background-color: #f5f5f5;
+}
+.employee-main{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: left;
+    height: 100vh;
+    background-color: #f5f5f5;
+}
+.dashboard-side-menu{
+    flex-basis: 20%;
+}
+.dashboard-content{
+    flex-basis: 80%;
+}

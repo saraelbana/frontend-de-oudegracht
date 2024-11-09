@@ -2,8 +2,8 @@ import "./NewEmployeeForm.css";
 import {useState, useEffect} from "react";
 import Button from "../button/Button.jsx";
 import MandatoryTag from "../mandatoryTag/MandatoryTag.jsx";
-import {deoudegrachtApi, employeeEndpoint, rolesEndpoint} from "../../deoudegrachtApi.js";
-import {createRequestData} from "../../helpers/CreateNewEmployeeRequest.js";
+import {deoudegrachtApi, employeesEndpoint, rolesEndpoint} from "../../deoudegrachtApi.js";
+import {createRequestData} from "../../helpers/EmployeesOperations.js";
 import {Default_Employee_Role} from "../../constants/EmployeesConstants.js";
 
 function NewEmployeeForm(){
@@ -36,7 +36,7 @@ function NewEmployeeForm(){
         const requestData = createRequestData({firstname, lastname, email, username, password, phone, role});
 
         try {
-            const response = await deoudegrachtApi.post(employeeEndpoint, requestData);
+            const response = await deoudegrachtApi.post(employeesEndpoint, requestData);
             setSuccess(`Employee created successfully! ID: ${response.data.id}`);
             setError("");
         }
