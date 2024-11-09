@@ -7,6 +7,6 @@ export const deoudegrachtApi = axios.create({
 });
 
 // employees endpoints
-export const employeeEndpoint = DE_OUGRACHT_API_URL + "/employees";
+export const employeesEndpoint = DE_OUGRACHT_API_URL + "/employees";
 //Roles endpoints
 export const rolesEndpoint = DE_OUGRACHT_API_URL + "/roles";
