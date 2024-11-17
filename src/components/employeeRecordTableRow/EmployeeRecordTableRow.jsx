@@ -1,6 +1,5 @@
 import "./EmployeeRecordTableRow.css";
 import PropTypes from 'prop-types';
-import Button from "../button/Button.jsx";
 import {NavLink} from "react-router-dom";
 
 function EmployeeRecordTableRow({employee}){

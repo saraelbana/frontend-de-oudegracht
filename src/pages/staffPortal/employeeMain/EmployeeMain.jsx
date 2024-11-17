@@ -7,21 +7,25 @@ import WelcomeMessage from "../../../components/welcomeMessage/WelcomeMessage.js
 import {useState} from "react";
 import ProfileSettingsMenu from "../../../components/profileSettingsMenu/ProfileSettingsMenu.jsx";
 import EmployeeDetailsForm from "../../../components/employeeDetailsForm/EmployeeDetailsForm.jsx";
+import {Route, Routes, useNavigate} from "react-router-dom";
 
 
 function EmployeeMain() {
     const [isProfileSettingsVisible, setProfileSettingsVisible] = useState(false);
     const [activeComponent, setActiveComponent] = useState("Dashboard");
+    const navigate = useNavigate();
 
     const handleIconClick = () => {
         setProfileSettingsVisible(!isProfileSettingsVisible);
 
     };
     const handleProfileClick = () => {
+        navigate("/portal/employee");
         setActiveComponent("EmployeeDetailsForm");
         // setProfileSettingsVisible(false);
     };
     const handleDashboardClick = () => {
+        navigate("/portal");
         setActiveComponent("Dashboard");
         setProfileSettingsVisible(false);
     };
@@ -35,11 +39,20 @@ function EmployeeMain() {
                 {isProfileSettingsVisible && <ProfileSettingsMenu onClick={handleProfileClick}/>}
                 <section className="employee-main">
                     <section className="dashboard-side-menu">
-                        <DashboardSideMenu onClick = {handleDashboardClick}/>
+                        <DashboardSideMenu onClick={handleDashboardClick}/>
 
                     </section>
                     <section className="employee-main-content">
-                        {activeComponent === "Dashboard" ? <Dashboard /> : <EmployeeDetailsForm employeeData={{ /* pass employee data here */ }} />}
+                        <Routes>
+                            <Route path="/" element={<Dashboard/>}/>
+                            {/*<Route path="/menu" element={<Menu/>}/>*/}
+                            {/*<Route path="/recipes" element=/!*</>*!//>*/}
+                            <Route path="/employee"
+                                   element={<EmployeeDetailsForm employeeData={{ /* pass employee data here */}}/>}/>
+
+                        </Routes>
+                        {/*{activeComponent === "Dashboard" ? <Dashboard/> :*/}
+                        {/*    <EmployeeDetailsForm employeeData={{ /* pass employee data here *!/}/>}*/}
                     </section>
                 </section>
 
