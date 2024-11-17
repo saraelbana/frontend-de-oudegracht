@@ -42,10 +42,8 @@ function EmployeeDetailsForm({employeeData}){
                         role: {employeeData.role}
                     </label>
                 </div>
-                <div className="edit-employee-button">
-                    <Button buttonName="Edit Profile" />
-                </div>
             </form>
+            <Button buttonName="Edit Profile" />
         </div>
 
     )
