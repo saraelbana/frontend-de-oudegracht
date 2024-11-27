@@ -19,7 +19,6 @@ function App() {
                 {/*although let's navigate to this so that we can implement later the securely authentic authorised user login module*/}
                 <Route path="/portal/*" element={<EmployeeMain/>}/>
                 <Route path={"/test"} element={<TestComponent/>}/>
-
                 <Route path="*" element={<NotFound/>}/>
             </Routes>
             <FooterWrap/>

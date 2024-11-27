@@ -6,9 +6,10 @@ import EmployeeRecordTableRow from "../employeeRecordTableRow/EmployeeRecordTabl
 function EmployeesDataTable(){
     const [employees, setEmployees] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
     useEffect(()=>{
-        const fetchEAllEmployees = async ()=>{
+        const fetchAllEmployees = async ()=>{
             try {
                 const response = await deoudegrachtApi.get(employeesEndpoint);
                 console.log("Employees data fetched", response.data);
@@ -18,9 +19,10 @@ function EmployeesDataTable(){
             catch (e){
                 console.log("Error fetching employees", e.data);
                 setLoading(false);
+                setError(e);
             }
         }
-        fetchEAllEmployees();
+        fetchAllEmployees();
     },[]);
     useEffect(() => {
         console.log("Employees data set", employees);
@@ -29,35 +31,38 @@ function EmployeesDataTable(){
 
     return(
         <div className="employees-data-table">
-            <table>
-                <thead>
-                    <tr>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Email</th>
-                        <th>Phone Number</th>
-                        <th>Username</th>
-                        <th>Role</th>
+            <table  className="employees-table">
+                <thead className="employees-table-head">
+                    <tr className="employees-table-row">
+                        <th className="employees-row-table-head employees-table-head-firstname">Firstname</th>
+                        <th className="employees-row-table-head employees-table-head-lastname">Lastname</th>
+                        <th className="employees-row-table-head employees-table-head-email">Email</th>
+                        <th className="employees-row-table-head employees-table-head-phone">Phone Number</th>
+                        <th className="employees-row-table-head employees-table-head-username">Username</th>
+                        <th className="employees-row-table-head employees-table-head-role">Role</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody className="employees-table-body">
                 {
                     loading ? (
-                        <tr>
-                            <td colSpan="6">Loading...</td>
+                        <tr className="employees-table-row">
+                            <td className="employees-table-loading-data-cell" colSpan="6">Loading...</td>
                         </tr>
                     ):(
-                        employees.map(
-                            (employee, index) => (
-                                console.log("Employee data", employee),
-                                <EmployeeRecordTableRow key={index} employee={employee} />
-                            )
+                        error ? (
+                            <td className="employees-table-error-data-cell" colSpan="6">Error fetching data check connection...</td>,
+                            console.log("Error fetching data", error)
+                        ) : (
+                                employees.map((employee, index) => (
+                                            console.log("Employee data", employee),
+                                                <EmployeeRecordTableRow key={index} employee={employee} />
+                                    )
+                                )
                         )
                     )
                 }
                 </tbody>
             </table>
-
         </div>
     )
 }

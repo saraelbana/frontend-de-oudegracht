@@ -8,16 +8,26 @@ function MainMenu(){
             <nav>
                 <ul>
                     <li>
-                        <NavLink to="/" className ={({isActive})=> isActive ? 'active-menu-link' : 'default-menu-link'}>Home</NavLink>
+                        <NavLink
+                            to="/"
+                            className ={({isActive})=> isActive ? 'active-menu-link' : 'default-menu-link'}>
+                            Home
+                        </NavLink>
                     </li>
                     <li>
-                        <NavLink to="/menu" className ={({isActive})=> isActive ? 'active-menu-link' : 'default-menu-link'}>Menu</NavLink>
+                        <NavLink to="/menu" className ={({isActive})=> isActive ? 'active-menu-link' : 'default-menu-link'}>
+                            Menu
+                        </NavLink>
                     </li>
                     <li>
-                        <NavLink to="/reservations" className ={({isActive})=> isActive ? 'active-menu-link' : 'default-menu-link'}>Reservation</NavLink>
+                        <NavLink to="/reservations" className ={({isActive})=> isActive ? 'active-menu-link' : 'default-menu-link'}>
+                            Reservation
+                        </NavLink>
                     </li>
                     <li>
-                        <NavLink to="/login" className ={({isActive})=> isActive ? 'active-menu-link' : 'default-menu-link'}>Login</NavLink>
+                        <NavLink to="/login" className ={({isActive})=> isActive ? 'active-menu-link' : 'default-menu-link'}>
+                            Login
+                        </NavLink>
                     </li>
                 </ul>
             </nav>

@@ -1,0 +1,14 @@
+.employees-data-table{
+    width: 100%;
+    border: 2px solid #f1f1f1;
+}
+.employees-table-row{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    border-bottom: 1px solid #f1f1f1;
+
+}
+.employees-row-table-head {
+    flex: 1
+}

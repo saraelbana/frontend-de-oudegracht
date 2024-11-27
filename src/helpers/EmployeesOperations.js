@@ -9,3 +9,4 @@ export const createRequestData = ({ firstname, lastname, email, username, passwo
         role
     };
 };
+

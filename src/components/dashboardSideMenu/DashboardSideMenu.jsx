@@ -2,25 +2,26 @@ import "./DashboardSideMenu.css";
 import {NavLink} from "react-router-dom";
 function DashboardSideMenu(prop) {
     return(
-        <div className="dashboard-side-menu">
-            <ul className="dashboard-side-menu-items">
+            <ul className="dashboard-side-menu-list">
                 <li>
                     <NavLink to="/portal" className ={({isActive})=> isActive ? 'active-menu-link' : 'default-menu-link'} onClick={prop.onClick}>
                         Dashboard
                     </NavLink>
                 </li>
+                <NavLink to="/portal/employee" className ={({isActive})=> isActive ? 'active-menu-link' : 'default-menu-link'} onClick={prop.onClick}>
+                    Employees List
+                </NavLink>
                 <li>
-                    <NavLink to="/portal/employees" className ={({isActive})=> isActive ? 'active-menu-link' : 'default-menu-link'}>
+                    <NavLink to="/portal/recipes" className ={({isActive})=> isActive ? 'active-menu-link' : 'default-menu-link'}>
                         Recipes
                     </NavLink>
                 </li>
                 <li>
                     <NavLink to="/portal/employees" className ={({isActive})=> isActive ? 'active-menu-link' : 'default-menu-link'}>
-                        Daily Specials
+                        Menu
                     </NavLink>
                 </li>
             </ul>
-        </div>
     );
 }
 export default DashboardSideMenu;

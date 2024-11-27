@@ -6,17 +6,17 @@ function EmployeeRecordTableRow({employee}){
     console.log("Employee data " + employee);
 
     return(
-        <tr>
-            <td>{employee.firstname}</td>
-            <td>{employee.lastname}</td>
-            <td>{employee.email}</td>
-            <td>{employee.phone}</td>
-            <td className="username-navlink">
-                <NavLink to="/portal/employees-details" className ={({isActive})=> isActive ? 'active-menu-link' : 'default-menu-link'} >
+        <tr className="employee-record-row">
+            <td className="employee-firstname-data">{employee.firstname}</td>
+            <td className="employee-lastname-data">{employee.lastname}</td>
+            <td className="employee-email-data">{employee.email}</td>
+            <td className="employee-phone-data">{employee.phone}</td>
+            <td className="employee-data-username-navlink">
+                <NavLink to="/portal/employee/${employee.username}" className ={({isActive})=> isActive ? 'active-menu-link' : 'default-menu-link'} >
                     {employee.username}
                 </NavLink>
             </td>
-            <td>{employee.role}</td>
+            <td className="employee-role-data">{employee.role}</td>
         </tr>
 
     );

@@ -1,0 +1,18 @@
+.dashboard-side-menu-list{
+
+    border: 3px solid #f5f5f5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+.default-menu-link{
+    margin: 10px;
+
+}
+.active-menu-link {
+    margin: 10px;
+}
