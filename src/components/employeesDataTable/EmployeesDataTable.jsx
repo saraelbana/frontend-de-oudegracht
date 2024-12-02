@@ -1,7 +1,7 @@
 import "./EmployeesDataTable.css";
 import {useEffect, useState} from "react";
 import {deoudegrachtApi, employeesEndpoint} from "../../deoudegrachtApi.js";
-import EmployeeRecordTableRow from "../employeeRecordTableRow/EmployeeRecordTableRow.jsx";
+import EmployeesRecordsTableRow from "../employeesRecordsTableRow/EmployeesRecordsTableRow.jsx";
 
 function EmployeesDataTable(){
     const [employees, setEmployees] = useState([]);
@@ -55,7 +55,7 @@ function EmployeesDataTable(){
                         ) : (
                                 employees.map((employee, index) => (
                                             console.log("Employee data", employee),
-                                                <EmployeeRecordTableRow key={index} employee={employee} />
+                                                <EmployeesRecordsTableRow key={index} employee={employee} />
                                     )
                                 )
                         )

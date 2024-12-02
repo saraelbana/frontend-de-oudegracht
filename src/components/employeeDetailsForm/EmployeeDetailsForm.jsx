@@ -1,14 +1,36 @@
-import "./EmployeeDetailsForm.css"
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { deoudegrachtApi, employeesEndpoint } from "../../deoudegrachtApi.js";
 import Button from "../button/Button.jsx";
 import EmployeeProfileHeader from "../employeeProfileHeader/EmployeeProfileHeader.jsx";
 
-function EmployeeDetailsForm({employeeData}){
+function EmployeeDetailsForm() {
+    const { username } = useParams();
+    const [employeeData, setEmployeeData] = useState(null);
+
+    useEffect(() => {
+        const fetchEmployeeData = async () => {
+            try {
+                const response = await deoudegrachtApi.get(`${employeesEndpoint}/${username}`);
+                setEmployeeData(response.data);
+            } catch (error) {
+                console.error("Error fetching employee data", error);
+            }
+        };
+
+        fetchEmployeeData();
+    }, [username]);
+
+    if (!employeeData) {
+        return <div>Loading...</div>;
+    }
+
     return (
         <div className="employee-details-form">
             <div className="employee-header">
-                <EmployeeProfileHeader  employeeData={employeeData}/>
+                <EmployeeProfileHeader employeeData={employeeData} />
             </div>
-            <form className= "display-employee">
+            <form className="display-employee">
                 <div className="new-employee-name">
                     <div className="new-employee-firstname">
                         <label id="firstname-label">
@@ -35,17 +57,16 @@ function EmployeeDetailsForm({employeeData}){
                             Username: {employeeData.username}
                         </label>
                     </div>
-
                 </div>
                 <div className="new-employee-role">
                     <label id="role-label">
-                        role: {employeeData.role}
+                        Role: {employeeData.role}
                     </label>
                 </div>
             </form>
             <Button buttonName="Edit Profile" />
         </div>
-
-    )
+    );
 }
+
 export default EmployeeDetailsForm;

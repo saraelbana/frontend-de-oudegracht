@@ -6,10 +6,10 @@ import {SettingsIcon} from "../../../constants/AssetsFilesNames.js";
 import WelcomeMessage from "../../../components/welcomeMessage/WelcomeMessage.jsx";
 import {useState} from "react";
 import ProfileSettingsMenu from "../../../components/profileSettingsMenu/ProfileSettingsMenu.jsx";
-import EmployeeDetailsForm from "../../../components/employeeDetailsForm/EmployeeDetailsForm.jsx";
 import {Route, Routes, useNavigate} from "react-router-dom";
 import RecipesDashboard from "../../../components/recipesDashboard/RecipesDashboard.jsx";
 import EmployeesDataTable from "../../../components/employeesDataTable/EmployeesDataTable.jsx";
+import EmployeeDetailsForm from "../../../components/employeeDetailsForm/EmployeeDetailsForm.jsx";
 
 
 function EmployeeMain() {
@@ -52,6 +52,8 @@ function EmployeeMain() {
                             <Route path="/menu" element={<RecipesDashboard/>}/>
                             <Route path="/employee"
                                    element={< EmployeesDataTable/>}/>
+                            <Route path="/employee/:username"
+                                   element={<EmployeeDetailsForm/>}/>
                         </Routes>
                         {/*{activeComponent === "Dashboard" ? <Dashboard/> :*/}
                         {/*    <EmployeeDetailsForm employeeData={{ /* pass employee data here *!/}/>}*/}

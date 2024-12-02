@@ -1,10 +1,14 @@
-import "./EmployeeRecordTableRow.css";
+import "./EmployeesRecordsTableRow.css";
 import PropTypes from 'prop-types';
-import {NavLink} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-function EmployeeRecordTableRow({employee}){
+function EmployeesRecordsTableRow({employee}){
     console.log("Employee data " + employee);
+    const navigate = useNavigate();
 
+    const handleUsernameClick = () => {
+        navigate(`/portal/employee/${employee.username}`);
+    };
     return(
         <tr className="employee-record-row">
             <td className="employee-firstname-data">{employee.firstname}</td>
@@ -12,16 +16,17 @@ function EmployeeRecordTableRow({employee}){
             <td className="employee-email-data">{employee.email}</td>
             <td className="employee-phone-data">{employee.phone}</td>
             <td className="employee-data-username-navlink">
-                <NavLink to="/portal/employee/${employee.username}" className ={({isActive})=> isActive ? 'active-menu-link' : 'default-menu-link'} >
+                <span onClick={handleUsernameClick} className="username-navlink">
                     {employee.username}
-                </NavLink>
+                </span>
             </td>
             <td className="employee-role-data">{employee.role}</td>
         </tr>
 
     );
 }
-EmployeeRecordTableRow.propTypes = {
+
+EmployeesRecordsTableRow.propTypes = {
     employee: PropTypes.shape({
         firstname: PropTypes.string.isRequired,
         lastname: PropTypes.string.isRequired,
@@ -31,4 +36,4 @@ EmployeeRecordTableRow.propTypes = {
         role: PropTypes.string.isRequired,
     }).isRequired,
 };
-export default EmployeeRecordTableRow;
+export default EmployeesRecordsTableRow;

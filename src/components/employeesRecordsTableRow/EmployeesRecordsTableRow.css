@@ -1,0 +1,12 @@
+.username-navlink{
+    color: blue;
+}
+.username-navlink:hover{
+    color: coral;
+}
+.employee-record-row
+{
+    display: flex;
+    flex: 1;
+    justify-content: space-between;
+}
