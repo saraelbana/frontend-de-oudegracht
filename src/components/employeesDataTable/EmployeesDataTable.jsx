@@ -17,9 +17,50 @@ function EmployeesDataTable(){
                 setLoading(false);
             }
             catch (e){
-                console.log("Error fetching employees", e.data);
-                setLoading(false);
-                setError(e);
+                // this fragment is commented out for testing purposes
+                // console.log("Error fetching employees", e.data);
+                // setLoading(false);
+                // setError(e);
+                setEmployees([{
+                    "firstname": "Sara",
+                    "lastname": "Elbana",
+                    "email": "sara@sara.com",
+                    "username": "sara.elbana",
+                    "password": "password"
+
+                },{
+                    "firstname": "Layla",
+                    "lastname": "Raafat",
+                    "email": "layla@sara.com",
+                    "username": "layla.raafat",
+                    "password": "12345678"
+
+                },{
+                    "firstname": "Omar",
+                    "lastname": "Elbana",
+                    "email": "Omar@sara.com",
+                    "username": "omar.elbana",
+                    "password": "weakPass"
+
+                },{
+                    "firstname": "Mostafa",
+                    "lastname": "Raafat",
+                    "email": "mostafa@mostafa.com",
+                    "phone": "01002002060",
+                    "username": "Mostafa.Raafat",
+                    "password": "password"
+
+                },{
+                    "firstname": "Hans",
+                    "lastname": "Jan",
+                    "email": "hans@hans.com",
+                    "username": "hans.jan",
+                    "password": "password",
+                    "role":"CHEF",
+                    "phone":"0640020000"
+
+                }
+                ])
             }
         }
         fetchAllEmployees();
@@ -34,24 +75,24 @@ function EmployeesDataTable(){
             <table  className="employees-table">
                 <thead className="employees-table-head">
                     <tr className="employees-table-row">
-                        <th className="employees-row-table-head employees-table-head-firstname">Firstname</th>
-                        <th className="employees-row-table-head employees-table-head-lastname">Lastname</th>
-                        <th className="employees-row-table-head employees-table-head-email">Email</th>
-                        <th className="employees-row-table-head employees-table-head-phone">Phone Number</th>
-                        <th className="employees-row-table-head employees-table-head-username">Username</th>
-                        <th className="employees-row-table-head employees-table-head-role">Role</th>
+                        <th className="employees-table-head employees-table-head-firstname">Firstname</th>
+                        <th className="employees-table-head employees-table-head-lastname">Lastname</th>
+                        <th className="employees-table-head employees-table-head-email">Email</th>
+                        <th className="employees-table-head employees-table-head-phone">Phone Number</th>
+                        <th className="employees-table-head employees-table-head-username">Username</th>
+                        <th className="employees-table-head employees-table-head-role">Role</th>
                     </tr>
                 </thead>
                 <tbody className="employees-table-body">
                 {
                     loading ? (
                         <tr className="employees-table-row">
-                            <td className="employees-table-loading-data-cell" colSpan="6">Loading...</td>
+                            <td className="employees-table-data employees-table-loading-data-cell" colSpan="6">Loading...</td>
                         </tr>
                     ):(
                         error ? (
                             <tr className="employees-table-row">
-                                <td className="employees-table-error-data-cell" colSpan="6">Error fetching data check
+                                <td className="employees-table-data employees-table-error-data-cell" colSpan="6">Error fetching data check
                                     connection...
                                 </td>
                             </tr>,

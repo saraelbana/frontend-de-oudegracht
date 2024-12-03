@@ -11,18 +11,17 @@ function EmployeesRecordsTableRow({employee}){
     };
     return(
         <tr className="employee-record-row">
-            <td className="employee-firstname-data">{employee.firstname}</td>
-            <td className="employee-lastname-data">{employee.lastname}</td>
-            <td className="employee-email-data">{employee.email}</td>
-            <td className="employee-phone-data">{employee.phone}</td>
-            <td className="employee-data-username-navlink">
+            <td className="employees-table-data employee-firstname-data">{employee.firstname}</td>
+            <td className="employees-table-data employee-lastname-data">{employee.lastname}</td>
+            <td className="employees-table-data employee-email-data">{employee.email}</td>
+            <td className="employees-table-data employee-phone-data">{employee.phone}</td>
+            <td className="employees-table-data employee-data-username-navlink">
                 <span onClick={handleUsernameClick} className="username-navlink">
                     {employee.username}
                 </span>
             </td>
-            <td className="employee-role-data">{employee.role}</td>
+            <td className="employees-table-data employee-role-data">{employee.role}</td>
         </tr>
-
     );
 }
 
