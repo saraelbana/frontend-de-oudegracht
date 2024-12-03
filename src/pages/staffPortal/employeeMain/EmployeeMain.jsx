@@ -56,7 +56,7 @@ function EmployeeMain() {
                                    element={<EmployeeDetailsForm/>}/>
                         </Routes>
                         {/*{activeComponent === "Dashboard" ? <Dashboard/> :*/}
-                        {/*    <EmployeeDetailsForm employeeData={{ /* pass employee data here *!/}/>}*/}
+                        {/* <EmployeeDetailsForm employeeData={{ /* pass employee data here *!/}/>}*/}
                     </section>
                 </section>
 

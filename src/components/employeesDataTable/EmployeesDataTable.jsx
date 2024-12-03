@@ -50,14 +50,18 @@ function EmployeesDataTable(){
                         </tr>
                     ):(
                         error ? (
-                            <td className="employees-table-error-data-cell" colSpan="6">Error fetching data check connection...</td>,
-                            console.log("Error fetching data", error)
+                            <tr className="employees-table-row">
+                                <td className="employees-table-error-data-cell" colSpan="6">Error fetching data check
+                                    connection...
+                                </td>
+                            </tr>,
+                                console.log("Error fetching data", error)
                         ) : (
-                                employees.map((employee, index) => (
+                            employees.map((employee, index) => (
                                             console.log("Employee data", employee),
                                                 <EmployeesRecordsTableRow key={index} employee={employee} />
                                     )
-                                )
+                            )
                         )
                     )
                 }
