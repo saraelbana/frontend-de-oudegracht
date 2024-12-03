@@ -129,9 +129,10 @@ function NewEmployeeForm(){
                 <label id="role-label">
                     role:
                     <select id="role-field" name="role" onChange={(event) => setRole(event.target.value)}>
-                        {roles.map((role) => (
-                            <option key={role} value={role}>{role}</option>
-                        ))}
+                        {
+                            roles.map((role) => (
+                            <option key={role} value={role}>{role}</option>))
+                        }
                     </select>
                 </label>
             </div>
