@@ -7,9 +7,9 @@ import WelcomeMessage from "../../../components/welcomeMessage/WelcomeMessage.js
 import {useState} from "react";
 import ProfileSettingsMenu from "../../../components/profileSettingsMenu/ProfileSettingsMenu.jsx";
 import {Route, Routes, useNavigate} from "react-router-dom";
-import RecipesDashboard from "../../../components/recipesDashboard/RecipesDashboard.jsx";
 import EmployeesDataTable from "../../../components/employeesDataTable/EmployeesDataTable.jsx";
 import EmployeeDetailsForm from "../../../components/employeeDetailsForm/EmployeeDetailsForm.jsx";
+import RecipesDataTable from "../../../components/recipesDataTable/RecipesDataTable.jsx";
 
 
 function EmployeeMain() {
@@ -47,13 +47,12 @@ function EmployeeMain() {
                     <section className="employee-dashboard-main-content">
                         <Routes>
                             <Route path="/" element={<Dashboard/>}/>
+                            <Route path="/recipe" element={<RecipesDataTable/>}/>
+                            <Route path="/recipe/:id" element={<RecipeDetailsForm/>}/>
+                            <Route path="/menu" element={<RecipesDataTable/>}/>
                             {/*<Route path="/menu" element={<Menu/>}/>*/}
-                            <Route path="/recipes" element={<RecipesDashboard/>}/>
-                            <Route path="/menu" element={<RecipesDashboard/>}/>
-                            <Route path="/employee"
-                                   element={< EmployeesDataTable/>}/>
-                            <Route path="/employee/:username"
-                                   element={<EmployeeDetailsForm/>}/>
+                            <Route path="/employee" element={< EmployeesDataTable/>}/>
+                            <Route path="/employee/:username" element={<EmployeeDetailsForm/>}/>
                         </Routes>
                         {/*{activeComponent === "Dashboard" ? <Dashboard/> :*/}
                         {/* <EmployeeDetailsForm employeeData={{ /* pass employee data here *!/}/>}*/}

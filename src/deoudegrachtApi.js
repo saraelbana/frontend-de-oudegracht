@@ -11,3 +11,4 @@ export const employeesEndpoint = DE_OUGRACHT_API_URL + "/employees";
 //Roles endpoints
 export const rolesEndpoint = DE_OUGRACHT_API_URL + "/roles";
 export const recipesEndpoint = DE_OUGRACHT_API_URL + "/recipes";
+export const categoriesEndpoint = DE_OUGRACHT_API_URL + "/categories";

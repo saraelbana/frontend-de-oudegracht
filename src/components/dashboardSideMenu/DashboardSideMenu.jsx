@@ -12,12 +12,12 @@ function DashboardSideMenu(prop) {
                         Employees List
                     </NavLink>
                 <li>
-                    <NavLink to="/portal/recipes" className ={({isActive})=> isActive ? 'active-menu-link' : 'default-menu-link'} onClick={prop.onClick}>
+                    <NavLink to="/portal/recipe" className ={({isActive})=> isActive ? 'active-menu-link' : 'default-menu-link'} onClick={prop.onClick}>
                         Recipes
                     </NavLink>
                 </li>
                 <li>
-                    <NavLink to="/portal/employees" className ={({isActive})=> isActive ? 'active-menu-link' : 'default-menu-link'} onClick={prop.onClick}>
+                    <NavLink to="/portal/recipe" className ={({isActive})=> isActive ? 'active-menu-link' : 'default-menu-link'} onClick={prop.onClick}>
                         Menu
                     </NavLink>
                 </li>
