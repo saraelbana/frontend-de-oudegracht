@@ -1,0 +1,23 @@
+.recipe-id-navlink{
+    color: blue;
+}
+.recipe-id-navlink:hover{
+    color: coral;
+}
+.recipe-record-row
+{
+    display: flex;
+    flex: 1;
+    justify-content: space-between;
+    border: 1px solid #f1f1f1;
+}
+.recipes-table-data {
+    border: 1px solid #f1f1f1;
+    text-align: center;
+    vertical-align: middle;
+    padding: 8px;
+    box-sizing: border-box;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}

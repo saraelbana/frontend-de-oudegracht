@@ -42,13 +42,13 @@ function EmployeeMain() {
                 <section className="employee-main">
                     <section className="dashboard-side-menu">
                         <DashboardSideMenu onClick={handleDashboardClick}/>
-
                     </section>
+
                     <section className="employee-dashboard-main-content">
                         <Routes>
                             <Route path="/" element={<Dashboard/>}/>
                             {/*<Route path="/menu" element={<Menu/>}/>*/}
-                            <Route path="/recipe" element={<RecipesDashboard/>}/>
+                            <Route path="/recipes" element={<RecipesDashboard/>}/>
                             <Route path="/menu" element={<RecipesDashboard/>}/>
                             <Route path="/employee"
                                    element={< EmployeesDataTable/>}/>

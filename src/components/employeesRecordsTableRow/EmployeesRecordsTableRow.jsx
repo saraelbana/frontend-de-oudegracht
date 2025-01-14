@@ -15,7 +15,7 @@ function EmployeesRecordsTableRow({employee}){
             <td className="employees-table-data employee-lastname-data">{employee.lastname}</td>
             <td className="employees-table-data employee-email-data">{employee.email}</td>
             <td className="employees-table-data employee-phone-data">{employee.phone}</td>
-            <td className="employees-table-data employee-data-username-navlink">
+            <td className="employees-table-data employee-username-data-navlink">
                 <span onClick={handleUsernameClick} className="username-navlink">
                     {employee.username}
                 </span>

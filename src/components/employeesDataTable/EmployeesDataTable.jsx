@@ -17,50 +17,51 @@ function EmployeesDataTable(){
                 setLoading(false);
             }
             catch (e){
+
+                console.log("Error fetching employees", e.data);
+                setLoading(false);
+                setError(e);
                 // this fragment is commented out for testing purposes
-                // console.log("Error fetching employees", e.data);
-                // setLoading(false);
-                // setError(e);
-                setEmployees([{
-                    "firstname": "Sara",
-                    "lastname": "Elbana",
-                    "email": "sara@sara.com",
-                    "username": "sara.elbana",
-                    "password": "password"
-
-                },{
-                    "firstname": "Layla",
-                    "lastname": "Raafat",
-                    "email": "layla@sara.com",
-                    "username": "layla.raafat",
-                    "password": "12345678"
-
-                },{
-                    "firstname": "Omar",
-                    "lastname": "Elbana",
-                    "email": "Omar@sara.com",
-                    "username": "omar.elbana",
-                    "password": "weakPass"
-
-                },{
-                    "firstname": "Mostafa",
-                    "lastname": "Raafat",
-                    "email": "mostafa@mostafa.com",
-                    "phone": "01002002060",
-                    "username": "Mostafa.Raafat",
-                    "password": "password"
-
-                },{
-                    "firstname": "Hans",
-                    "lastname": "Jan",
-                    "email": "hans@hans.com",
-                    "username": "hans.jan",
-                    "password": "password",
-                    "role":"CHEF",
-                    "phone":"0640020000"
-
-                }
-                ])
+                // setEmployees([{
+                //     "firstname": "Sara",
+                //     "lastname": "Elbana",
+                //     "email": "sara@sara.com",
+                //     "username": "sara.elbana",
+                //     "password": "password"
+                //
+                // },{
+                //     "firstname": "Layla",
+                //     "lastname": "Raafat",
+                //     "email": "layla@sara.com",
+                //     "username": "layla.raafat",
+                //     "password": "12345678"
+                //
+                // },{
+                //     "firstname": "Omar",
+                //     "lastname": "Elbana",
+                //     "email": "Omar@sara.com",
+                //     "username": "omar.elbana",
+                //     "password": "weakPass"
+                //
+                // },{
+                //     "firstname": "Mostafa",
+                //     "lastname": "Raafat",
+                //     "email": "mostafa@mostafa.com",
+                //     "phone": "01002002060",
+                //     "username": "Mostafa.Raafat",
+                //     "password": "password"
+                //
+                // },{
+                //     "firstname": "Hans",
+                //     "lastname": "Jan",
+                //     "email": "hans@hans.com",
+                //     "username": "hans.jan",
+                //     "password": "password",
+                //     "role":"CHEF",
+                //     "phone":"0640020000"
+                //
+                // }
+                // ])
             }
         }
         fetchAllEmployees();

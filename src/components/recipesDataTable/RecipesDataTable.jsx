@@ -12,7 +12,7 @@ function RecipesDataTable(){
                         <th>Recipe ID</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody className="recipes-table-body">
                     <RecipeTableRow recipe={}/>
                 </tbody>
             </table>
