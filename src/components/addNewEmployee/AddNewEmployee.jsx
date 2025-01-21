@@ -1,5 +1,5 @@
 import "./AddNewEmployee.css";
-import NewEmployeeForm from "../../../components/newEmployeeForm/NewEmployeeForm.jsx";
+import NewEmployeeForm from "../newEmployeeForm/NewEmployeeForm.jsx";
 
 function AddNewEmployee(){
     return(

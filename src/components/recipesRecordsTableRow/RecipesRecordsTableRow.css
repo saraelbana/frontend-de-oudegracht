@@ -21,3 +21,10 @@
     white-space: nowrap;
     text-overflow: ellipsis;
 }
+.recipe-name-data-table-cell{
+    color: #2563eb;
+}
+.recipe-name-data-table-cell:hover{
+    color: #f1f1f1;
+    background-color: #2563eb;
+}

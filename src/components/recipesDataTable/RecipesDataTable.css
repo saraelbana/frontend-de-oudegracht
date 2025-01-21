@@ -1,0 +1,9 @@
+.recipes-table-head-row{
+    display: flex;
+    justify-content: space-between;
+}
+.recipes-data-table{
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}

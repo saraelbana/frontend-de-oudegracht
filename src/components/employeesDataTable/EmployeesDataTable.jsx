@@ -2,12 +2,20 @@ import "./EmployeesDataTable.css";
 import {useEffect, useState} from "react";
 import {deoudegrachtApi, employeesEndpoint} from "../../deoudegrachtApi.js";
 import EmployeesRecordsTableRow from "../employeesRecordsTableRow/EmployeesRecordsTableRow.jsx";
+import Button from "../button/Button.jsx";
+import {ADD_ICON} from "../../constants/AssetsFilesNames.js";
+import {useNavigate} from "react-router-dom";
 
 function EmployeesDataTable(){
+
     const [employees, setEmployees] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const navigate = useNavigate();
 
+    const handleAddClick = () => {
+        navigate('/portal/employee/new');
+    };
     useEffect(()=>{
         const fetchAllEmployees = async ()=>{
             try {
@@ -19,7 +27,7 @@ function EmployeesDataTable(){
             catch (e){
 
                 console.log("Error fetching employees", e.data);
-                setLoading(false);
+                //setLoading(false);
                 setError(e);
                 // this fragment is commented out for testing purposes
                 // setEmployees([{
@@ -61,7 +69,7 @@ function EmployeesDataTable(){
                 //     "phone":"0640020000"
                 //
                 // }
-                // ])
+                // ]);
             }
         }
         fetchAllEmployees();
@@ -82,6 +90,7 @@ function EmployeesDataTable(){
                         <th className="employees-table-head employees-table-head-phone">Phone Number</th>
                         <th className="employees-table-head employees-table-head-username">Username</th>
                         <th className="employees-table-head employees-table-head-role">Role</th>
+                        <th className="employees-table-head employees-table-head-edit">Edit</th>
                     </tr>
                 </thead>
                 <tbody className="employees-table-body">
@@ -109,6 +118,7 @@ function EmployeesDataTable(){
                 }
                 </tbody>
             </table>
+            <Button iconSrc = {ADD_ICON} size = "icon" onClick ={handleAddClick}/>
         </div>
     )
 }

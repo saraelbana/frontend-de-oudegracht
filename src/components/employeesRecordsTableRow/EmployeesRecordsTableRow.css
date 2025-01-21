@@ -21,3 +21,14 @@
     white-space: nowrap;
     text-overflow: ellipsis;
 }
+.edit-button{
+    background-color: white;
+}
+
+.employee-username-data-navlink{
+    color: #2563eb;
+}
+.employee-username-data-navlink:hover{
+    color: #f1f1f1;
+    background-color: #2563eb;
+}

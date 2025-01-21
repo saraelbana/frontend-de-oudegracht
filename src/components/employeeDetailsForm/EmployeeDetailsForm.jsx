@@ -1,21 +1,46 @@
 import "./EmployeeDetailsForm.css";
-import { useParams } from "react-router-dom";
+import {useNavigate, useParams, useSearchParams} from "react-router-dom";
 import { useEffect, useState } from "react";
 import Button from "../button/Button.jsx";
-import EmployeeProfileHeader from "../employeeProfileHeader/EmployeeProfileHeader.jsx";
-import {getResponseData, getRolesList, updateEmployeeData} from "../../helpers/APIOperations.js";
+import {
+    getEmployeeResponseData,
+    getRolesList,
+    updateEmployeeData
+} from "../../helpers/APIOperations.js";
 
 function EmployeeDetailsForm() {
-    const { username } = useParams();
+    const {username} = useParams();
+    const [searchParams] = useSearchParams();
     const [employeeData, setEmployeeData] = useState(null);
     const [isEditMode, setIsEditMode] = useState(false);
     const [rolesList, setRolesList] = useState([]);
+    const navigate = useNavigate();
 
-
-
+    const handleBackClick = () => {
+        navigate("/portal/employee");
+    }
+    const handleEditClick = () => {
+        setIsEditMode(!isEditMode);
+    };
+    const handleSaveClick = async () => {
+        console.log("Saving employee data:", employeeData);
+        const updateEmployeeResponse = await updateEmployeeData(username, employeeData);
+        console.log("Update response:", updateEmployeeResponse);
+        if (updateEmployeeResponse[0] === 1) {
+            setIsEditMode(false);
+        } else {
+            console.error("Error updating employee data", updateEmployeeResponse[1]);
+        }
+    };
+    useEffect(() => {
+        const editable = searchParams.get('edit') === 'true';
+        if (editable) {
+            setIsEditMode(true);
+        }
+    }, [searchParams]);
     useEffect(() => {
         const fetchEmployeeData = async () => {
-            const response = await getResponseData(username);
+            const response = await getEmployeeResponseData(username);
 
             if (response[0] === 1) {
                 setEmployeeData(response[1]);
@@ -25,60 +50,51 @@ function EmployeeDetailsForm() {
         };
         fetchEmployeeData();
     }, [username]);
-
     useEffect(() => {
         const fetchRolesList = async () => {
             const rolesListResponse = await getRolesList();
-            if(rolesListResponse[0] === 0) {
+            if (rolesListResponse[0] === 0) {
                 console.error("Error fetching roles", rolesListResponse[1]);
-            }
-            else
+            } else
                 setRolesList(rolesListResponse[1]);
         };
         fetchRolesList();
     }, []);
 
-    const handleEditClick = () => {
-        setIsEditMode(!isEditMode);
-    };
-
-    const handleSaveClick = async () => {
-        const updateEmployeeResponse = await updateEmployeeData(username, employeeData);
-        if (updateEmployeeResponse[0] === 1) {
-            setIsEditMode(false);
-        } else {
-            console.error("Error updating employee data", updateEmployeeResponse[1]);
-        }
-    };
 
     if (!employeeData) {
         return <div>Loading...</div>;
     }
 
     return (
-        <div className="employee-details-form">
-            <div className="employee-header">
-                <EmployeeProfileHeader employeeData={employeeData} />
-            </div>
+        <div className="main-employee-details-form">
+            <section className="Employee-details-header">
+                <Button buttonName="← Back" onClick={handleBackClick}/>
+                <h2>{employeeData.role} {employeeData.firstname} profile</h2>
+            </section>
             <form className="display-employee">
                 <div className="new-employee-name">
                     <div className="new-employee-firstname">
                         <label id="firstname-label">
-                            Firstname: {isEditMode ? <input type="text" defaultValue={employeeData.firstname} /> : employeeData.firstname}
+                            Firstname: {isEditMode ?
+                            <input type="text" defaultValue={employeeData.firstname}/> : employeeData.firstname}
                         </label>
                     </div>
                     <div className="new-employee-lastname">
                         <label id="lastname-label">
-                            Lastname: {isEditMode ? <input type="text" defaultValue={employeeData.lastname} /> : employeeData.lastname}
+                            Lastname: {isEditMode ?
+                            <input type="text" defaultValue={employeeData.lastname}/> : employeeData.lastname}
                         </label>
                     </div>
                 </div>
                 <div className="new-employee-contact">
                     <label id="email-label">
-                        Email: {isEditMode ? <input type="email" defaultValue={employeeData.email} /> : employeeData.email}
+                        Email: {isEditMode ?
+                        <input type="email" defaultValue={employeeData.email}/> : employeeData.email}
                     </label>
                     <label id="phone-number-label">
-                        Phone Number: {isEditMode ? <input type="text" defaultValue={employeeData.phone} /> : employeeData.phone}
+                        Phone Number: {isEditMode ?
+                        <input type="text" defaultValue={employeeData.phone}/> : employeeData.phone}
                     </label>
                 </div>
                 <div className="new-employee-credentials">
@@ -100,17 +116,33 @@ function EmployeeDetailsForm() {
                         <select defaultValue={employeeData.role}>
                             {
                                 rolesList.map((role) => (
-                                    <option key ={role} value={role}> {role} </option>
+                                    <option key={role} value={role}> {role} </option>
                                 ))
                             }
                         </select>
                     ) : employeeData.role}
                     </label>
+                    <div className="new-employee-password">
+                        <label id="password-label">
+                            Password: {isEditMode ?
+                            <div>
+                            <input type="password" defaultValue={employeeData.password}/>
+                            <label id="confirm-password-label">
+                                Confirm password:
+                                <input type="password" defaultValue={employeeData.confirmPassword}/>
+                            </label>
+                            </div> : "*****"
+                        }
+                        </label>
+
+                    </div>
                 </div>
             </form>
-            <Button buttonName={isEditMode ? "Save" : "Edit Profile"} onClick={isEditMode ? handleSaveClick : handleEditClick}  />
+            <Button buttonName={isEditMode ? "Save" : "Edit Recipe"}
+                    onClick={isEditMode ? handleSaveClick : handleEditClick}/>
         </div>
     );
+
 }
 
 export default EmployeeDetailsForm;

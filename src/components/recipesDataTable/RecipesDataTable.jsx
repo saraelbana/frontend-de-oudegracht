@@ -2,133 +2,82 @@ import "./RecipesDataTable.css";
 import {useEffect, useState} from "react";
 import {deoudegrachtApi, recipesEndpoint} from "../../deoudegrachtApi.js";
 import RecipesRecordsTableRow from "../recipesRecordsTableRow/RecipesRecordsTableRow.jsx";
+import FoodCategoryNavbar from "../foodCategoryNavbar/FoodCategoryNavbar.jsx";
+import {ADD_ICON} from "../../constants/AssetsFilesNames.js";
+import Button from "../button/Button.jsx";
+import {useNavigate} from "react-router-dom";
 
 function RecipesDataTable(){
     const [recipes, setRecipes] = useState([]);
+    const [filteredRecipes, setFilteredRecipes] = useState([]);
+    const [selectedCategory, setSelectedCategory] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const navigate = useNavigate();
 
+    const handleAddClick = () => {
+        navigate('/portal/recipe/new');
+    };
     useEffect(()=>{
         const fetchAllRecipes = async ()=>{
             try {
                 const response = await deoudegrachtApi.get(recipesEndpoint);
-                console.log("REcipess data fetched", response.data);
+                console.log("Recipes data fetched", response.data);
                 setRecipes(response.data);
+                setFilteredRecipes(response.data); // Initialize filtered recipes with all recipes
                 setLoading(false);
             }
             catch (e){
                 console.log("Error fetching recipes", e.data);
-                setLoading(false);
                 setError(e);
-                // this fragment is commented out for testing purposes
-                // setRecipes([{
-                //  "recipeName": "Lamb Kofta",
-                //  "description": "Middle Eastern spiced lamb meatballs",
-                //  "category": "MainCourse",
-                //  "recipeIngredients": [
-                //   {
-                //     "name": "Ground lamb",
-                //     "quantity": 500,
-                //     "unit": "grams"
-                //   },
-                //   {
-                //     "name": "Onion",
-                //     "quantity": 100,
-                //     "unit": "grams"
-                //   },
-                //   {
-                //     "name": "Parsley",
-                //     "quantity": 30,
-                //     "unit": "grams"
-                //   },
-                //   {
-                //     "name": "Cumin",
-                //     "quantity": 10,
-                //     "unit": "grams"
-                //   },
-                //   {
-                //     "name": "Salt",
-                //     "quantity": 5,
-                //     "unit": "grams"
-                //   }
-                //  ]
-                // },{
-                //  "recipeName": "Grilled Chicken Biryani",
-                //  "description": "Aromatic basmati rice with marinated grilled chicken and spices",
-                //  "category": "MainCourse",
-                //  "recipeIngredients": [
-                //   {
-                //     "name": "Basmati rice",
-                //     "quantity": 500,
-                //     "unit": "grams"
-                //   },
-                //   {
-                //     "name": "Chicken",
-                //     "quantity": 400,
-                //     "unit": "grams"
-                //   },
-                //   {
-                //     "name": "Yogurt",
-                //     "quantity": 200,
-                //     "unit": "grams"
-                //   },
-                //   {
-                //     "name": "Onions",
-                //     "quantity": 150,
-                //     "unit": "grams"
-                //   },
-                //   {
-                //     "name": "Mixed spices",
-                //     "quantity": 30,
-                //     "unit": "grams"
-                //   }
-                //  ]
-                // })
+                setLoading(false);
+                // Your test data here...
             }
         }
         fetchAllRecipes();
     },[]);
-    useEffect(() => {
-        console.log("Recipes data set", recipes);
-        setLoading(false);
-    }, [recipes]);
+    const handleCategorySelect = (category) => {
+        setSelectedCategory(category);
+        if (category) {
+            const filtered = recipes.filter(recipe => recipe.category === category);
+            setFilteredRecipes(filtered);
+        } else {
+            setFilteredRecipes(recipes); // Show all recipes when no category is selected
+        }
+    };
 
     return(
         <div className="recipes-data-table">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Recipe Name</th>
-                        <th>Category</th>
-                        <th>Recipe ID</th>
-                    </tr>
+            <FoodCategoryNavbar onCategorySelect={handleCategorySelect} selectedCategory={selectedCategory}/>
+            <table className="recipes-table">
+                <thead className="recipes-table-head">
+                <tr className="recipes-table-head-row">
+                    <th className="recipes-name-table-head">Recipe Name</th>
+                    <th className="recipes-category-table-head">Category</th>
+                    <th className="recipes-edit-table-head">Edit</th>
+                </tr>
                 </thead>
-                <tbody>
+                <tbody className="recipes-table-body">
                 {
                     loading ? (
-                        <tr className="recipes-table-row">
-                            <td className="recipes-table-data recipes-table-loading-data-cell" colSpan="6">Loading...</td>
-                        </tr>
-                    ):(
+                            <tr className="recipes-table-row">
+                                <td className="recipes-table-data recipes-table-loading-data-cell" colSpan="6">Loading...</td>
+                            </tr>
+                        ):
                         error ? (
                             <tr className="recipes-table-row">
                                 <td className="recipes-table-data recipes-table-error-data-cell" colSpan="6">Error fetching data check
-                                    connection...
-                                </td>
-                            </tr>,
-                                console.log("Error fetching data", error)
+                                    connection...</td>
+                            </tr>
                         ) : (
-                            recipes.map((recipe, index) => (
-                                    console.log("recipe data", recipe),
-                                        <RecipesRecordsTableRow key={index} recipe={recipe} />
-                                )
-                            )
+                            filteredRecipes.map((recipe, index) => (
+                                <RecipesRecordsTableRow key={index} recipe={recipe} />
+                            ))
                         )
-                    )
                 }
-                {/*<RecipeTableRow recipe={}/>*/}
                 </tbody>
             </table>
+            <Button iconSrc = {ADD_ICON} size = "icon" onClick ={handleAddClick}/>
         </div>
     );
 }

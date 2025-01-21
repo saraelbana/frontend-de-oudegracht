@@ -1,8 +1,8 @@
 import  "./MandatoryTag.css";
 
-function MandatoryTag(){
+function MandatoryTag(prop){
     return(
-        <span className="mandatory-tag">*</span>
+        <span className="mandatory-tag"> * {prop.restrictionMessage}</span>
     );
 }
 export default MandatoryTag;

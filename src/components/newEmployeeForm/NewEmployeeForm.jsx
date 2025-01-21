@@ -12,6 +12,7 @@ function NewEmployeeForm(){
     const [lastname, setLastname] = useState("");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
     const [email, setEmail] = useState("");
     const [role, setRole] = useState(Default_Employee_Role);
     const [roles, setRoles] = useState([]);
@@ -20,7 +21,7 @@ function NewEmployeeForm(){
     const [error, setError] = useState("");
 
     useEffect(() => {
-        const fetchRoles = async () => {
+        const getRoles = async () => {
             try {
                 const response = await deoudegrachtApi.get(rolesEndpoint);
                 setRoles(response.data.allRoles);
@@ -28,11 +29,14 @@ function NewEmployeeForm(){
                 console.log("Error fetching roles", e.data);
             }
         };
-        fetchRoles();
+        getRoles();
     }, []);
-
     const handleSubmit = async (e) => {
         e.preventDefault(); //needs investigation if it is necessary or not
+        if (password !== confirmPassword) {
+            setError("Passwords do not match");
+            return;
+        }
         const requestData = createRequestData({firstname, lastname, email, username, password, phone, role});
 
         try {
@@ -51,7 +55,7 @@ function NewEmployeeForm(){
             <div className="new-employee-name">
                 <div className="new-employee-firstname">
                     <label id="firstname-label">
-                    firstname:
+                    Firstname:
                     <input type='text'
                            id="firstname-field"
                            name="firstname"
@@ -64,7 +68,7 @@ function NewEmployeeForm(){
                 </div>
                 <div className="new-employee-lastname">
                     <label id="lastname-label">
-                    lastname:
+                    Lastname:
                     <input type='text'
                            id="lastname-field"
                            name="lastname"
@@ -78,7 +82,7 @@ function NewEmployeeForm(){
             </div>
             <div className="new-employee-contact">
                 <label id="email-label">
-                    email:
+                    Email:
                     <input type='email'
                            id="email-field"
                            name="email"
@@ -99,31 +103,43 @@ function NewEmployeeForm(){
             <div className="new-employee-credentials">
                 <div className="new-employee-username">
                     <label id="username-label">
-                    username:
-                    <input type='text'
-                           id="username-field"
-                           name="username"
-                           placeholder="Username"
-                           required
-                           onChange={(event) => setUsername(event.target.value)}
-                    />
-                </label>
-                    <MandatoryTag/>
-                </div>
-                <div className="new-employee-password">
-                    <label id="password-label">
-                        password:
-                        <input type='password'
-                           id="password-field"
-                           name="password"
-                           placeholder="Password"
-                           required
-                           onChange={(event) => setPassword(event.target.value)}
+                        Username:
+                        <input type='text'
+                               id="username-field"
+                               name="username"
+                               placeholder="Username"
+                               required
+                               onChange={(event) => setUsername(event.target.value)}
                         />
                     </label>
                     <MandatoryTag/>
                 </div>
-
+                <div className="new-employee-password">
+                    <label id="password-label">
+                        Password:
+                        <input type='password'
+                               id="password-field"
+                               name="password"
+                               placeholder="Password"
+                               required
+                               onChange={(event) => setPassword(event.target.value)}
+                        />
+                    </label>
+                    <MandatoryTag/>
+                </div>
+                <div className="new-employee-password">
+                    <label id="confirm-password-label">
+                        confirm Password:
+                        <input type='password'
+                               id="confirm-password-field"
+                               name="confirm-password"
+                               placeholder="confrim password"
+                               required
+                               onChange={(event) => setConfirmPassword(event.target.value)}
+                        />
+                    </label>
+                    <MandatoryTag/>
+                </div>
             </div>
             <div className="new-employee-role">
                 <label id="role-label">
@@ -131,7 +147,7 @@ function NewEmployeeForm(){
                     <select id="role-field" name="role" onChange={(event) => setRole(event.target.value)}>
                         {
                             roles.map((role) => (
-                            <option key={role} value={role}>{role}</option>))
+                                <option key={role} value={role}>{role}</option>))
                         }
                     </select>
                 </label>
