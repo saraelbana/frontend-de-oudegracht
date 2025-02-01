@@ -8,7 +8,7 @@ function RecipesRecordsTableRow({recipe}){
     console.log("Recipe data " + recipe);
     const navigate = useNavigate();
     const handleRecipeIdClick = () => {
-        navigate(`/portal/recipe/${recipe.id}`);
+        navigate(`/portal/recipe/${recipe.id}?edit=false`);
     };
     const handleEditClick = () => {
         // Navigate with edit mode parameter
@@ -17,12 +17,27 @@ function RecipesRecordsTableRow({recipe}){
 
     console.log("Recipe data " + recipe);
     return(
-        <tr className="recipe-record-row">
-            <td className="recipes-table-data recipe-name-data-table-cell" onClick={handleRecipeIdClick}
-                style={{ cursor: 'pointer' }}>{recipe.recipeName}</td>
-            <td className="recipes-table-data recipe-name-data">{recipe.category}</td>
-            <td className="edit-button">
-                <Button size="icon" iconSrc={EDIT_ICON} onClick={handleEditClick}/>
+        <tr>
+            <td 
+                onClick={handleRecipeIdClick}
+                style={{ 
+                    cursor: 'pointer', 
+                    color: '#0088ff',
+                    textDecoration: 'underline' 
+                }}
+            >
+                {recipe.recipeName}
+            </td>
+            <td>{recipe.category || 'Uncategorized'}</td>
+            <td>
+                <div className="table-action-buttons">
+                    <Button 
+                        size="icon" 
+                        iconSrc={EDIT_ICON} 
+                        onClick={handleEditClick}
+                        className="edit-btn"
+                    />
+                </div>
             </td>
         </tr>
     );

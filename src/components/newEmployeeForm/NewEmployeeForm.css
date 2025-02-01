@@ -1,0 +1,46 @@
+.new-employee-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.new-employee-name {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.new-employee-name > div {
+    flex: 1;
+    margin-right: 15px;
+}
+
+.new-employee-name > div:last-child {
+    margin-right: 0;
+}
+
+.new-employee-contact,
+.new-employee-credentials,
+.new-employee-role {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.new-employee-form label {
+    margin-bottom: 5px;
+    color: #495057;
+    font-size: 0.9em;
+}
+
+.error-message {
+    color: red;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.success-message {
+    color: green;
+    text-align: center;
+    margin-top: 10px;
+}

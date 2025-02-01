@@ -1,11 +1,15 @@
+import React from "react";
 import "./WelcomeMessage.css";
 
-function WelcomeMessage(prop){
-    return(
+function WelcomeMessage({name}) {
+    // If no name prop is passed, try to get it from localStorage
+    const userName = localStorage.getItem("userName") || "there!";
+    
+    return (
         <div className="welcome-message">
-            <h1>Welcome {prop.name} </h1>
-            <p>{prop.title}</p>
+            <h2>Welcome, {userName}!</h2>
         </div>
     );
 }
+
 export default WelcomeMessage;

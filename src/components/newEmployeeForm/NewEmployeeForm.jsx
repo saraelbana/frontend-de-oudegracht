@@ -51,112 +51,113 @@ function NewEmployeeForm(){
     }
 
     return(
-        <form className="new-employee-form" onSubmit={handleSubmit}>
-            <div className="new-employee-name">
-                <div className="new-employee-firstname">
-                    <label id="firstname-label">
-                    Firstname:
-                    <input type='text'
-                           id="firstname-field"
-                           name="firstname"
-                           placeholder="Firstname"
-                           required
-                           onChange={(event) => setFirstname(event.target.value)}
-                    />
-                </label>
-                    <MandatoryTag/>
-                </div>
-                <div className="new-employee-lastname">
-                    <label id="lastname-label">
-                    Lastname:
-                    <input type='text'
-                           id="lastname-field"
-                           name="lastname"
-                           placeholder="Lastname"
-                           required
-                           onChange={(event) => setLastname(event.target.value)}
-                    />
-                </label>
-                    <MandatoryTag/>
-                </div>
-            </div>
-            <div className="new-employee-contact">
-                <label id="email-label">
-                    Email:
-                    <input type='email'
-                           id="email-field"
-                           name="email"
-                           placeholder="Email"
-                           onChange={(event) => setEmail(event.target.value)}
-                    />
-                </label>
-                <label id="phone-number-label">
-                    Mobile Number:
-                    <input type='tel'
-                           id="phone-number-field"
-                           name="phone-number"
-                           placeholder="Mobile Number"
-                           onChange={(event) => setPhone(event.target.value)}
-                    />
-                </label>
-            </div>
-            <div className="new-employee-credentials">
-                <div className="new-employee-username">
-                    <label id="username-label">
-                        Username:
-                        <input type='text'
-                               id="username-field"
-                               name="username"
-                               placeholder="Username"
-                               required
-                               onChange={(event) => setUsername(event.target.value)}
+        <div className="login-form-container">
+            <form className="login-form new-employee-form" onSubmit={handleSubmit}>
+                <div className="new-employee-name">
+                    <div className="new-employee-firstname">
+                        <label htmlFor="firstname-field">Firstname</label>
+                        <input 
+                            type='text'
+                            id="firstname-field"
+                            name="firstname"
+                            placeholder="Firstname"
+                            required
+                            className="login-form-text-field"
+                            onChange={(event) => setFirstname(event.target.value)}
                         />
-                    </label>
-                    <MandatoryTag/>
-                </div>
-                <div className="new-employee-password">
-                    <label id="password-label">
-                        Password:
-                        <input type='password'
-                               id="password-field"
-                               name="password"
-                               placeholder="Password"
-                               required
-                               onChange={(event) => setPassword(event.target.value)}
+                    </div>
+                    <div className="new-employee-lastname">
+                        <label htmlFor="lastname-field">Lastname</label>
+                        <input 
+                            type='text'
+                            id="lastname-field"
+                            name="lastname"
+                            placeholder="Lastname"
+                            required
+                            className="login-form-text-field"
+                            onChange={(event) => setLastname(event.target.value)}
                         />
-                    </label>
-                    <MandatoryTag/>
+                    </div>
                 </div>
-                <div className="new-employee-password">
-                    <label id="confirm-password-label">
-                        confirm Password:
-                        <input type='password'
-                               id="confirm-password-field"
-                               name="confirm-password"
-                               placeholder="confrim password"
-                               required
-                               onChange={(event) => setConfirmPassword(event.target.value)}
+                <div className="new-employee-contact">
+                    <label htmlFor="email-field">Email</label>
+                    <input 
+                        type='email'
+                        id="email-field"
+                        name="email"
+                        placeholder="Email"
+                        className="login-form-text-field"
+                        onChange={(event) => setEmail(event.target.value)}
+                    />
+                    <label htmlFor="phone-number-field">Mobile Number</label>
+                    <input 
+                        type='tel'
+                        id="phone-number-field"
+                        name="phone-number"
+                        placeholder="Mobile Number"
+                        className="login-form-text-field"
+                        onChange={(event) => setPhone(event.target.value)}
+                    />
+                </div>
+                <div className="new-employee-credentials">
+                    <label htmlFor="username-field">Username</label>
+                    <input 
+                        type='text'
+                        id="username-field"
+                        name="username"
+                        placeholder="Username"
+                        required
+                        className="login-form-text-field"
+                        onChange={(event) => setUsername(event.target.value)}
+                    />
+                    <div className="password-container">
+                        <label htmlFor="password-field">Password</label>
+                        <input 
+                            type='password'
+                            id="password-field"
+                            name="password"
+                            placeholder="Password"
+                            required
+                            className="login-form-text-field"
+                            onChange={(event) => setPassword(event.target.value)}
                         />
-                    </label>
-                    <MandatoryTag/>
+                    </div>
+                    <div className="password-container">
+                        <label htmlFor="confirm-password-field">Confirm Password</label>
+                        <input 
+                            type='password'
+                            id="confirm-password-field"
+                            name="confirm-password"
+                            placeholder="Confirm Password"
+                            required
+                            className="login-form-text-field"
+                            onChange={(event) => setConfirmPassword(event.target.value)}
+                        />
+                    </div>
                 </div>
-            </div>
-            <div className="new-employee-role">
-                <label id="role-label">
-                    role:
-                    <select id="role-field" name="role" onChange={(event) => setRole(event.target.value)}>
-                        {
-                            roles.map((role) => (
-                                <option key={role} value={role}>{role}</option>))
-                        }
+                <div className="new-employee-role">
+                    <label htmlFor="role-field">Role</label>
+                    <select 
+                        id="role-field" 
+                        name="role" 
+                        className="login-form-text-field"
+                        onChange={(event) => setRole(event.target.value)}
+                    >
+                        {roles.map((role) => (
+                            <option key={role} value={role}>{role}</option>
+                        ))}
                     </select>
-                </label>
-            </div>
-            <Button buttonName="Submit" disable={!(firstname && lastname && username && password)}/>
-            {error && <p className="error-message">{error}</p>}
-            {success && <p className="success-message">{success}</p>}
-        </form>
-);
+                </div>
+                <Button 
+                    buttonName="Submit" 
+                    className="submit-login-button"
+                    disable={!(firstname && lastname && username && password)}
+                />
+                {error && <p className="error-message">{error}</p>}
+                {success && <p className="success-message">{success}</p>}
+            </form>
+        </div>
+    );
 }
 
 export default NewEmployeeForm;

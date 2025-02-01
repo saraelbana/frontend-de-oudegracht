@@ -81,44 +81,51 @@ function EmployeesDataTable(){
 
     return(
         <div className="employees-data-table">
-            <table  className="employees-table">
-                <thead className="employees-table-head">
-                    <tr className="employees-table-row">
-                        <th className="employees-table-head employees-table-head-firstname">Firstname</th>
-                        <th className="employees-table-head employees-table-head-lastname">Lastname</th>
-                        <th className="employees-table-head employees-table-head-email">Email</th>
-                        <th className="employees-table-head employees-table-head-phone">Phone Number</th>
-                        <th className="employees-table-head employees-table-head-username">Username</th>
-                        <th className="employees-table-head employees-table-head-role">Role</th>
-                        <th className="employees-table-head employees-table-head-edit">Edit</th>
+            <table className="employee-table">
+                <thead>
+                    <tr>
+                        <th>Firstname</th>
+                        <th>Lastname</th>
+                        <th>Email</th>
+                        <th>Phone Number</th>
+                        <th>Username</th>
+                        <th>Role</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
-                <tbody className="employees-table-body">
+                <tbody>
                 {
                     loading ? (
-                        <tr className="employees-table-row">
-                            <td className="employees-table-data employees-table-loading-data-cell" colSpan="6">Loading...</td>
+                        <tr>
+                            <td colSpan="7" style={{textAlign: 'center', padding: '20px'}}>Loading...</td>
                         </tr>
                     ):(
                         error ? (
-                            <tr className="employees-table-row">
-                                <td className="employees-table-data employees-table-error-data-cell" colSpan="6">Error fetching data check
-                                    connection...
+                            <tr>
+                                <td colSpan="7" style={{textAlign: 'center', color: 'red', padding: '20px'}}>
+                                    Error fetching data. Please check your connection.
                                 </td>
-                            </tr>,
-                                console.log("Error fetching data", error)
+                            </tr>
                         ) : (
                             employees.map((employee, index) => (
-                                            console.log("Employee data", employee),
-                                                <EmployeesRecordsTableRow key={index} employee={employee} />
-                                    )
-                            )
+                                <EmployeesRecordsTableRow key={index} employee={employee} />
+                            ))
                         )
                     )
                 }
                 </tbody>
             </table>
-            <Button iconSrc = {ADD_ICON} size = "icon" onClick ={handleAddClick}/>
+            <div style={{
+                display: 'flex', 
+                justifyContent: 'flex-end', 
+                marginTop: '15px'
+            }}>
+                <Button 
+                    iconSrc={ADD_ICON} 
+                    size="icon" 
+                    onClick={handleAddClick}
+                />
+            </div>
         </div>
     )
 }

@@ -5,8 +5,10 @@ import {useState} from "react";
 import {deoudegrachtApi, ingredientsEndpoint} from "../../deoudegrachtApi.js";
 import {createIngredientRequestData} from "../../helpers/RecipesOperations.js";
 import {useNavigate} from "react-router-dom";
+import {ADD_ICON} from "../../constants/AssetsFilesNames.js";
 
 function AddNewIngredient(){
+
     const [name, setName] = useState("");
     const [success, setSuccess] = useState("");
     const [error, setError] = useState("");
@@ -30,6 +32,10 @@ function AddNewIngredient(){
             setSuccess("");
         }
     }
+    const handleAddClick = () => {
+        navigate('/portal/ingredient/new');
+    };
+
     return(
         <div className="add-new-ingredient">
             <h1>Add New Ingredient</h1>
@@ -47,6 +53,8 @@ function AddNewIngredient(){
                         />
                     </label>
                     <MandatoryTag/>
+                    <Button iconSrc = {ADD_ICON} size = "icon" onClick ={handleAddClick}/>
+                    {/*/>*/}
                 </div>
                 <Button text="save" onClick={handleSave}/>
                 {error && <p className="error-message">{error}</p>}

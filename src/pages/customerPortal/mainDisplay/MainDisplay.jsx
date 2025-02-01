@@ -1,6 +1,6 @@
 import "./MainDisplay.css";
 import ImageContainer from "../../../components/imageContainer/ImageContainer.jsx";
-import {CoverImage, SignatureDish} from "../../../constants/AssetsFilesNames.js";
+import {CoverImage, SignatureDishOne, SignatureDishTwo, SignatureDishThree} from "../../../constants/AssetsFilesNames.js";
 
 
 function MainDisplay(){
@@ -10,11 +10,11 @@ function MainDisplay(){
                 <ImageContainer source={CoverImage} alt="restaurant vibes"/>
             </section>
             <section className="signature-dish-section">
-                <ImageContainer className="image-container" source={SignatureDish}
+                <ImageContainer className="image-container" source={SignatureDishOne}
                                 alt="signature dish"/>
-                <ImageContainer className="image-container" source={SignatureDish}
+                <ImageContainer className="image-container" source={SignatureDishTwo}
                                 alt="signature dish"/>
-                <ImageContainer className="image-container" source={SignatureDish}
+                <ImageContainer className="image-container" source={SignatureDishThree}
                                 alt="signature dish"/>
             </section>
         </div>

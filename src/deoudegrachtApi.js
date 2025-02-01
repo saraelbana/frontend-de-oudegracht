@@ -18,3 +18,20 @@ export const categoriesEndpoint = DE_OUGRACHT_API_URL + "/categories";
 export const reservationsEndpoint = DE_OUGRACHT_API_URL + "/reservations";
 //Ingredients endpoints
 export const ingredientsEndpoint = DE_OUGRACHT_API_URL + "/ingredients";
+export const guestEndpoint = DE_OUGRACHT_API_URL + "/guests";
+export const registerEndpoint = DE_OUGRACHT_API_URL + "/auth/register";
+export const menuEndpoint = DE_OUGRACHT_API_URL + "/menu-items";
+
+deoudegrachtApi.interceptors.request.use(
+    (config) => {
+        const token = localStorage.getItem("authToken");
+        console.log(token);
+        if (token) {
+            config.headers.Authorization = `Bearer ${token}`;
+        }
+        return config;
+    },
+    (error) => {
+        return Promise.reject(error);
+    }
+);

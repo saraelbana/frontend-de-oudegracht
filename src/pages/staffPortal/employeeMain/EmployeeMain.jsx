@@ -1,4 +1,5 @@
 import "./EmployeeMain.css";
+import "./EmployeeMainTable.css";
 import DashboardSideMenu from "../../../components/dashboardSideMenu/DashboardSideMenu.jsx";
 import Dashboard from "../../../components/dashboard/Dashboard.jsx";
 import {SettingsIcon} from "../../../constants/AssetsFilesNames.js";
@@ -11,10 +12,11 @@ import EmployeeDetailsForm from "../../../components/employeeDetailsForm/Employe
 import RecipesDataTable from "../../../components/recipesDataTable/RecipesDataTable.jsx";
 import RecipeDetailsForm from "../../../components/recipeDetailsForm/RecipeDetailsForm.jsx";
 import Button from "../../../components/button/Button.jsx";
-import MenuDisplay from "../../../components/menuDisplay/MenuDisplay.jsx";
+import DisplayMenu from "../../../components/displayMenu/DisplayMenu.jsx";
 import AddNewEmployee from "../../../components/addNewEmployee/AddNewEmployee.jsx";
 import AddNewRecipe from "../../../components/addNewRecipe/AddNewRecipe.jsx";
 import AddNewIngredient from "../../../components/addNewIngredient/AddNewIngredient.jsx";
+import AddMenuItem from "../../../components/addMenuItem/AddMenuItem.jsx";
 
 function EmployeeMain() {
     const [isProfileSettingsVisible, setProfileSettingsVisible] = useState(false);
@@ -32,7 +34,6 @@ function EmployeeMain() {
     };
     const handleDashboardClick = () => {
         navigate("/portal");
-        setActiveComponent("Dashboard");
         setProfileSettingsVisible(false);
     };
 
@@ -52,7 +53,8 @@ function EmployeeMain() {
                             <Route path="/" element={<Dashboard/>}/>
                             <Route path="/recipe" element={<RecipesDataTable/>}/>
                             <Route path="/recipe/:id" element={<RecipeDetailsForm/>}/>
-                            <Route path="/menu" element={<MenuDisplay/>}/>
+                            <Route path="/menu" element={<DisplayMenu/>}/>
+                            <Route path="/menu/new-item" element={<AddMenuItem/>}/>
                             <Route path="/employee" element={< EmployeesDataTable/>}/>
                             <Route path="/employee/:username" element={<EmployeeDetailsForm/>}/>
                             <Route path="/profile" element={<EmployeeDetailsForm/>}/>

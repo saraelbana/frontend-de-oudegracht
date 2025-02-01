@@ -1,7 +1,16 @@
 import  "./ProfileSettingsMenu.css";
 import {NavLink} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 function ProfileSettingsMenu() {
+    const navigate = useNavigate();
+    const handleLogout = () => {
+        localStorage.removeItem("authToken");
+        navigate("http://localhost:5173");
+    };
+    const handleProfileClick = () => {
+        navigate("/employee/:username");
+    };
     return(
         <div className="settings-menu-overlay">
             <div className="settings-menu">
@@ -11,7 +20,7 @@ function ProfileSettingsMenu() {
                             <NavLink
                                 to="/portal/profile"
                                 className="profile-settings-menu-link"
-                                onClick={(e) => handleCategoryClick(category, e)}>
+                                onClick={handleProfileClick}>
 
                                 Profile
                             </NavLink>
@@ -20,8 +29,7 @@ function ProfileSettingsMenu() {
                             <NavLink
                                 to="/portal/logout"
                                 className="logout-settings-menu-link"
-                                onClick={(e) => handleCategoryClick(category, e)}>
-
+                                onClick={handleLogout}>
                                 Logout
                             </NavLink>
                         </li>

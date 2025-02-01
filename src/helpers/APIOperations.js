@@ -5,7 +5,7 @@ import {
     recipesEndpoint,
     /* reservationsEndpoint, */
     rolesEndpoint,
-    ingredientsEndpoint
+    ingredientsEndpoint, guestEndpoint
 } from "../deoudegrachtApi.js";
 
 //this is a flag obj. with 2 values first element a flag 0/1 second is either the successfully returned obj or the failure error
@@ -17,11 +17,11 @@ export async function getEmployeeResponseData(username) {
         } catch (error) {
         console.error("Error fetching employee data", error);
             return [0, error];
-
         }
 }
 export async function updateEmployeeData(username, data) {
     try {
+        console.log("to be updated employee data", data);
         const response = await deoudegrachtApi.put(`${employeesEndpoint}/${username}`, data);
         return [1, response.data]; // 1 indicates success
     } catch (error) {
@@ -42,6 +42,7 @@ export async function getRecipeResponseData(id) {
 }
 export async function updateRecipeData(id, data) {
     try {
+        console.error("to be updated recipe data", data);
         const response = await deoudegrachtApi.put(`${recipesEndpoint}/${id}`, data);
         return [1, response.data]; // 1 indicates success
     } catch (error) {
@@ -71,7 +72,7 @@ export async function getCategoriesList(){
 }
 export async function getDashboardData() {
     try {
-        // Fetch all required data in parallel
+
         const [employeesResponse, recipesResponse,/*reservationsResponse*/] = await Promise.all([
             deoudegrachtApi.get(employeesEndpoint),
             deoudegrachtApi.get(recipesEndpoint)/*,
@@ -85,6 +86,16 @@ export async function getDashboardData() {
         return [1, dashboardData];
     } catch (error) {
         console.error("Error fetching dashboard data:", error);
+        return [0, error];
+    }
+}
+export async function getGuestResponseData(username) {
+    try {
+        const response = await deoudegrachtApi.get(`${guestEndpoint}/${username}`);
+        console.log(response.data);
+        return [1, response.data];
+    } catch (error) {
+        console.error("Error fetching guest data", error);
         return [0, error];
     }
 }
@@ -112,6 +123,15 @@ export async function postRecipeData(requestData){
         return [1, response.data];
     } catch (error) {
         console.error("Error posting recipe data", error);
+        return [0, error];
+    }
+}
+export async function getRecipesList(){
+    try {
+        const response = await deoudegrachtApi.get(recipesEndpoint);
+        return [1, response.data];
+    } catch (error) {
+        console.error("Error fetching recipes", error);
         return [0, error];
     }
 }

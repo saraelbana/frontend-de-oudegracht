@@ -7,7 +7,9 @@ import {
 } from "../../helpers/APIOperations.js";
 import {useNavigate, useParams, useSearchParams} from "react-router-dom";
 import Button from "../button/Button.jsx";
-import {createNewRecipeRequestData} from "../../helpers/RecipesOperations.js";
+import {ADD_ICON} from "../../constants/AssetsFilesNames.js";
+import {deoudegrachtApi, ingredientsEndpoint} from "../../deoudegrachtApi.js";
+import MandatoryTag from "../mandatoryTag/MandatoryTag.jsx";
 
 function RecipeDetailsForm(){
     const {id} = useParams();
@@ -19,8 +21,12 @@ function RecipeDetailsForm(){
     const [category, setCategory] = useState();
     const [description, setDescription] = useState();
     const [ingredients, setIngredients] = useState([]);
+    const [allIngredients, setAllIngredients] = useState([]);
+    const [selectedIngredients, setSelectedIngredients] = useState([]);
     const [instructions, setInstructions] = useState([]);
     const navigate = useNavigate();
+    const [success, setSuccess] = useState("");
+    const [error, setError] = useState("");
 
     useEffect(() => {
         const editable = searchParams.get('edit') === 'true';
@@ -31,13 +37,14 @@ function RecipeDetailsForm(){
     useEffect(() => {
         const fetchRecipeData = async () => {
             const response = await getRecipeResponseData(id);
+            console.log(response);
             if(response[0] === 1){
                 setRecipeData(response[1]);
                 setRecipeName(response[1].recipeName);
                 setCategory(response[1].category);
                 setDescription(response[1].description);
-                setInstructions(response[1].instructions);
-                setIngredients(response[1].ingredients);
+                setInstructions(response[1].instructionSteps);
+                setIngredients(response[1].recipeIngredients);
 
             } else {
                 console.error("Error fetching recipe data", response[1]);
@@ -56,6 +63,18 @@ function RecipeDetailsForm(){
         };
         fetchCategoriesList();
     }, []);
+    useEffect(() => {
+        const getIngredientsList= async () => {
+            try {
+                const response = await deoudegrachtApi.get(ingredientsEndpoint);
+                console.log(response.data);
+                setAllIngredients(response.data);
+            } catch (e) {
+                console.log("Error fetching ingredienta list", e.data);
+            }
+        };
+        getIngredientsList();
+    }, []);
 
     const handleBackClick = () => {
         navigate("/portal/recipe");
@@ -64,61 +83,247 @@ function RecipeDetailsForm(){
         setIsEditMode(!isEditMode);
     };
     const handleSaveClick = async () => {
-        const responseData = createNewRecipeRequestData({recipeName, category, description, ingredients, instructions});
-        const updateRecipeResponse = await updateRecipeData(id, responseData);
-        console.log("Update response:", updateRecipeResponse);
+        const requestIngredients = recipeData.recipeIngredients.map(ingredient => {
+            const selectedIngredient = selectedIngredients.find(ing => ing.name === ingredient.name);
+            return selectedIngredient ? selectedIngredient : ingredient;
+        }).concat(
+            selectedIngredients.filter(ing => !recipeData.recipeIngredients.some(ingredient => ingredient.name === ing.name))
+        );
+        const requestData = {
+            recipeName,
+            description,
+            category,
+            recipeIngredients: requestIngredients,
+            instructionsSteps: instructions
+        };
+        console.log(requestData);
+
+        const updateRecipeResponse = await updateRecipeData(id, requestData);
+        // try {
+        //     console.error("to be updated recipe data", requestData);
+        //     const updateRecipeResponse = await deoudegrachtApi.put(`${recipesEndpoint}/${id}`, requestData);
+        //     setIsEditMode(false);
+        //     setSuccess(`Recipe edited successfully! ID: ${updateRecipeResponse.data.id}`);
+        //     setError("");
+        // } catch (error) {
+        //     console.error("Error updating recipe data", error);
+        //     setError("Error editing recipe " + updateRecipeResponse.data);
+        //     setSuccess("");
+        // }
         if (updateRecipeResponse[0] === 1) {
             setIsEditMode(false);
+            setSuccess(`Recipe edited successfully! ID: ${updateRecipeResponse.data.id}`);
+            setError("");
         } else {
+            setError("Error editing recipe " + updateRecipeResponse.data);
+            setSuccess("");
             console.error("Error updating recipe data", updateRecipeResponse[1]);
         }
+    };
+    const handleIngredientSelect = (event) => {
+        const selectedName = event.target.value;
+        if (!selectedName) return;
+
+        const alreadySelected = selectedIngredients.some(ing => ing.name === selectedName);
+
+        if (!alreadySelected) {
+            setSelectedIngredients([...selectedIngredients, {
+                name: selectedName,
+                quantity: '',
+                unit: ''
+            }]);
+        }
+    };
+    const handleIngredientUpdate = (ingredientName, field, value) => {
+        setSelectedIngredients(prevIngredients =>
+            prevIngredients.map(ing =>
+                ing.name === ingredientName
+                    ? { ...ing, [field]: field === 'quantity' ? Number(value) : value }
+                    : ing
+            )
+        );
+    };
+    const handleRemoveIngredient = (ingredientName, e) => {
+        e.preventDefault(); // Prevent form submission
+        setSelectedIngredients(selectedIngredients.filter(
+            ing => ing.name !== ingredientName
+        ));
+    };
+    const handleAddNewIngredientClick = () => {
+        navigate('/portal/ingredient/new');
+    };
+    const handleInstructionChange = (index, value) => {
+        setInstructions(prevInstructions =>
+            prevInstructions.map((instruction, i) =>
+                i === index ? value : instruction
+            )
+        );
+    };
+    const handleRemoveInstruction = (index) => {
+        setInstructions(prevInstructions =>
+            prevInstructions.filter((_, i) => i !== index)
+        );
     };
 
     if (!recipeData) {
         return <div>Loading...</div>;
     }
+
     return(
-        <div className="main-recipe-details-form">
-            <section className="recipe-details-header">
-                <Button buttonName="← Back" onClick={handleBackClick}/>
-                <h2>{recipeData.recipeName} </h2>
-            </section>
-            <section className="recipe-details-form">
-                <form className="display-recipe">
-                    <label id="name-label">
-                        Name: {isEditMode ?
-                        <input type="text" name="recipeName" defaultValue={recipeData.recipeName}
-                               onChange={(event) => setRecipeName(event.target.value)}/> : recipeData.recipeName}
-                    </label>
-                    <label id="description-label">
-                        Description: { isEditMode ?
-                        <textarea id="description-field"
-                                  name="description"
-                                  placeholder= {recipeData.description}
-                                  required
-                                  onChange={(event) => setDescription(event.target.value)}
-                                  maxLength="200" /*set max character to textarea 200 is the number of character that can be written in the textarea */
-                        />
-                        : recipeData.description}
-                    </label>
-                    <label id="category-label">
-                        Category: {isEditMode ? (
-                        <select defaultValue={recipeData.category} name="category"
-                                onChange={(event) => setCategory(event.target.value)}>
-                            {
-                                categoriesList.map((category) => (
-                                    <option key={category} value={category}> {category} </option>
-                                ))
-                            }
+        <div className="login-form-container">
+            <form className="login-form recipe-details-form" onSubmit={handleSaveClick}>
+                <div className="recipe-details-header">
+                    <Button 
+                        buttonName="← Back" 
+                        onClick={handleBackClick} 
+                        className="back-button"
+                    />
+                    <h2>{recipeData.recipeName}</h2>
+                </div>
+
+                <div>
+                    <label htmlFor="name-field">Recipe Name</label>
+                    <input 
+                        type="text" 
+                        id="name-field" 
+                        name="recipeName" 
+                        className="login-form-text-field"
+                        value={recipeName}
+                        onChange={(event) => setRecipeName(event.target.value)}
+                        disabled={!isEditMode}
+                    />
+                </div>
+
+                <div>
+                    <label htmlFor="description-field">Description</label>
+                    <textarea 
+                        id="description-field"
+                        name="description"
+                        className="login-form-text-field"
+                        placeholder="Enter recipe description"
+                        value={description}
+                        onChange={(event) => setDescription(event.target.value)}
+                        maxLength="200"
+                        disabled={!isEditMode}
+                    />
+                </div>
+
+                <div>
+                    <label htmlFor="category-field">Category</label>
+                    <select 
+                        id="category-field" 
+                        name="category" 
+                        className="login-form-text-field"
+                        value={category}
+                        onChange={(event) => setCategory(event.target.value)}
+                        disabled={!isEditMode}
+                    >
+                        {categoriesList.map((cat) => (
+                            <option key={cat} value={cat}>{cat}</option>
+                        ))}
+                    </select>
+                </div>
+
+                {isEditMode && (
+                    <div>
+                        <label>Ingredients</label>
+                        <select 
+                            className="login-form-text-field"
+                            onChange={handleIngredientSelect}
+                        >
+                            <option value="">Select Ingredient</option>
+                            {allIngredients.map((ingredient) => (
+                                <option key={ingredient.name} value={ingredient.name}>
+                                    {ingredient.name}
+                                </option>
+                            ))}
                         </select>
-                    ) : recipeData.category}
-                    </label>
-                </form>
-                <Button buttonName={isEditMode ? "Save" : "Edit Recipe"}
-                        onClick={isEditMode ? handleSaveClick : handleEditClick}/>
-            </section>
+                        <Button 
+                            buttonName="Add New Ingredient" 
+                            onClick={handleAddNewIngredientClick}
+                            className="submit-login-button"
+                        />
+                    </div>
+                )}
+
+                {isEditMode && selectedIngredients.map((ingredient) => (
+                    <div key={ingredient.name} className="ingredient-input">
+                        <input 
+                            type="text" 
+                            value={ingredient.name} 
+                            readOnly 
+                            className="login-form-text-field"
+                        />
+                        <input 
+                            type="number" 
+                            placeholder="Quantity" 
+                            value={ingredient.quantity || ''}
+                            onChange={(e) => handleIngredientUpdate(
+                                ingredient.name, 
+                                'quantity', 
+                                e.target.value
+                            )}
+                            className="login-form-text-field"
+                        />
+                        <input 
+                            type="text" 
+                            placeholder="Unit" 
+                            value={ingredient.unit || ''}
+                            onChange={(e) => handleIngredientUpdate(
+                                ingredient.name, 
+                                'unit', 
+                                e.target.value
+                            )}
+                            className="login-form-text-field"
+                        />
+                        <Button 
+                            buttonName="Remove" 
+                            onClick={(e) => handleRemoveIngredient(ingredient.name, e)}
+                            className="submit-login-button"
+                        />
+                    </div>
+                ))}
+
+                {isEditMode && (
+                    <div>
+                        <label>Instructions</label>
+                        {instructions.map((instruction, index) => (
+                            <div key={index} className="instruction-input">
+                                <textarea 
+                                    value={instruction}
+                                    onChange={(e) => handleInstructionChange(index, e.target.value)}
+                                    className="login-form-text-field"
+                                    placeholder={`Step ${index + 1}`}
+                                />
+                                <Button 
+                                    buttonName="Remove" 
+                                    onClick={() => handleRemoveInstruction(index)}
+                                    className="submit-login-button"
+                                />
+                            </div>
+                        ))}
+                    </div>
+                )}
+
+                {isEditMode ? (
+                    <Button 
+                        buttonName="Save" 
+                        className="submit-login-button"
+                        onClick={handleSaveClick}
+                    />
+                ) : (
+                    <Button 
+                        buttonName="Edit" 
+                        className="submit-login-button"
+                        onClick={handleEditClick}
+                    />
+                )}
+
+                {error && <p className="error-message">{error}</p>}
+                {success && <p className="success-message">{success}</p>}
+            </form>
         </div>
-    )
+    );
 }
 
 export default RecipeDetailsForm;

@@ -7,7 +7,6 @@ import {EDIT_ICON} from "../../constants/AssetsFilesNames.js";
 function EmployeesRecordsTableRow({employee}){
     console.log("Employee data " + employee);
     const navigate = useNavigate();
-
     const handleUsernameClick = () => {
         navigate(`/portal/employee/${employee.username}`);
     };
@@ -17,20 +16,31 @@ function EmployeesRecordsTableRow({employee}){
     };
 
     return(
-        <tr className="employee-record-row">
-            <td className="employees-table-data employee-firstname-data">{employee.firstname}</td>
-            <td className="employees-table-data employee-lastname-data">{employee.lastname}</td>
-            <td className="employees-table-data employee-email-data">{employee.email}</td>
-            <td className="employees-table-data employee-phone-data">{employee.phone}</td>
-            <td className="employees-table-data employee-username-data-navlink"
+        <tr>
+            <td>{employee.firstname}</td>
+            <td>{employee.lastname}</td>
+            <td>{employee.email}</td>
+            <td>{employee.phone || 'N/A'}</td>
+            <td 
                 onClick={handleUsernameClick}
-                style={{ cursor: 'pointer' }}
+                style={{ 
+                    cursor: 'pointer', 
+                    color: '#0088ff',
+                    textDecoration: 'underline' 
+                }}
             >
                 {employee.username}
             </td>
-            <td className="employees-table-data employee-role-data">{employee.role}</td>
-            <td className="edit-button">
-                <Button size="icon" iconSrc={EDIT_ICON} onClick={handleEditClick}/>
+            <td>{employee.role || 'Employee'}</td>
+            <td>
+                <div className="table-action-buttons">
+                    <Button 
+                        size="icon" 
+                        iconSrc={EDIT_ICON} 
+                        onClick={handleEditClick}
+                        className="edit-btn"
+                    />
+                </div>
             </td>
         </tr>
     );

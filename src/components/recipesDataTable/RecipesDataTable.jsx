@@ -49,35 +49,49 @@ function RecipesDataTable(){
     return(
         <div className="recipes-data-table">
             <FoodCategoryNavbar onCategorySelect={handleCategorySelect} selectedCategory={selectedCategory}/>
-            <table className="recipes-table">
-                <thead className="recipes-table-head">
-                <tr className="recipes-table-head-row">
-                    <th className="recipes-name-table-head">Recipe Name</th>
-                    <th className="recipes-category-table-head">Category</th>
-                    <th className="recipes-edit-table-head">Edit</th>
-                </tr>
+            <table className="employee-table">
+                <thead>
+                    <tr>
+                        <th>Recipe Name</th>
+                        <th>Category</th>
+                        <th>Actions</th>
+                    </tr>
                 </thead>
-                <tbody className="recipes-table-body">
+                <tbody>
                 {
                     loading ? (
-                            <tr className="recipes-table-row">
-                                <td className="recipes-table-data recipes-table-loading-data-cell" colSpan="6">Loading...</td>
-                            </tr>
-                        ):
-                        error ? (
-                            <tr className="recipes-table-row">
-                                <td className="recipes-table-data recipes-table-error-data-cell" colSpan="6">Error fetching data check
-                                    connection...</td>
-                            </tr>
-                        ) : (
-                            filteredRecipes.map((recipe, index) => (
-                                <RecipesRecordsTableRow key={index} recipe={recipe} />
-                            ))
-                        )
+                        <tr>
+                            <td colSpan="3" style={{textAlign: 'center', padding: '20px'}}>Loading...</td>
+                        </tr>
+                    ) : error ? (
+                        <tr>
+                            <td colSpan="3" style={{
+                                textAlign: 'center', 
+                                color: 'red', 
+                                padding: '20px'
+                            }}>
+                                Error fetching data. Please check your connection.
+                            </td>
+                        </tr>
+                    ) : (
+                        filteredRecipes.map((recipe, index) => (
+                            <RecipesRecordsTableRow key={index} recipe={recipe} />
+                        ))
+                    )
                 }
                 </tbody>
             </table>
-            <Button iconSrc = {ADD_ICON} size = "icon" onClick ={handleAddClick}/>
+            <div style={{
+                display: 'flex', 
+                justifyContent: 'flex-end', 
+                marginTop: '15px'
+            }}>
+                <Button 
+                    iconSrc={ADD_ICON} 
+                    size="icon" 
+                    onClick={handleAddClick}
+                />
+            </div>
         </div>
     );
 }

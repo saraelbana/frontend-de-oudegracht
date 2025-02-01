@@ -10,6 +10,8 @@ import Login from "../login/Login.jsx";
 import NotFound from "../../notFound/NotFound.jsx";
 import MainDisplay from "../mainDisplay/MainDisplay.jsx";
 import ForgotPassword from "../forgotPassword/ForgotPassword.jsx";
+import Signup from "../signup/Signup.jsx";
+import GuestProfile from "../../../components/guestProfile/GuestProfile.jsx";
 
 function Home()
 {
@@ -24,6 +26,8 @@ function Home()
                 <Route path="/reservations" element={<Reservations/>}/>
                 <Route path="/contact" element={<Contact/>}/>
                 <Route path="/login" element={<Login/>}/>
+                <Route path={"/guest-profile/:username"} element={<GuestProfile/>}/>
+                <Route path="/signup" element={<Signup/>}/>
                 <Route path="/forgot-password" element={<ForgotPassword/>}/>
                 <Route path="*" element={<NotFound/>}/>
             </Routes>

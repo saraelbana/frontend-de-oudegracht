@@ -8,6 +8,8 @@
 ul{
      list-style: none;
      display: flex;
+     padding-inline-start: 0px;
+     margin-inline-start: -15px;
 }
 li{
     margin: 0 15px;
@@ -20,7 +22,9 @@ li:hover {
 }
 .active-menu-link{
     text-decoration: underline;
+    color: #000;
 }
 .default-menu-link{
     text-decoration: none;
+    color: #000;
 }
