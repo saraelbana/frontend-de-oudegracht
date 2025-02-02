@@ -18,6 +18,13 @@
     right: 0;
 }
 
+.form-field-label {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-bottom: 8px;
+}
+
 .add-menu-item-form {
     height: 100%;
     display: flex;

@@ -76,7 +76,7 @@ function EmployeesDataTable(){
             <div className="add-button-container">
                 <Button 
                     iconSrc={ADD_ICON} 
-                    size="icon" 
+                    text="Add New Employee"
                     onClick={handleAddClick}
                 />
             </div>

@@ -78,7 +78,7 @@ function RecipesDataTable() {
             <div className="add-button-container">
                 <Button
                     iconSrc={ADD_ICON}
-                    size="icon"
+                    text="Add New Recipe"
                     onClick={handleAddClick}
                 />
             </div>

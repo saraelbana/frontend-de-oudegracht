@@ -59,11 +59,12 @@ function NewEmployeeForm(){
                 <div className="new-employee-name">
                     <div className="new-employee-firstname">
                         <label htmlFor="firstname-field">Firstname</label>
+                        <MandatoryTag />
                         <input 
                             type='text'
                             id="firstname-field"
                             name="firstname"
-                            placeholder="Firstname"
+                            placeholder="Firstname*"
                             required
                             className="login-form-text-field"
                             onChange={(event) => setFirstname(event.target.value)}
@@ -71,10 +72,11 @@ function NewEmployeeForm(){
                     </div>
                     <div className="new-employee-lastname">
                         <label htmlFor="lastname-field">Lastname</label>
+                        <MandatoryTag />
                         <input 
                             type='text'
                             id="lastname-field"
-                            name="lastname"
+                            name="lastname*"
                             placeholder="Lastname"
                             required
                             className="login-form-text-field"
@@ -88,7 +90,7 @@ function NewEmployeeForm(){
                         type='email'
                         id="email-field"
                         name="email"
-                        placeholder="Email"
+                        placeholder="email@email.com"
                         className="login-form-text-field"
                         onChange={(event) => setEmail(event.target.value)}
                     />
@@ -104,22 +106,24 @@ function NewEmployeeForm(){
                 </div>
                 <div className="new-employee-credentials">
                     <label htmlFor="username-field">Username</label>
+                    <MandatoryTag />
                     <input 
                         type='text'
                         id="username-field"
                         name="username"
-                        placeholder="Username"
+                        placeholder="Username*"
                         required
                         className="login-form-text-field"
                         onChange={(event) => setUsername(event.target.value)}
                     />
                     <div className="password-container">
                         <label htmlFor="password-field">Password</label>
+                        <MandatoryTag />
                         <input 
                             type='password'
                             id="password-field"
                             name="password"
-                            placeholder="Password"
+                            placeholder="Password*"
                             required
                             className="login-form-text-field"
                             onChange={(event) => setPassword(event.target.value)}
@@ -127,16 +131,18 @@ function NewEmployeeForm(){
                     </div>
                     <div className="password-container">
                         <label htmlFor="confirm-password-field">Confirm Password</label>
+                        <MandatoryTag />
                         <input 
                             type='password'
                             id="confirm-password-field"
                             name="confirm-password"
-                            placeholder="Confirm Password"
+                            placeholder="Confirm Password*"
                             required
                             className="login-form-text-field"
                             onChange={(event) => setConfirmPassword(event.target.value)}
                         />
                     </div>
+
                 </div>
                 <div className="new-employee-role">
                     <label htmlFor="role-field">Role</label>
@@ -152,10 +158,10 @@ function NewEmployeeForm(){
                         ))}
                     </select>
                 </div>
-                <Button 
+                <Button
                     buttonName="Submit" 
-                    className="submit-login-button"
-                    disable={!(firstname && lastname && username && password)}
+                    className="submit-button"
+                    disable={!(firstname && lastname && username && password &&confirmPassword)}
                 />
                 {error && <p className="error-message">{error}</p>}
                 {success && <p className="success-message">{success}</p>}

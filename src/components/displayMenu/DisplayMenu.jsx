@@ -19,7 +19,9 @@ function DisplayMenu(){
             <h1>De Oudegracht Menu</h1>
             <MenuDataTable/>
             {isPortalPath && (
-                <Button iconSrc={ADD_ICON} text="Add New Item" size="large" onClick={handleAddMenuItem} />
+                <div className="add-button-container">
+                    <Button iconSrc={ADD_ICON} text="Add New Item" onClick={handleAddMenuItem} />
+                </div>
             )}
         </div>
     );

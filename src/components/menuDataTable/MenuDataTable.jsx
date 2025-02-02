@@ -46,6 +46,7 @@ function MenuDataTable(){
                         <th>Menu Item</th>
                         <th>Price</th>
                         <th>Category</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>

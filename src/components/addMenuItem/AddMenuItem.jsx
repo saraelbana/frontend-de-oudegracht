@@ -74,22 +74,34 @@ function AddMenuItem(){
         <div className="add-menu-item">
             <h1>Add New Menu Item</h1>
             <form className="add-menu-item-form">
-                <label htmlFor="itemName">Item Name</label>
+                <div className="form-field-label">
+                    <label htmlFor="itemName">Item Name</label>
+                    <MandatoryTag/>
+                </div>
                 <input type="text" id="itemName" name="itemName" required
                        className="add-menu-item-text-field"
                        onChange={(e) => setItemName(e.target.value)}/>
-                <MandatoryTag/>
-                <label htmlFor="itemDescription">Item Description</label>
+
+                <div className="form-field-label">
+                    <label htmlFor="itemDescription">Item Description</label>
+                    <MandatoryTag/>
+                </div>
                 <textarea id="itemDescription" name="itemDescription" required
                           className="item-description-textarea"
                           onChange={(e) => setItemDescription(e.target.value)}/>
-                <MandatoryTag/>
-                <label htmlFor="itemPrice">Item Price</label>
+
+                <div className="form-field-label">
+                    <label htmlFor="itemPrice">Item Price</label>
+                    <MandatoryTag/>
+                </div>
                 <input type="number" id="itemPrice" name="itemPrice" required min="0" step="0.01"
                        className="item-price-text-field"
                        onChange={(e) => setItemPrice(e.target.value)}/>
-                <MandatoryTag/>
-                <label htmlFor="itemCategory">Item Category</label>
+
+                <div className="form-field-label">
+                    <label htmlFor="itemCategory">Item Category</label>
+                    <MandatoryTag/>
+                </div>
                 {loading ? (<p> loading...</p>) : (
                     <select required id="itemCategory" name="itemCategory"
                             className="item-category-dropdown"
@@ -103,25 +115,31 @@ function AddMenuItem(){
                             </option>
                         ))}
                     </select>)}
-                <MandatoryTag/>
-                <label htmlFor="recipesList">Select Recipe</label>
-                <div id="recipesList">
-                    {recipesList.map((recipe) => (
-                        <div key={recipe.id}>
-                            <input
-                                type="radio"
-                                id={`recipe-${recipe.id}`}
-                                name="recipes"
-                                value={recipe.recipeName}
-                                className="recipe-radio-button"
-                                onChange={() => handleRecipeSelect(recipe.id)}
-                            />
-                            <label htmlFor={`recipe-${recipe.id}`}>{recipe.recipeName}</label>
-                        </div>
-                    ))}
+
+                <div className="form-field-label">
+                    <label htmlFor="recipesList">Select Recipe</label>
+                    <MandatoryTag/>
                 </div>
-                <MandatoryTag/>
-                <Button buttonName="Add Item" size="large" onClick={handleSubmit}/>
+                {loading ? (<p>Loading...</p>) : (
+                    <select
+                        required
+                        id="recipesList"
+                        name="recipesList"
+                        className="item-category-dropdown"
+                        onChange={(e) => handleRecipeSelect(e.target.value)}
+                        value={selectedRecipe}
+                    >
+                        <option value="" disabled selected>
+                            Select recipe
+                        </option>
+                        {recipesList.map((recipe, index) => (
+                            <option key={index} value={recipe.id}>
+                                {recipe.recipeName}
+                            </option>
+                        ))}
+                    </select>
+                )}
+                <Button type="submit" text="Add Menu Item" onClick={handleSubmit} className="submit-add-menu-item-button"/>
                 {error && <p className="error-message">{error}</p>}
                 {success && <p className="success-message">{success}</p>}
             </form>

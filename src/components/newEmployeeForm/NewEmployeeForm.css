@@ -44,3 +44,12 @@
     text-align: center;
     margin-top: 10px;
 }
+.submit-button:disabled {
+    background-color: gray;
+    cursor: not-allowed;
+}
+
+.submit-button:not(:disabled) {
+    background-color: blue;
+    cursor: pointer;
+}

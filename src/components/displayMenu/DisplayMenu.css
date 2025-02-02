@@ -1,0 +1,17 @@
+.menu-display {
+    width: 100%;
+}
+
+.menu-display h1 {
+    color: #333;
+    margin-bottom: 2rem;
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+.add-button-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 15px;
+}
