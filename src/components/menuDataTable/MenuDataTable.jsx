@@ -9,6 +9,16 @@ function MenuDataTable(){
     const [selectedCategory, setSelectedCategory] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const handleCategorySelect = (category) => {
+        setSelectedCategory(category);
+        if (category) {
+            const filtered = menu.filter(item => item.category === category);
+            setFilteredMenu(filtered);
+        } else {
+            setFilteredMenu(menu); // Show all items when no category is selected
+        }
+    };
+
     useEffect(() => {
         const fetchMenuData = async () => {
             try {
@@ -26,15 +36,6 @@ function MenuDataTable(){
 
         fetchMenuData();
     }, []);
-    const handleCategorySelect = (category) => {
-        setSelectedCategory(category);
-        if (category) {
-            const filtered = menu.filter(item => item.category === category);
-            setFilteredMenu(filtered);
-        } else {
-            setFilteredMenu(menu); // Show all items when no category is selected
-        }
-    };
 
     return(
         <div className="menu-data-table">
