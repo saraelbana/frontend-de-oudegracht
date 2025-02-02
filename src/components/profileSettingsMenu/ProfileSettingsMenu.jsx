@@ -1,6 +1,7 @@
 import  "./ProfileSettingsMenu.css";
 import {NavLink} from "react-router-dom";
 import {useNavigate} from "react-router-dom";
+import Button from "../button/Button.jsx";
 
 function ProfileSettingsMenu() {
     const navigate = useNavigate();
@@ -9,7 +10,9 @@ function ProfileSettingsMenu() {
         navigate("http://localhost:5173");
     };
     const handleProfileClick = () => {
-        navigate("/employee/:username");
+        const username = localStorage.getItem("user_username");
+        console.log("Username", username);
+        navigate(`/portal/employee/${username}`);
     };
     return(
         <div className="settings-menu-overlay">
@@ -17,21 +20,18 @@ function ProfileSettingsMenu() {
               <div className="settings-list">
                     <ul className="list-items">
                         <li>
-                            <NavLink
-                                to="/portal/profile"
+                            <Button
                                 className="profile-settings-menu-link"
-                                onClick={handleProfileClick}>
-
-                                Profile
-                            </NavLink>
+                                onClick={handleProfileClick}
+                                text= "Profile"
+                            />
                         </li>
                         <li>
-                            <NavLink
-                                to="/portal/logout"
+                            <Button
                                 className="logout-settings-menu-link"
-                                onClick={handleLogout}>
-                                Logout
-                            </NavLink>
+                                onClick={handleLogout}
+                                text= "Logout"
+                            />
                         </li>
                     </ul>
                 </div>

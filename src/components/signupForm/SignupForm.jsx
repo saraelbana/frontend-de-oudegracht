@@ -49,18 +49,19 @@ function SignupForm(){
                             id="firstname-field"
                             name="firstname"
                             required
-                            placeholder="Firstname"
+                            placeholder="Firstname*"
                             className="signup-form-text-field"
                             onChange={(e) => setFirstname(e.target.value)}
                         />
                     </label>
+
                     <label htmlFor="lastname-field" id="lastname-label">
                         <input 
                             type='text'
                             id="lastname-field"
                             name="lastname"
                             required
-                            placeholder="Lastname"
+                            placeholder="Lastname*"
                             className="signup-form-text-field"
                             onChange={(e) => setLastname(e.target.value)}
                         />
@@ -72,7 +73,7 @@ function SignupForm(){
                         id="email-field"
                         name="email"
                         required
-                        placeholder="Email"
+                        placeholder="Email*"
                         className="signup-form-text-field"
                         onChange={(e) => setEmail(e.target.value)}
                     />
@@ -83,7 +84,7 @@ function SignupForm(){
                         id="username-field"
                         name="username"
                         required
-                        placeholder="Username"
+                        placeholder="Username*"
                         className="signup-form-text-field"
                         onChange={(e) => setUsername(e.target.value)}
                     />
@@ -95,7 +96,7 @@ function SignupForm(){
                             id="password-field"
                             name="password"
                             required
-                            placeholder="Password"
+                            placeholder="Password*"
                             className="signup-form-text-field"
                             onChange={(e) => setPassword(e.target.value)}
                         />
@@ -114,7 +115,7 @@ function SignupForm(){
                             id="confirm-password-field"
                             name="confirm-password"
                             required
-                            placeholder="Confirm Password"
+                            placeholder="Confirm Password*"
                             className="signup-form-text-field"
                             onChange={(e) => setConfirmPassword(e.target.value)}
                         />

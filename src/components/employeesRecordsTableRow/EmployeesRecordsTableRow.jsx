@@ -38,7 +38,7 @@ function EmployeesRecordsTableRow({employee}){
                         size="icon" 
                         iconSrc={EDIT_ICON} 
                         onClick={handleEditClick}
-                        className="edit-btn"
+                        className="edit-button"
                     />
                 </div>
             </td>

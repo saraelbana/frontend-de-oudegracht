@@ -21,7 +21,7 @@ export const ingredientsEndpoint = DE_OUGRACHT_API_URL + "/ingredients";
 export const guestEndpoint = DE_OUGRACHT_API_URL + "/guests";
 export const registerEndpoint = DE_OUGRACHT_API_URL + "/auth/register";
 export const menuEndpoint = DE_OUGRACHT_API_URL + "/menu-items";
-
+export const loginEndpoint = DE_OUGRACHT_API_URL + "/auth/login";
 deoudegrachtApi.interceptors.request.use(
     (config) => {
         const token = localStorage.getItem("authToken");

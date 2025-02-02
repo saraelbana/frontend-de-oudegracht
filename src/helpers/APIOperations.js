@@ -5,7 +5,7 @@ import {
     recipesEndpoint,
     /* reservationsEndpoint, */
     rolesEndpoint,
-    ingredientsEndpoint, guestEndpoint
+    ingredientsEndpoint, guestEndpoint, menuEndpoint
 } from "../deoudegrachtApi.js";
 
 //this is a flag obj. with 2 values first element a flag 0/1 second is either the successfully returned obj or the failure error
@@ -72,18 +72,24 @@ export async function getCategoriesList(){
 }
 export async function getDashboardData() {
     try {
+        const endpoints = [
+            { name: "employees", endpoint: employeesEndpoint },
+            { name: "recipes", endpoint: recipesEndpoint },
+            { name: "menu-items", endpoint: menuEndpoint },
+            { name: "guests", endpoint: guestEndpoint }
+        ];
 
-        const [employeesResponse, recipesResponse,/*reservationsResponse*/] = await Promise.all([
-            deoudegrachtApi.get(employeesEndpoint),
-            deoudegrachtApi.get(recipesEndpoint)/*,
-            deoudegrachtApi.get(reservationsEndpoint)*/
-        ]);
-        const dashboardData = {
-            totalEmployees: employeesResponse.data.length,
-            totalRecipes: recipesResponse.data.length/*,
-            totalReservations: reservationsResponse.data.length*/
-        };
-        return [1, dashboardData];
+        const dashboardData = await Promise.all(endpoints.map(async ({ name, endpoint }) => {
+            try {
+                const response = await deoudegrachtApi.get(endpoint);
+                return { name, totalNumber: response.data.length };
+            } catch (error) {
+                console.error(`Error fetching data from ${name} endpoint:`, error);
+                return null;
+            }
+        }));
+
+        return [1, dashboardData.filter(data => data !== null)];
     } catch (error) {
         console.error("Error fetching dashboard data:", error);
         return [0, error];
@@ -135,15 +141,12 @@ export async function getRecipesList(){
         return [0, error];
     }
 }
-
-// export async function setEmployeeRequestData(username) {
-//     return ("{ " +
-//         "firstname:" + firstname +
-//         "lastname:" + lastname +
-//         "role:" +  role +
-//         "email:" + email +
-//         "phone:" + phone +
-//         "username:" + username +
-//         "password:" + password +
-//         " }");
-// }
+export async function deleteMenuItem(id){
+    try {
+        const response = await deoudegrachtApi.delete(`${menuEndpoint}/${id}`);
+        return [1, response.data];
+    } catch (error) {
+        console.error("Error deleting menu item", error);
+        return [0, error];
+    }
+}

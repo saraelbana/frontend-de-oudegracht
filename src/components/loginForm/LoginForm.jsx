@@ -5,6 +5,8 @@ import {useState} from "react";
 import axios from "axios";
 import {SHOW_PASSWORD_ICON, HIDE_PASSWORD_ICON} from "../../constants/AssetsFilesNames.js";
 import { useNavigate } from "react-router-dom";
+import {authRequestData} from "../../helpers/LoginOperations.js";
+import {loginEndpoint} from "../../deoudegrachtApi.js";
 
 function LoginForm(){
     const [username, setUsername] = useState("");
@@ -16,25 +18,29 @@ function LoginForm(){
 
     const handleLogin = async (e) => {
         e.preventDefault();
+        console.log("Attempting to login with:", username, password);
         try {
-            const response = await axios.post("http://localhost:8080/auth/login", {
-                username,
-                password
-            });
-
+            const requestData = authRequestData({username, password});
+            const response = await axios.post(loginEndpoint, requestData);
             console.log("Full login response:", response.data);
 
             // Assuming the token is in response.data.token
             const token = response.data.token;
-            const userName = response.data.name || response.data.username || "Employee";
+            const user_username = response.data.name || response.data.username || "Employee";
+            const user_role = response.data.userRole;
+            const user_firstname = response.data.firstname;
             
             if (token) {
                 localStorage.setItem("authToken", token);
                 // Store the name from the response
-                localStorage.setItem("userName", userName);
+                localStorage.setItem("user_username", user_username);
+                localStorage.setItem("user_role", user_role);
+                localStorage.setItem("user_firstname", user_firstname);
                 console.log("Token and name stored successfully:", {
                     token: token,
-                    userName: userName
+                    user_username: user_username,
+                    user_role: user_role,
+                    user_firstname: user_firstname
                 });
             }
             setSuccess("Login successful");
@@ -83,13 +89,15 @@ function LoginForm(){
                         />
                     </div>
                 </label>
-                <p>
+                <p className="forget-password-link">
                     <Link to="/forgot-password" className="forgot-password-link">
                         Forgot your password?
                     </Link>
                 </p>
                 <br></br>
-                <Button buttonName="Log In" disable={!(username && password)}/>
+                <Button buttonName="Log In"
+                        disable={!(username && password)}
+                />
                 {error && <p className="error-message">{error}</p>}
                 {success && <p className="success-message">{success}</p>}
                 <p className="or-divider">

@@ -1,8 +1,10 @@
+import DisplayMenu from "../../../components/displayMenu/DisplayMenu.jsx";
+
 function Menu(){
     return (
         <div>
             <h1>Menu</h1>
-            <p>Our menu is coming soon!</p>
+            <DisplayMenu/>
         </div>
     )
 }

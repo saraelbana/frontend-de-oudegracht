@@ -2,16 +2,18 @@ import "./RecipesRecordsTableRow.css";
 import { useNavigate} from "react-router-dom";
 import Button from "../button/Button.jsx";
 import {EDIT_ICON} from "../../constants/AssetsFilesNames.js";
-import {useState} from "react";
 
+// eslint-disable-next-line react/prop-types
 function RecipesRecordsTableRow({recipe}){
     console.log("Recipe data " + recipe);
     const navigate = useNavigate();
-    const handleRecipeIdClick = () => {
+    const handleRecipeNameClick = () => {
+        // eslint-disable-next-line react/prop-types
         navigate(`/portal/recipe/${recipe.id}?edit=false`);
     };
     const handleEditClick = () => {
         // Navigate with edit mode parameter
+        // eslint-disable-next-line react/prop-types
         navigate(`/portal/recipe/${recipe.id}?edit=true`);
     };
 
@@ -19,15 +21,17 @@ function RecipesRecordsTableRow({recipe}){
     return(
         <tr>
             <td 
-                onClick={handleRecipeIdClick}
+                onClick={handleRecipeNameClick}
                 style={{ 
                     cursor: 'pointer', 
                     color: '#0088ff',
                     textDecoration: 'underline' 
                 }}
             >
+                {/* eslint-disable-next-line react/prop-types */}
                 {recipe.recipeName}
             </td>
+            {/* eslint-disable-next-line react/prop-types */}
             <td>{recipe.category || 'Uncategorized'}</td>
             <td>
                 <div className="table-action-buttons">

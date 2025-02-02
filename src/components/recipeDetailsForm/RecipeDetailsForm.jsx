@@ -79,8 +79,9 @@ function RecipeDetailsForm(){
     const handleBackClick = () => {
         navigate("/portal/recipe");
     }
-    const handleEditClick = () => {
-        setIsEditMode(!isEditMode);
+    const handleEditClick = (event) => {
+        event.preventDefault();
+        setIsEditMode(true);
     };
     const handleSaveClick = async () => {
         const requestIngredients = recipeData.recipeIngredients.map(ingredient => {
@@ -180,7 +181,6 @@ function RecipeDetailsForm(){
                     />
                     <h2>{recipeData.recipeName}</h2>
                 </div>
-
                 <div>
                     <label htmlFor="name-field">Recipe Name</label>
                     <input 
@@ -193,7 +193,6 @@ function RecipeDetailsForm(){
                         disabled={!isEditMode}
                     />
                 </div>
-
                 <div>
                     <label htmlFor="description-field">Description</label>
                     <textarea 
@@ -207,7 +206,6 @@ function RecipeDetailsForm(){
                         disabled={!isEditMode}
                     />
                 </div>
-
                 <div>
                     <label htmlFor="category-field">Category</label>
                     <select 
@@ -246,7 +244,8 @@ function RecipeDetailsForm(){
                     </div>
                 )}
 
-                {isEditMode && selectedIngredients.map((ingredient) => (
+                {isEditMode ? (
+                    selectedIngredients.map((ingredient) => (
                     <div key={ingredient.name} className="ingredient-input">
                         <input 
                             type="text" 
@@ -282,43 +281,56 @@ function RecipeDetailsForm(){
                             className="submit-login-button"
                         />
                     </div>
-                ))}
+                    )
+                )): (<div>
+                    <label>Ingredients</label>
+                    {ingredients.map((ingredient, index) => (
+                        <div key={index} className="ingredient-input">
+                            <p>{ingredient.quantity} {ingredient.unit} {ingredient.name}</p>
+                        </div>
+                    ))}
+                </div>)}
 
-                {isEditMode && (
-                    <div>
+                {
+
+                    <div className="instructions-container">
                         <label>Instructions</label>
                         {instructions.map((instruction, index) => (
                             <div key={index} className="instruction-input">
-                                <textarea 
-                                    value={instruction}
+                                <label>Step {index + 1}</label>
+                                <textarea
+                                    value={instruction.instruction}
                                     onChange={(e) => handleInstructionChange(index, e.target.value)}
                                     className="login-form-text-field"
                                     placeholder={`Step ${index + 1}`}
+                                    disabled={!isEditMode}
                                 />
-                                <Button 
-                                    buttonName="Remove" 
-                                    onClick={() => handleRemoveInstruction(index)}
-                                    className="submit-login-button"
-                                />
+                                {
+                                    isEditMode && (
+                                        <Button
+                                            buttonName="Remove"
+                                            onClick={() => handleRemoveInstruction(index)}
+                                            className="submit-login-button"
+                                        />)
+                                }
                             </div>
                         ))}
                     </div>
-                )}
+                }
 
                 {isEditMode ? (
-                    <Button 
+                    <Button
                         buttonName="Save" 
                         className="submit-login-button"
                         onClick={handleSaveClick}
                     />
-                ) : (
-                    <Button 
+                ):(
+                    <Button
                         buttonName="Edit" 
                         className="submit-login-button"
                         onClick={handleEditClick}
                     />
                 )}
-
                 {error && <p className="error-message">{error}</p>}
                 {success && <p className="success-message">{success}</p>}
             </form>

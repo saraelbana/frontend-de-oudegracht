@@ -40,7 +40,7 @@ function EmployeeMain() {
     return(
             <article className = "employee-main-article" >
                 <section className="employee-header-settings-section">
-                    <WelcomeMessage name = "Employee Name"/>
+                    <WelcomeMessage />
                     <Button iconSrc={SettingsIcon} onClick={handleIconClick} />
                 </section>
                 {isProfileSettingsVisible && <ProfileSettingsMenu onClick={handleProfileClick}/>}
@@ -55,7 +55,7 @@ function EmployeeMain() {
                             <Route path="/recipe/:id" element={<RecipeDetailsForm/>}/>
                             <Route path="/menu" element={<DisplayMenu/>}/>
                             <Route path="/menu/new-item" element={<AddMenuItem/>}/>
-                            <Route path="/employee" element={< EmployeesDataTable/>}/>
+                            <Route path="/employee" element={<EmployeesDataTable/>}/>
                             <Route path="/employee/:username" element={<EmployeeDetailsForm/>}/>
                             <Route path="/profile" element={<EmployeeDetailsForm/>}/>
                             <Route path="/logout" element={<EmployeeDetailsForm/>}/>

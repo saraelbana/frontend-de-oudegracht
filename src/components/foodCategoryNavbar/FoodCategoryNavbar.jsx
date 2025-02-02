@@ -37,7 +37,8 @@ function FoodCategoryNavbar({ onCategorySelect, selectedCategory, showAllRecipes
                     <li>Error loading categories</li>
                 ) : (
                     <>
-                        {showAllRecipes && (
+                        {
+                            showAllRecipes && (
                             <li>
                                 <NavLink
                                     to="/portal/recipe/"
@@ -47,8 +48,10 @@ function FoodCategoryNavbar({ onCategorySelect, selectedCategory, showAllRecipes
                                     All Recipes
                                 </NavLink>
                             </li>
-                        )}
-                        {categories.map((category, index) => (
+                            )
+                        }
+                        {
+                            categories.map((category, index) => (
                             <li key={index}>
                                 <NavLink
                                     to="/portal/recipe/"
@@ -58,7 +61,8 @@ function FoodCategoryNavbar({ onCategorySelect, selectedCategory, showAllRecipes
                                     {category}
                                 </NavLink>
                             </li>
-                        ))}
+                            ))
+                        }
                     </>
                 )}
             </ul>

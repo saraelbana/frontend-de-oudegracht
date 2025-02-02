@@ -19,7 +19,6 @@ function EmployeeDetailsForm() {
     const [phone, setPhone] = useState("");
     const [role, setRole] = useState("");
 
-
     const [rolesList, setRolesList] = useState([]);
     const [success, setSuccess] = useState("");
     const [error, setError] = useState("");
@@ -33,6 +32,7 @@ function EmployeeDetailsForm() {
     }, [searchParams]);
     useEffect(() => {
         const fetchEmployeeData = async () => {
+            console.log("Fetching employee data username form here", username);
             const response = await getEmployeeResponseData(username);
             console.log("Employee data response", response);
             if (response[0] === 1) {
@@ -95,7 +95,6 @@ function EmployeeDetailsForm() {
     if (!employeeData) {
         return <div>Loading...</div>;
     }
-
     return (
         <div className="main-employee-details-form">
             {/* <section className="Employee-details-header">
