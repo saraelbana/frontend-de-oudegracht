@@ -1,7 +1,7 @@
 import "./MenuItemRecordRow.css";
 import Button from "../button/Button.jsx";
 import {DELETE_ICON} from "../../constants/AssetsFilesNames.js";
-import {useNavigate} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import {useState} from "react";
 import {deleteMenuItem} from "../../helpers/APIOperations.js";
 
