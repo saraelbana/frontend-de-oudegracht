@@ -19,11 +19,11 @@ function MainMenu(){
                             Menu
                         </NavLink>
                     </li>
-                    <li>
-                        <NavLink to="/reservations" className ={({isActive})=> isActive ? 'active-menu-link' : 'default-menu-link'}>
-                            Reservation
-                        </NavLink>
-                    </li>
+                    {/*<li>*/}
+                    {/*    <NavLink to="/reservations" className ={({isActive})=> isActive ? 'active-menu-link' : 'default-menu-link'}>*/}
+                    {/*        Reservation*/}
+                    {/*    </NavLink>*/}
+                    {/*</li>*/}
                     <li>
                         <NavLink to="/login" className ={({isActive})=> isActive ? 'active-menu-link' : 'default-menu-link'}>
                             Login
