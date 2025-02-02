@@ -154,7 +154,7 @@ function RecipeDetailsForm(){
     const handleInstructionChange = (index, value) => {
         setInstructions(prevInstructions =>
             prevInstructions.map((instruction, i) =>
-                i === index ? value : instruction
+                i === index ? {instruction: value} : instruction
             )
         );
     };
@@ -320,13 +320,13 @@ function RecipeDetailsForm(){
 
                 {isEditMode ? (
                     <Button
-                        buttonName="Save" 
+                        buttonName="Save"
                         className="submit-login-button"
                         onClick={handleSaveClick}
                     />
                 ):(
                     <Button
-                        buttonName="Edit" 
+                        buttonName="Edit"
                         className="submit-login-button"
                         onClick={handleEditClick}
                     />

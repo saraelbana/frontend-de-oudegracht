@@ -10,6 +10,7 @@ function GuestProfile(){
     const [error, setError] = useState("");
     useEffect(() => {
         const fetchGuestData = async () => {
+            console.log("hello Fetching guest data for", username);
             try {
                 const response = await deoudegrachtApi.get(`${guestEndpoint}/${username}`);
                 console.log(response.data);

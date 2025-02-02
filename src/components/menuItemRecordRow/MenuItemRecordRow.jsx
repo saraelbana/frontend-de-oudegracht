@@ -9,6 +9,8 @@ function MenuItemRecordRow(prop){
     const [error, setError] = useState(null);
     const [success, setSuccess] = useState(null);
     const navigate = useNavigate();
+    const location = useLocation();
+    const isPortalPath = location.pathname.includes("portal");
     const handleDeleteClick = async () => {
         try {
             console.log(`Deleting item with id: ${prop.item.id}`);
@@ -34,16 +36,18 @@ function MenuItemRecordRow(prop){
             <td>{prop.item.name}</td>
             <td>€{prop.item.price}</td>
             <td>{prop.item.category}</td>
-            <td>
-                <div className="table-action-buttons">
-                    <Button
-                        size="icon"
-                        iconSrc={DELETE_ICON}
-                        onClick={handleDeleteClick}
-                        className="edit-button"
-                    />
-                </div>
-            </td>
+            {isPortalPath && (
+                <td>
+                    <div className="table-action-buttons">
+                        <Button
+                            size="icon"
+                            iconSrc={DELETE_ICON}
+                            onClick={handleDeleteClick}
+                            className="edit-button"
+                        />
+                    </div>
+                </td>
+            )}
         </tr>
     );
 }

@@ -27,6 +27,8 @@ function LoginForm() {
             const token = response.data.token;
             const user_username = response.data.name || response.data.username || "Employee";
             const user_role = response.data.userRole;
+            console.log("User role:", user_role);
+            console.log("User name:", user_username);
             const user_firstname = response.data.firstname;
 
             if (token) {
@@ -44,7 +46,10 @@ function LoginForm() {
             setSuccess("Login successful");
             setError("");
             console.log("Successful login", response.data);
-            navigate("/portal");
+            if(user_role === "GUEST")
+                navigate(`/guest-profile/${user_username}`);
+                else
+                    navigate("/portal");
         } catch (error) {
             console.error("Full error response:", error.response);
             setError("Login failed: " + (error.response?.data || "Unknown error"));
