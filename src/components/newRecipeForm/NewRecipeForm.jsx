@@ -1,18 +1,16 @@
 import "./NewRecipeForm.css";
-import {useState, useEffect} from "react";
+import { useState, useEffect } from "react";
 import Button from "../button/Button.jsx";
 import {
     deoudegrachtApi,
     categoriesEndpoint,
     ingredientsEndpoint, recipesEndpoint
 } from "../../deoudegrachtApi.js";
-import {createNewRecipeRequestData} from "../../helpers/RecipesOperations.js";
-import {DEFAULT_RECIPE_CATEGORY} from "../../constants/RecipesConstants.js";
-import {ADD_ICON} from "../../constants/AssetsFilesNames.js";
-import {useNavigate} from "react-router-dom";
-import AddNewInstruction from "../addNewInstruction/AddNewInstruction.jsx";
+import { createNewRecipeRequestData } from "../../helpers/RecipesOperations.js";
+import { DEFAULT_RECIPE_CATEGORY } from "../../constants/RecipesConstants.js";
+import { useNavigate } from "react-router-dom";
 
-function NewRecipeForm(){
+function NewRecipeForm() {
     const [recipeName, setRecipeName] = useState("");
     const [category, setCategory] = useState(DEFAULT_RECIPE_CATEGORY);
     const [categories, setCategories] = useState([]);
@@ -32,7 +30,7 @@ function NewRecipeForm(){
     const [newIngredientName, setNewIngredientName] = useState('');
 
     useEffect(() => {
-        const getCategories= async () => {
+        const getCategories = async () => {
             try {
                 const response = await deoudegrachtApi.get(categoriesEndpoint);
                 console.log(response.data);
@@ -44,7 +42,7 @@ function NewRecipeForm(){
         getCategories();
     }, []);
     useEffect(() => {
-        const getIngredientsList= async () => {
+        const getIngredientsList = async () => {
             try {
                 const response = await deoudegrachtApi.get(ingredientsEndpoint);
                 console.log(response.data);
@@ -60,10 +58,8 @@ function NewRecipeForm(){
         setInstructions([...instructions, '']);
     };
     const handleInstructionChange = (index, value) => {
-        //the JSON is of type [{instruction: "string"}]
-
         const newInstructions = [...instructions];
-        newInstructions[index] = {instruction: value};
+        newInstructions[index] = { instruction: value };
         setInstructions(newInstructions);
     };
     const handleRemoveInstruction = (index) => {
@@ -96,7 +92,6 @@ function NewRecipeForm(){
     };
     const closeAddIngredientModal = () => {
         setIsAddIngredientModalOpen(false);
-        // Reset the new ingredient details
         setNewIngredientDetails({
             name: '',
             quantity: '',
@@ -104,9 +99,7 @@ function NewRecipeForm(){
         });
     };
     const handleAddIngredientSubmit = (e) => {
-        // Prevent any default form submission behavior
         e?.preventDefault();
-
         if (newIngredientDetails.name && newIngredientDetails.quantity && newIngredientDetails.unit) {
             const newIngredient = {
                 name: newIngredientDetails.name,
@@ -127,16 +120,12 @@ function NewRecipeForm(){
     };
     const handleCreateNewIngredient = async () => {
         if (newIngredientName.trim() === '') return;
-
         try {
             const response = await deoudegrachtApi.post(ingredientsEndpoint, {
                 name: newIngredientName.trim()
             });
-
             const createdIngredient = response.data;
             setAllAvailableIngredients(prev => [...prev, createdIngredient]);
-            
-            // Reset new ingredient input
             setNewIngredientName('');
         } catch (error) {
             console.error("Error creating ingredient:", error);
@@ -153,7 +142,6 @@ function NewRecipeForm(){
         const selectedIngredient = allAvailableIngredients.find(
             ingredient => ingredient.name === event.target.value
         );
-
         if (selectedIngredient && !selectedIngredients.some(ing => ing.name === selectedIngredient.name)) {
             setSelectedIngredients([...selectedIngredients, { ...selectedIngredient, quantity: '', unit: '' }]);
         }
@@ -161,54 +149,38 @@ function NewRecipeForm(){
     const handleAddNewIngredientClick = () => {
         navigate('/portal/ingredient/new');
     };
-    return(
+    return (
         <div className="login-form-container">
             <form className="login-form new-recipe-form" onSubmit={handleSubmit}>
                 <h2>Add New Recipe</h2>
                 <div className="recipe-input">
                     <label htmlFor="recipe-name">Recipe Name</label>
-                    <input 
+                    <input
                         id="recipe-name"
                         type="text"
-                        className="login-form-text-field"
+                        className="login-form-text-field full-width height-40 margin-0"
                         placeholder="Enter Recipe Name"
                         value={recipeName}
                         onChange={(e) => setRecipeName(e.target.value)}
-                        style={{ 
-                            width: '100%', 
-                            height: '40px', 
-                            margin: '0' 
-                        }}
                     />
                 </div>
                 <div className="recipe-input">
                     <label htmlFor="recipe-description">Description</label>
-                    <textarea 
+                    <textarea
                         id="recipe-description"
-                        className="login-form-text-field"
+                        className="login-form-text-field full-width min-height-100 margin-0 resize-vertical"
                         placeholder="Enter Recipe Description"
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
-                        style={{ 
-                            width: '100%', 
-                            minHeight: '100px', 
-                            margin: '0',
-                            resize: 'vertical'
-                        }}
                     />
                 </div>
                 <div className="recipe-input">
                     <label htmlFor="category-select">Category</label>
-                    <select 
+                    <select
                         id="category-select"
-                        className="login-form-text-field"
+                        className="login-form-text-field full-width height-40 margin-0"
                         onChange={(event) => setCategory(event.target.value)}
                         value={category}
-                        style={{ 
-                            width: '100%', 
-                            height: '40px', 
-                            margin: '0' 
-                        }}
                     >
                         <option value="">Select a Category</option>
                         {categories.map((category) => (
@@ -218,39 +190,24 @@ function NewRecipeForm(){
                 </div>
                 <div className="recipe-input">
                     <label>Ingredients</label>
-                    <div style={{
-                        display: 'flex', 
-                        alignItems: 'center', 
-                        gap: '10px', 
-                        marginTop: '0'
-                    }}>
+                    <div className="flex-align-center">
                         <Button type="button"
-                            buttonName="Add Ingredient" 
-                            onClick={openAddIngredientModal}
-                            textWidth={true}
+                                buttonName="Add Ingredient"
+                                onClick={openAddIngredientModal}
+                                textWidth={true}
                         />
                     </div>
-
                     {selectedIngredients.map((ingredient, index) => (
-                        <div key={index} style={{ 
-                            display: 'flex', 
-                            alignItems: 'center', 
-                            margin: '5px 0' 
-                        }}>
-                            <input 
-                                type="text" 
-                                value={ingredient.name} 
-                                readOnly 
-                                className="login-form-text-field"
-                                style={{ 
-                                    width: '100%', 
-                                    height: '40px', 
-                                    margin: '0' 
-                                }}
+                        <div key={index} className="margin-5-0 flex-align-center">
+                            <input
+                                type="text"
+                                value={ingredient.name}
+                                readOnly
+                                className="login-form-text-field full-width height-40 margin-0"
                             />
-                            <Button 
+                            <Button
                                 type="button"
-                                buttonName="Remove" 
+                                buttonName="Remove"
                                 textWidth={true}
                                 onClick={() => handleRemoveIngredient(ingredient)}
                             />
@@ -258,37 +215,16 @@ function NewRecipeForm(){
                     ))}
                 </div>
                 {isAddIngredientModalOpen && (
-                    <div style={{
-                        position: 'fixed',
-                        top: 0,
-                        left: 0,
-                        width: '100%',
-                        height: '100%',
-                        backgroundColor: 'rgba(0,0,0,0.5)',
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        zIndex: 1000
-                    }}>
-                        <div style={{
-                            backgroundColor: 'white',
-                            padding: '20px',
-                            borderRadius: '10px',
-                            width: '400px'
-                        }}>
+                    <div className="fixed-overlay">
+                        <div className="modal-content">
                             <h3>Add New Ingredient</h3>
                             <div className="recipe-input">
                                 <label htmlFor="ingredient-select">Ingredient</label>
-                                <select 
+                                <select
                                     id="ingredient-select"
-                                    className="login-form-text-field"
+                                    className="login-form-text-field full-width height-40 margin-0"
                                     value={newIngredientDetails.name}
                                     onChange={(e) => handleIngredientChange('name', e.target.value)}
-                                    style={{ 
-                                        width: '100%', 
-                                        height: '40px', 
-                                        margin: '0' 
-                                    }}
                                 >
                                     <option value="">Select an Ingredient</option>
                                     {allAvailableIngredients.map((ingredient) => (
@@ -299,66 +235,52 @@ function NewRecipeForm(){
                                 </select>
                             </div>
                             <div className="new-ingredient-creation">
-                                <input 
+                                <input
                                     type="text"
                                     placeholder="Create New Ingredient"
                                     value={newIngredientName}
                                     onChange={(e) => setNewIngredientName(e.target.value)}
                                 />
-                                <Button 
+                                <Button
                                     type="button"
-                                    buttonName="Create" 
+                                    buttonName="Create"
                                     onClick={handleCreateNewIngredient}
                                 />
                             </div>
                             <div className="recipe-input">
                                 <label htmlFor="ingredient-quantity">Quantity</label>
-                                <input 
+                                <input
                                     id="ingredient-quantity"
                                     type="number"
-                                    className="login-form-text-field"
+                                    className="login-form-text-field full-width height-40 margin-0"
                                     value={newIngredientDetails.quantity}
                                     onChange={(e) => handleIngredientChange('quantity', e.target.value)}
-                                    style={{ 
-                                        width: '100%', 
-                                        height: '40px', 
-                                        margin: '0' 
-                                    }}
                                     placeholder="Enter quantity"
                                 />
                             </div>
                             <div className="recipe-input">
                                 <label htmlFor="ingredient-unit">Unit</label>
-                                <input 
+                                <input
                                     id="ingredient-unit"
                                     type="text"
-                                    className="login-form-text-field"
+                                    className="login-form-text-field full-width height-40 margin-0"
                                     value={newIngredientDetails.unit}
                                     onChange={(e) => handleIngredientChange('unit', e.target.value)}
-                                    style={{ 
-                                        width: '100%', 
-                                        height: '40px', 
-                                        margin: '0' 
-                                    }}
                                     placeholder="Enter unit (e.g., grams, cups)"
                                 />
                             </div>
-                            <div style={{
-                                display: 'flex',
-                                justifyContent: 'space-between',
-                                marginTop: '20px'
-                            }}>
+                            <div className="flex-center">
                                 <Button
                                     type="button"
-                                    buttonName="Cancel" 
+                                    buttonName="Cancel"
                                     onClick={closeAddIngredientModal}
                                     textWidth={true}
                                 />
                                 <Button
                                     type="button"
-                                    buttonName="Add" 
+                                    buttonName="Add"
                                     onClick={(e) => {
-                                        e.preventDefault(); // Explicitly prevent form submission
+                                        e.preventDefault();
                                         handleAddIngredientSubmit();
                                     }}
                                     textWidth={true}
@@ -370,71 +292,37 @@ function NewRecipeForm(){
                 <div className="recipe-input">
                     <label>Instructions</label>
                     {instructions.map((instruction, index) => (
-                        <div key={index} style={{ 
-                            display: 'flex', 
-                            alignItems: 'center', 
-                            margin: '5px 0' 
-                        }}>
-                            <span style={{ marginRight: '10px' }}>{index + 1}.</span>
-                            <textarea 
+                        <div key={index} className="margin-5-0 flex-align-center">
+                            <span className="margin-10">{index + 1}.</span>
+                            <textarea
                                 value={instruction.instruction}
                                 onChange={(e) => handleInstructionChange(index, e.target.value)}
-                                className="login-form-text-field"
-                                style={{ 
-                                    width: '100%', 
-                                    minHeight: '100px', 
-                                    margin: '0',
-                                    resize: 'vertical'
-                                }}
+                                className="login-form-text-field full-width min-height-100 margin-0 resize-vertical"
                             />
                             <Button
                                 type="button"
-                                buttonName="Remove" 
+                                buttonName="Remove"
                                 onClick={() => handleRemoveInstruction(index)}
                                 textWidth={true}
-                                style={{ 
-                                    height: '40px', 
-                                    padding: '0 10px', 
-                                    margin: '0 0 0 10px' 
-                                }}
                             />
                         </div>
                     ))}
-                    <div style={{
-                        display: 'flex', 
-                        alignItems: 'center', 
-                        gap: '10px', 
-                        marginTop: '0'
-                    }}>
+                    <div className="flex-align-center">
                         <Button
                             type="button"
-                            buttonName="Add Instruction" 
+                            buttonName="Add Instruction"
                             onClick={handleAddNewInstructionClick}
                             textWidth={true}
-                            style={{ 
-                                height: '40px', 
-                                padding: '0 10px', 
-                                margin: '0' 
-                            }}
                         />
                     </div>
                 </div>
                 <br /><br />
-                <div style={{
-                    display: 'flex', 
-                    justifyContent: 'center', 
-                    marginTop: '20px'
-                }}>
-                    <Button 
-                        buttonName="Create Recipe" 
-                        type="submit" 
+                <div className="flex-center">
+                    <Button
+                        buttonName="Create Recipe"
+                        type="submit"
                         textWidth={true}
-                        style={{
-                            padding: '15px 40px',
-                            fontSize: '18px',
-                            fontWeight: 'bold',
-                            borderRadius: '10px'
-                        }}
+                        className="padding-15-40 font-bold border-radius-10"
                         disabled={!recipeName || !description || !category}
                     />
                 </div>

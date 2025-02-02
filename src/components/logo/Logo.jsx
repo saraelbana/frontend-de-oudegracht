@@ -1,5 +1,4 @@
 import "./Logo.css";
-import React from "react";
 import { useNavigate } from "react-router-dom";
 
 function Logo(prop){
@@ -10,7 +9,7 @@ function Logo(prop){
     };
 
     return (
-        <div className="logo" onClick={handleLogoClick} style={{cursor: 'pointer'}}>
+        <div className="logo" onClick={handleLogoClick}>
             <img src={prop.imgAddress} alt="Logo"/>
         </div>
     );

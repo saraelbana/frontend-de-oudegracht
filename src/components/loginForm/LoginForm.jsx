@@ -1,14 +1,14 @@
 import "./LoginForm.css";
 import Button from "../button/Button.jsx";
-import {Link} from "react-router-dom";
-import {useState} from "react";
+import { Link } from "react-router-dom";
+import { useState } from "react";
 import axios from "axios";
-import {SHOW_PASSWORD_ICON, HIDE_PASSWORD_ICON} from "../../constants/AssetsFilesNames.js";
+import { SHOW_PASSWORD_ICON, HIDE_PASSWORD_ICON } from "../../constants/AssetsFilesNames.js";
 import { useNavigate } from "react-router-dom";
-import {authRequestData} from "../../helpers/LoginOperations.js";
-import {loginEndpoint} from "../../deoudegrachtApi.js";
+import { authRequestData } from "../../helpers/LoginOperations.js";
+import { loginEndpoint } from "../../deoudegrachtApi.js";
 
-function LoginForm(){
+function LoginForm() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
@@ -20,19 +20,17 @@ function LoginForm(){
         e.preventDefault();
         console.log("Attempting to login with:", username, password);
         try {
-            const requestData = authRequestData({username, password});
+            const requestData = authRequestData({ username, password });
             const response = await axios.post(loginEndpoint, requestData);
             console.log("Full login response:", response.data);
 
-            // Assuming the token is in response.data.token
             const token = response.data.token;
             const user_username = response.data.name || response.data.username || "Employee";
             const user_role = response.data.userRole;
             const user_firstname = response.data.firstname;
-            
+
             if (token) {
                 localStorage.setItem("authToken", token);
-                // Store the name from the response
                 localStorage.setItem("user_username", user_username);
                 localStorage.setItem("user_role", user_role);
                 localStorage.setItem("user_firstname", user_firstname);
@@ -53,36 +51,37 @@ function LoginForm(){
             setSuccess("");
         }
     };
+
     const toggleShowPassword = () => {
         setShowPassword(!showPassword);
     };
 
-    return(
-        <div className="login-form-container" style={{marginTop: "10%"}}>
+    return (
+        <div className="login-form-container margin-top-10">
             <form className="login-form" onSubmit={handleLogin}>
-            <h2>Please sign in</h2>
-                <label htmlFor="username-field"
-                       id="username-label">
-                    <input type='text'
-                           id="username-field"
-                           name="username"
-                           placeholder="Username"
-                           className="login-form-text-field"
-                           onChange={(event) => setUsername(event.target.value)}
+                <h2>Please sign in</h2>
+                <label htmlFor="username-field" id="username-label">
+                    <input
+                        type="text"
+                        id="username-field"
+                        name="username"
+                        placeholder="Username"
+                        className="login-form-text-field"
+                        onChange={(event) => setUsername(event.target.value)}
                     />
-                    {/*onChange={( e : ChangeEvent<HTMLInputElement>) => console.log(e.target.value)}*/}
                 </label>
-                <label htmlFor="password-field"
-                       id="password-label">
+                <label htmlFor="password-field" id="password-label">
                     <div className="password-container">
-                        <input type={showPassword ? "text" : "password"}
-                               id="password-field"
-                               name="password"
-                               placeholder="Password"
-                               className="login-form-text-field"
-                               onChange={(event) => setPassword(event.target.value)}
+                        <input
+                            type={showPassword ? "text" : "password"}
+                            id="password-field"
+                            name="password"
+                            placeholder="Password"
+                            className="login-form-text-field"
+                            onChange={(event) => setPassword(event.target.value)}
                         />
-                        <Button size="icon"
+                        <Button
+                            size="icon"
                             iconSrc={showPassword ? HIDE_PASSWORD_ICON : SHOW_PASSWORD_ICON}
                             onClick={toggleShowPassword}
                             type="button"
@@ -94,26 +93,20 @@ function LoginForm(){
                         Forgot your password?
                     </Link>
                 </p>
-                <br></br>
-                <Button buttonName="Log In"
-                        disable={!(username && password)}
-                />
+                <br />
+                <Button buttonName="Log In" disable={!(username && password)} />
                 {error && <p className="error-message">{error}</p>}
                 {success && <p className="success-message">{success}</p>}
-                <p className="or-divider">
-                    of
-                </p>
-                <Button 
-                    buttonName="Sign Up" 
+                <p className="or-divider">or</p>
+                <Button
+                    buttonName="Sign Up"
                     onClick={() => window.location.href = "/signup"}
                     className="signup-button"
                 />
-                <p className="signup-text">
-                    Become a special guest member
-                </p>
+                <p className="signup-text">Become a special guest member</p>
             </form>
         </div>
-    )
+    );
 }
 
 export default LoginForm;

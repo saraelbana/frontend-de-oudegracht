@@ -1,11 +1,11 @@
-.username-navlink{
+/* EmployeesRecordsTableRow.css */
+.username-navlink {
     color: blue;
 }
-.username-navlink:hover{
+.username-navlink:hover {
     color: coral;
 }
-.employee-record-row
-{
+.employee-record-row {
     display: flex;
     flex: 1;
     justify-content: space-between;
@@ -21,14 +21,15 @@
     white-space: nowrap;
     text-overflow: ellipsis;
 }
-.edit-button{
+.edit-button {
     background-color: white;
 }
-
-.employee-username-data-navlink{
+.employee-username-data-navlink {
     color: #2563eb;
+    cursor: pointer;
+    text-decoration: underline;
 }
-.employee-username-data-navlink:hover{
-    color: #f1f1f1;
-    background-color: #2563eb;
-}
+/*.employee-username-data-navlink:hover {*/
+/*    color: #f1f1f1;*/
+/*    background-color: #2563eb;*/
+/*}*/

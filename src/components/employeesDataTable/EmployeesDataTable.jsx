@@ -55,12 +55,12 @@ function EmployeesDataTable(){
                 {
                     loading ? (
                         <tr>
-                            <td colSpan="7" style={{textAlign: 'center', padding: '20px'}}>Loading...</td>
+                            <td colSpan="7" className="loading-cell">Loading...</td>
                         </tr>
                     ):(
                         error ? (
                             <tr>
-                                <td colSpan="7" style={{textAlign: 'center', color: 'red', padding: '20px'}}>
+                                <td colSpan="7" className="error-cell">
                                     Error fetching data. Please check your connection.
                                 </td>
                             </tr>
@@ -73,11 +73,7 @@ function EmployeesDataTable(){
                 }
                 </tbody>
             </table>
-            <div style={{
-                display: 'flex', 
-                justifyContent: 'flex-end', 
-                marginTop: '15px'
-            }}>
+            <div className="add-button-container">
                 <Button 
                     iconSrc={ADD_ICON} 
                     size="icon" 

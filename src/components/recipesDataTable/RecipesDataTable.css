@@ -1,9 +1,28 @@
-.recipes-table-head-row{
+/* RecipesDataTable.css */
+.recipes-table-head-row {
     display: flex;
     justify-content: space-between;
 }
-.recipes-data-table{
+
+.recipes-data-table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
+}
+
+.loading-cell {
+    text-align: center;
+    padding: 20px;
+}
+
+.error-cell {
+    text-align: center;
+    color: red;
+    padding: 20px;
+}
+
+.add-button-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 15px;
 }

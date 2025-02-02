@@ -9,6 +9,22 @@
     border-bottom: 1px solid #f1f1f1;
 
 }
+.add-button-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 15px;
+}
+
+.loading-cell {
+    text-align: center;
+    padding: 20px;
+}
+
+.error-cell {
+    text-align: center;
+    color: red;
+    padding: 20px;
+}
 
 .employees-table-head {
     flex: 1;

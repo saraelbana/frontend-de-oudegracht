@@ -1,11 +1,11 @@
-.recipe-id-navlink{
+/* RecipesRecordsTableRow.css */
+.recipe-id-navlink {
     color: blue;
 }
-.recipe-id-navlink:hover{
+.recipe-id-navlink:hover {
     color: coral;
 }
-.recipe-record-row
-{
+.recipe-record-row {
     display: flex;
     flex: 1;
     justify-content: space-between;
@@ -21,10 +21,12 @@
     white-space: nowrap;
     text-overflow: ellipsis;
 }
-.recipe-name-data-table-cell{
-    color: #2563eb;
+.recipe-name-data-table-cell {
+    cursor: pointer;
+    color: #0088ff;
+    text-decoration: underline;
 }
-.recipe-name-data-table-cell:hover{
-    color: #f1f1f1;
-    background-color: #2563eb;
+.recipe-name-data-table-cell:hover {
+   // color: #f1f1f1;
+   // background-color: #2563eb;
 }
