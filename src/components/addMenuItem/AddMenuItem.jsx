@@ -59,6 +59,7 @@ function AddMenuItem(){
             const response = await deoudegrachtApi.post(menuEndpoint, requestData);
             setSuccess(`Menu item created successfully! ID: ${response.data.id}`);
             setError("");
+            window.location.reload();
         } catch (e) {
             console.error("Error creating new menu item", e);
             setError("Error creating a menu item " + e.response.data);
@@ -93,6 +94,9 @@ function AddMenuItem(){
                     <select required id="itemCategory" name="itemCategory"
                             className="item-category-dropdown"
                             onChange={(e) => setSelectedCategory(e.target.value)}>
+                        <option value="" disabled selected>
+                            select category
+                        </option>
                         {categories.map((category, index) => (
                             <option key={index} value={category}>
                                 {category}

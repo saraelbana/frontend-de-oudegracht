@@ -61,7 +61,8 @@ function MenuDataTable(){
                     </tr>
                 ):(
                         filteredMenu.map((item, index) => (
-                            <MenuItemRecordRow key={index} item={item} />
+                            console.log(item),
+                            <MenuItemRecordRow key={index} item={item}/>
                     ))
                 )}
                 </tbody>

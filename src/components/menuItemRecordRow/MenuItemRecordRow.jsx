@@ -11,13 +11,16 @@ function MenuItemRecordRow(prop){
     const navigate = useNavigate();
     const handleDeleteClick = async () => {
         try {
-            const response = await deleteMenuItem(prop.id); // Call the delete API with the item ID
+            console.log(`Deleting item with id: ${prop.item.id}`);
+            const response = await deleteMenuItem(prop.item.id); // Call the delete API with the item ID
             if (response[0] === 1) {
                 console.log(`Item with id: ${prop.id} deleted successfully`);
                 //better to confirm before deleting
                 setSuccess("Item deleted successfully");
                 setError("");
-                navigate(`/portal/menu`); // Navigate to the menu page after deletion
+                navigate(`/portal/menu`);
+
+                window.location.reload();
             }
         }
         catch (error) {

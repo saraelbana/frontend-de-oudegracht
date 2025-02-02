@@ -85,6 +85,7 @@ function EmployeeDetailsForm() {
             setIsEditMode(false);
             setSuccess(`employee data edited successfully! ID: ${updatedResponseData.data.id}`);
             setError("");
+            navigate("/portal/employee");
         }
         catch (error) {
             setError("Error editing employee data " + error);
@@ -162,6 +163,7 @@ function EmployeeDetailsForm() {
                     <label id="role-label">
                         Role: {isEditMode ? (
                         <select defaultValue={employeeData.role} onChange={(event) => setRole(event.target.value)}>
+                            <option disabled selected>select role</option>
                             {
                                 rolesList.map((role) => (
                                     <option key={role} value={role}> {role} </option>

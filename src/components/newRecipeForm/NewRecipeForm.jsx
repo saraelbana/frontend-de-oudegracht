@@ -1,7 +1,6 @@
 import "./NewRecipeForm.css";
 import {useState, useEffect} from "react";
 import Button from "../button/Button.jsx";
-import MandatoryTag from "../mandatoryTag/MandatoryTag.jsx";
 import {
     deoudegrachtApi,
     categoriesEndpoint,
@@ -24,7 +23,6 @@ function NewRecipeForm(){
     const [success, setSuccess] = useState("");
     const [error, setError] = useState("");
     const navigate = useNavigate();
-
     const [isAddIngredientModalOpen, setIsAddIngredientModalOpen] = useState(false);
     const [newIngredientDetails, setNewIngredientDetails] = useState({
         name: '',
@@ -58,15 +56,14 @@ function NewRecipeForm(){
         getIngredientsList();
     }, []);
 
-    const handleAddNewIngredientClick = () => {
-        navigate('/portal/ingredient/new');
-    };
     const handleAddNewInstructionClick = () => {
         setInstructions([...instructions, '']);
     };
     const handleInstructionChange = (index, value) => {
+        //the JSON is of type [{instruction: "string"}]
+
         const newInstructions = [...instructions];
-        newInstructions[index] = value;
+        newInstructions[index] = {instruction: value};
         setInstructions(newInstructions);
     };
     const handleRemoveInstruction = (index) => {
@@ -75,24 +72,18 @@ function NewRecipeForm(){
     };
     const handleSubmit = async (e) => {
         e.preventDefault();
+        console.log(instructions);
         const requestData = createNewRecipeRequestData({ recipeName, category, description, recipeIngredients: selectedIngredients, instructionsSteps: instructions });
-        console.log(requestData);
+        console.log("request data", requestData);
         try {
             const response = await deoudegrachtApi.post(recipesEndpoint, requestData);
+            console.log("response data", response.data);
             setSuccess(`Recipe created successfully! ID: ${response.data.id}`);
             setError("");
+            navigate("/portal/recipe");
         } catch (e) {
             setError("Error creating new recipe " + e.response.data);
             setSuccess("");
-        }
-    };
-    const handleIngredientSelect = (event) => {
-        const selectedIngredient = allAvailableIngredients.find(
-            ingredient => ingredient.name === event.target.value
-        );
-
-        if (selectedIngredient && !selectedIngredients.some(ing => ing.name === selectedIngredient.name)) {
-            setSelectedIngredients([...selectedIngredients, { ...selectedIngredient, quantity: '', unit: '' }]);
         }
     };
     const handleRemoveIngredient = (ingredientToRemove) => {
@@ -100,18 +91,9 @@ function NewRecipeForm(){
             ing => ing.name !== ingredientToRemove.name
         ));
     };
-    const handleIngredientUpdate = (ingredientName, property, value) => {
-        setSelectedIngredients(prevIngredients =>
-            prevIngredients.map(ingredient =>
-                ingredient.name === ingredientName ? { ...ingredient, [property]: value } : ingredient
-            )
-        );
-    };
-
     const openAddIngredientModal = () => {
         setIsAddIngredientModalOpen(true);
     };
-
     const closeAddIngredientModal = () => {
         setIsAddIngredientModalOpen(false);
         // Reset the new ingredient details
@@ -121,7 +103,6 @@ function NewRecipeForm(){
             unit: ''
         });
     };
-
     const handleAddIngredientSubmit = (e) => {
         // Prevent any default form submission behavior
         e?.preventDefault();
@@ -135,18 +116,15 @@ function NewRecipeForm(){
             setSelectedIngredients([...selectedIngredients, newIngredient]);
             closeAddIngredientModal();
         } else {
-            // Optional: Add error handling
             alert('Please fill in all ingredient details');
         }
     };
-
     const handleIngredientChange = (field, value) => {
         setNewIngredientDetails(prev => ({
             ...prev,
             [field]: value
         }));
     };
-
     const handleCreateNewIngredient = async () => {
         if (newIngredientName.trim() === '') return;
 
@@ -164,12 +142,29 @@ function NewRecipeForm(){
             console.error("Error creating ingredient:", error);
         }
     };
+    const handleIngredientUpdate = (ingredientName, property, value) => {
+        setSelectedIngredients(prevIngredients =>
+            prevIngredients.map(ingredient =>
+                ingredient.name === ingredientName ? { ...ingredient, [property]: value } : ingredient
+            )
+        );
+    };
+    const handleIngredientSelect = (event) => {
+        const selectedIngredient = allAvailableIngredients.find(
+            ingredient => ingredient.name === event.target.value
+        );
 
+        if (selectedIngredient && !selectedIngredients.some(ing => ing.name === selectedIngredient.name)) {
+            setSelectedIngredients([...selectedIngredients, { ...selectedIngredient, quantity: '', unit: '' }]);
+        }
+    };
+    const handleAddNewIngredientClick = () => {
+        navigate('/portal/ingredient/new');
+    };
     return(
         <div className="login-form-container">
             <form className="login-form new-recipe-form" onSubmit={handleSubmit}>
                 <h2>Add New Recipe</h2>
-                
                 <div className="recipe-input">
                     <label htmlFor="recipe-name">Recipe Name</label>
                     <input 
@@ -186,7 +181,6 @@ function NewRecipeForm(){
                         }}
                     />
                 </div>
-
                 <div className="recipe-input">
                     <label htmlFor="recipe-description">Description</label>
                     <textarea 
@@ -203,7 +197,6 @@ function NewRecipeForm(){
                         }}
                     />
                 </div>
-
                 <div className="recipe-input">
                     <label htmlFor="category-select">Category</label>
                     <select 
@@ -264,7 +257,6 @@ function NewRecipeForm(){
                         </div>
                     ))}
                 </div>
-
                 {isAddIngredientModalOpen && (
                     <div style={{
                         position: 'fixed',
@@ -306,7 +298,6 @@ function NewRecipeForm(){
                                     ))}
                                 </select>
                             </div>
-
                             <div className="new-ingredient-creation">
                                 <input 
                                     type="text"
@@ -320,7 +311,6 @@ function NewRecipeForm(){
                                     onClick={handleCreateNewIngredient}
                                 />
                             </div>
-
                             <div className="recipe-input">
                                 <label htmlFor="ingredient-quantity">Quantity</label>
                                 <input 
@@ -337,7 +327,6 @@ function NewRecipeForm(){
                                     placeholder="Enter quantity"
                                 />
                             </div>
-
                             <div className="recipe-input">
                                 <label htmlFor="ingredient-unit">Unit</label>
                                 <input 
@@ -354,18 +343,19 @@ function NewRecipeForm(){
                                     placeholder="Enter unit (e.g., grams, cups)"
                                 />
                             </div>
-
                             <div style={{
                                 display: 'flex',
                                 justifyContent: 'space-between',
                                 marginTop: '20px'
                             }}>
-                                <Button 
+                                <Button
+                                    type="button"
                                     buttonName="Cancel" 
                                     onClick={closeAddIngredientModal}
                                     textWidth={true}
                                 />
-                                <Button 
+                                <Button
+                                    type="button"
                                     buttonName="Add" 
                                     onClick={(e) => {
                                         e.preventDefault(); // Explicitly prevent form submission
@@ -377,7 +367,6 @@ function NewRecipeForm(){
                         </div>
                     </div>
                 )}
-
                 <div className="recipe-input">
                     <label>Instructions</label>
                     {instructions.map((instruction, index) => (
@@ -388,7 +377,7 @@ function NewRecipeForm(){
                         }}>
                             <span style={{ marginRight: '10px' }}>{index + 1}.</span>
                             <textarea 
-                                value={instruction}
+                                value={instruction.instruction}
                                 onChange={(e) => handleInstructionChange(index, e.target.value)}
                                 className="login-form-text-field"
                                 style={{ 
@@ -398,7 +387,8 @@ function NewRecipeForm(){
                                     resize: 'vertical'
                                 }}
                             />
-                            <Button 
+                            <Button
+                                type="button"
                                 buttonName="Remove" 
                                 onClick={() => handleRemoveInstruction(index)}
                                 textWidth={true}
@@ -416,7 +406,8 @@ function NewRecipeForm(){
                         gap: '10px', 
                         marginTop: '0'
                     }}>
-                        <Button 
+                        <Button
+                            type="button"
                             buttonName="Add Instruction" 
                             onClick={handleAddNewInstructionClick}
                             textWidth={true}
@@ -428,9 +419,7 @@ function NewRecipeForm(){
                         />
                     </div>
                 </div>
-
                 <br /><br />
-                
                 <div style={{
                     display: 'flex', 
                     justifyContent: 'center', 
@@ -449,7 +438,6 @@ function NewRecipeForm(){
                         disabled={!recipeName || !description || !category}
                     />
                 </div>
-
                 {error && <p className="error-message">{error}</p>}
                 {success && <p className="success-message">{success}</p>}
             </form>

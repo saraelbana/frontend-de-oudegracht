@@ -10,6 +10,8 @@ function DisplayMenu(){
     const location = useLocation();
     const handleAddMenuItem = () => {
         navigate("/portal/menu/new-item");
+        //reload the page
+
     };
     const isPortalPath = location.pathname.includes("portal");
     return(

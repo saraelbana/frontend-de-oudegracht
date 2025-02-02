@@ -7,7 +7,7 @@ function ProfileSettingsMenu() {
     const navigate = useNavigate();
     const handleLogout = () => {
         localStorage.removeItem("authToken");
-        navigate("http://localhost:5173");
+        navigate("//localhost:5173");
     };
     const handleProfileClick = () => {
         const username = localStorage.getItem("user_username");

@@ -7,9 +7,7 @@ import {
 } from "../../helpers/APIOperations.js";
 import {useNavigate, useParams, useSearchParams} from "react-router-dom";
 import Button from "../button/Button.jsx";
-import {ADD_ICON} from "../../constants/AssetsFilesNames.js";
 import {deoudegrachtApi, ingredientsEndpoint} from "../../deoudegrachtApi.js";
-import MandatoryTag from "../mandatoryTag/MandatoryTag.jsx";
 
 function RecipeDetailsForm(){
     const {id} = useParams();
@@ -189,6 +187,7 @@ function RecipeDetailsForm(){
                         name="recipeName" 
                         className="login-form-text-field"
                         value={recipeName}
+                        placeholder="Enter recipe name*"
                         onChange={(event) => setRecipeName(event.target.value)}
                         disabled={!isEditMode}
                     />
@@ -208,14 +207,15 @@ function RecipeDetailsForm(){
                 </div>
                 <div>
                     <label htmlFor="category-field">Category</label>
-                    <select 
-                        id="category-field" 
-                        name="category" 
+                    <select
+                        id="category-field"
+                        name="category"
                         className="login-form-text-field"
                         value={category}
                         onChange={(event) => setCategory(event.target.value)}
                         disabled={!isEditMode}
                     >
+                        <option disabled selected>select category</option>
                         {categoriesList.map((cat) => (
                             <option key={cat} value={cat}>{cat}</option>
                         ))}

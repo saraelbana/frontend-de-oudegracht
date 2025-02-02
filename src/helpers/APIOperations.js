@@ -31,8 +31,10 @@ export async function updateEmployeeData(username, data) {
 }
 export async function getRecipeResponseData(id) {
     try {
+
         const response = await deoudegrachtApi.get(`${recipesEndpoint}/${id}`);
-        console.log(response.data);
+        console.log("response data from API operation file", response);
+
         return [1, response.data];
     } catch (error) {
         console.error("Error fetching recipe data", error);
@@ -95,6 +97,24 @@ export async function getDashboardData() {
         return [0, error];
     }
 }
+export async function getRecipesList(){
+    try {
+        const response = await deoudegrachtApi.get(recipesEndpoint);
+        return [1, response.data];
+    } catch (error) {
+        console.error("Error fetching recipes", error);
+        return [0, error];
+    }
+}
+export async function deleteMenuItem(id){
+    try {
+        const response = await deoudegrachtApi.delete(`${menuEndpoint}/${id}`);
+        return [1, response.data];
+    } catch (error) {
+        console.error("Error deleting menu item", error);
+        return [0, error];
+    }
+}
 export async function getGuestResponseData(username) {
     try {
         const response = await deoudegrachtApi.get(`${guestEndpoint}/${username}`);
@@ -132,21 +152,4 @@ export async function postRecipeData(requestData){
         return [0, error];
     }
 }
-export async function getRecipesList(){
-    try {
-        const response = await deoudegrachtApi.get(recipesEndpoint);
-        return [1, response.data];
-    } catch (error) {
-        console.error("Error fetching recipes", error);
-        return [0, error];
-    }
-}
-export async function deleteMenuItem(id){
-    try {
-        const response = await deoudegrachtApi.delete(`${menuEndpoint}/${id}`);
-        return [1, response.data];
-    } catch (error) {
-        console.error("Error deleting menu item", error);
-        return [0, error];
-    }
-}
+

@@ -5,6 +5,7 @@ import MandatoryTag from "../mandatoryTag/MandatoryTag.jsx";
 import {deoudegrachtApi, employeesEndpoint, rolesEndpoint} from "../../deoudegrachtApi.js";
 import {createRequestData} from "../../helpers/EmployeesOperations.js";
 import {Default_Employee_Role} from "../../constants/EmployeesConstants.js";
+import {useNavigate} from "react-router-dom";
 
 function NewEmployeeForm(){
 
@@ -19,6 +20,7 @@ function NewEmployeeForm(){
     const [phone, setPhone] = useState("");
     const [success, setSuccess] = useState("");
     const [error, setError] = useState("");
+    const navigate = useNavigate();
 
     useEffect(() => {
         const getRoles = async () => {
@@ -43,6 +45,7 @@ function NewEmployeeForm(){
             const response = await deoudegrachtApi.post(employeesEndpoint, requestData);
             setSuccess(`Employee created successfully! ID: ${response.data.id}`);
             setError("");
+            navigate("/portal/employee");
         }
         catch (e) {
             setError("Error creating new employee " + e.response.data);
@@ -137,12 +140,13 @@ function NewEmployeeForm(){
                 </div>
                 <div className="new-employee-role">
                     <label htmlFor="role-field">Role</label>
-                    <select 
-                        id="role-field" 
-                        name="role" 
+                    <select
+                        id="role-field"
+                        name="role"
                         className="login-form-text-field"
                         onChange={(event) => setRole(event.target.value)}
                     >
+                        <option value="" disabled selected >select role</option>
                         {roles.map((role) => (
                             <option key={role} value={role}>{role}</option>
                         ))}
