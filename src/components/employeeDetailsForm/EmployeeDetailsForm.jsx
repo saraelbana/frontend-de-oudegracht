@@ -1,12 +1,13 @@
 import "./EmployeeDetailsForm.css";
 import {useNavigate, useParams, useSearchParams} from "react-router-dom";
-import { useEffect, useState } from "react";
+import {useContext, useEffect, useState} from "react";
 import Button from "../button/Button.jsx";
 import {
     getEmployeeResponseData,
     getRolesList
 } from "../../helpers/APIOperations.js";
 import {deoudegrachtApi, employeesEndpoint} from "../../deoudegrachtApi.js";
+import {AuthContext} from "../../context/authContext/AuthContext.jsx";
 
 function EmployeeDetailsForm() {
     const {username} = useParams();
@@ -24,6 +25,8 @@ function EmployeeDetailsForm() {
     const [error, setError] = useState("");
     const navigate = useNavigate();
 
+    const {user}= useContext(AuthContext);
+
     useEffect(() => {
         const editable = searchParams.get('edit') === 'true';
         if (editable) {
@@ -32,14 +35,16 @@ function EmployeeDetailsForm() {
     }, [searchParams]);
     useEffect(() => {
         const fetchEmployeeData = async () => {
-
-            const response = await getEmployeeResponseData(username);
-
-            if (response[0] === 1) {
-                setEmployeeData(response[1]);
+            if(user.role === "admin" || user.role === "CHEF" || user.username === username) {
+                const response = await getEmployeeResponseData(username);
+                if (response[0] === 1) {
+                    setEmployeeData(response[1]);
+                } else {
+                    console.error("Error fetching employee data", response[1]);
+                }
             }
-            else {
-                console.error("Error fetching employee data", response[1]);
+            else
+            { navigate("/notfound")
             }
         };
         fetchEmployeeData();
@@ -170,8 +175,10 @@ function EmployeeDetailsForm() {
                     </label>
                 </div>
             </form>
-            <Button buttonName={isEditMode ? "Save" : "Edit"}
-                    onClick={isEditMode ? handleSaveClick : handleEditClick}/>
+            { (user.role === "admin" || user.username === username) &&
+                <Button buttonName={isEditMode ? "Save" : "Edit"}
+                        onClick={isEditMode ? handleSaveClick : handleEditClick}/>
+            }
             {error && <p className="error-message">{error}</p>}
             {success && <p className="success-message">{success}</p>}
         </div>

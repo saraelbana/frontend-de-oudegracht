@@ -6,15 +6,14 @@ import {AuthContext} from "../../context/authContext/AuthContext.jsx";
 
 function ProfileSettingsMenu() {
     const navigate = useNavigate();
-    const {logoutHandler} = useContext(AuthContext);
+    const {logoutHandler, user} = useContext(AuthContext);
     const {username} = localStorage.getItem("user_username");
     const handleLogout = () => {
         logoutHandler();
     };
     const handleProfileClick = () => {
-        // const username = localStorage.getItem("user_username");
-        console.log("username = ",username);
-        navigate(`/portal/employee/${username}`);
+        const username = localStorage.getItem("user_username");
+        navigate(`/portal/employee/${user.username}`);
     };
     return(
         <div className="settings-menu-overlay">

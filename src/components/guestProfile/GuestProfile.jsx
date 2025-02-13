@@ -1,23 +1,32 @@
 import "./GuestProfile.css";
 import WelcomeMessage from "../welcomeMessage/WelcomeMessage.jsx";
-import {useParams} from "react-router-dom";
-import {useEffect, useState} from "react";
+import {useNavigate, useParams} from "react-router-dom";
+import {useContext, useEffect, useState} from "react";
 import {deoudegrachtApi, guestEndpoint} from "../../deoudegrachtApi.js";
+import {AuthContext} from "../../context/authContext/AuthContext.jsx";
 
 function GuestProfile(){
     const {username} = useParams();
     const [guestData, setGuestData] = useState(null);
     const [error, setError] = useState("");
+    const {user} = useContext(AuthContext);
+    const navigate = useNavigate();
+
     useEffect(() => {
         const fetchGuestData = async () => {
+            if(user.username === username)
+            {
+                try {
+                    const response = await deoudegrachtApi.get(`${guestEndpoint}/${username}`);
 
-            try {
-                const response = await deoudegrachtApi.get(`${guestEndpoint}/${username}`);
+                    setGuestData(response.data);
+                } catch (error) {
 
-                setGuestData(response.data);
-            } catch (error) {
-
-                setError("Error fetching guest data" + error);
+                    setError("Error fetching guest data" + error);
+                }
+            }
+            else{
+                navigate("/notfound")
             }
         };
         fetchGuestData();

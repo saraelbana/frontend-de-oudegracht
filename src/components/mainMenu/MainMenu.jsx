@@ -1,8 +1,10 @@
 import './MainMenu.css';
 import {NavLink} from "react-router-dom";
+import {AuthContext} from "../../context/authContext/AuthContext.jsx";
+import {useContext} from "react";
 
 function MainMenu(){
-
+    const {user} = useContext(AuthContext);
     return (
         <div className="main-menu-container">
             <nav>
@@ -20,9 +22,23 @@ function MainMenu(){
                         </NavLink>
                     </li>
                     <li>
-                        <NavLink to="/login" className ={({isActive})=> isActive ? 'active-menu-link' : 'default-menu-link'}>
-                            Login
-                        </NavLink>
+                        {   (user && user.role === "GUEST") ? (
+                            <NavLink to={`/guest-profile/${user.username}`}
+                                     className={({isActive}) => isActive ? 'active-menu-link' : 'default-menu-link'}>
+                                Profile
+                            </NavLink>
+                            ) : user ? (
+                            <NavLink to="/portal"
+                                     className={({isActive}) => isActive ? 'active-menu-link' : 'default-menu-link'}>
+                                portal
+                            </NavLink>
+                        ):(
+                            <NavLink to="/login"
+                                     className={({isActive}) => isActive ? 'active-menu-link' : 'default-menu-link'}>
+                                Login
+                    </NavLink>
+                    )
+                        }
                     </li>
                 </ul>
             </nav>
