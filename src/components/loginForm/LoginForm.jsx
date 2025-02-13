@@ -1,12 +1,14 @@
 import "./LoginForm.css";
 import Button from "../button/Button.jsx";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import axios from "axios";
 import { SHOW_PASSWORD_ICON, HIDE_PASSWORD_ICON } from "../../constants/AssetsFilesNames.js";
 import { useNavigate } from "react-router-dom";
 import { authRequestData } from "../../helpers/LoginOperations.js";
 import { loginEndpoint } from "../../deoudegrachtApi.js";
+import {AuthContext} from "../../context/authContext/AuthContext.jsx";
+
 
 function LoginForm() {
     const [username, setUsername] = useState("");
@@ -15,6 +17,7 @@ function LoginForm() {
     const [success, setSuccess] = useState("");
     const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
+    const {loginHandler} = useContext(AuthContext);
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -23,11 +26,9 @@ function LoginForm() {
             const requestData = authRequestData({ username, password });
             const response = await axios.post(loginEndpoint, requestData);
 
-
             const token = response.data.token;
             const user_username = response.data.name || response.data.username || "Employee";
             const user_role = response.data.userRole;
-
             const user_firstname = response.data.firstname;
 
             if (token) {
@@ -35,6 +36,12 @@ function LoginForm() {
                 localStorage.setItem("user_username", user_username);
                 localStorage.setItem("user_role", user_role);
                 localStorage.setItem("user_firstname", user_firstname);
+
+                loginHandler({
+                    username: user_username,
+                    role: user_role,
+                    firstname: user_firstname
+                });
             }
             setSuccess("Login successful");
             setError("");

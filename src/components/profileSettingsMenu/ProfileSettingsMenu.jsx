@@ -1,16 +1,19 @@
 import  "./ProfileSettingsMenu.css";
 import {useNavigate} from "react-router-dom";
 import Button from "../button/Button.jsx";
+import {useContext} from "react";
+import {AuthContext} from "../../context/authContext/AuthContext.jsx";
 
 function ProfileSettingsMenu() {
     const navigate = useNavigate();
+    const {logoutHandler} = useContext(AuthContext);
+    const {username} = localStorage.getItem("user_username");
     const handleLogout = () => {
-        localStorage.removeItem("authToken");
-        navigate("//localhost:5173");
+        logoutHandler();
     };
     const handleProfileClick = () => {
-        const username = localStorage.getItem("user_username");
-
+        // const username = localStorage.getItem("user_username");
+        console.log("username = ",username);
         navigate(`/portal/employee/${username}`);
     };
     return(

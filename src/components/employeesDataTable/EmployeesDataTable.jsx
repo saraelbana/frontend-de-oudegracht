@@ -1,13 +1,15 @@
 import "./EmployeesDataTable.css";
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import {deoudegrachtApi, employeesEndpoint} from "../../deoudegrachtApi.js";
 import EmployeesRecordsTableRow from "../employeesRecordsTableRow/EmployeesRecordsTableRow.jsx";
 import Button from "../button/Button.jsx";
 import {ADD_ICON} from "../../constants/AssetsFilesNames.js";
 import {useNavigate} from "react-router-dom";
+import {AuthContext} from "../../context/authContext/AuthContext.jsx";
 
 function EmployeesDataTable(){
 
+    const {user} = useContext(AuthContext);
     const [employees, setEmployees] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -72,13 +74,16 @@ function EmployeesDataTable(){
                 }
                 </tbody>
             </table>
-            <div className="add-button-container">
-                <Button 
-                    iconSrc={ADD_ICON} 
-                    text="Add New Employee"
-                    onClick={handleAddClick}
-                />
-            </div>
+            {
+                user && user.role === "ADMIN" &&
+                    (<div className="add-button-container">
+                    <Button
+                        iconSrc={ADD_ICON}
+                        text="Add New Employee"
+                        onClick={handleAddClick}
+                    />
+                </div>)
+            }
         </div>
     )
 }

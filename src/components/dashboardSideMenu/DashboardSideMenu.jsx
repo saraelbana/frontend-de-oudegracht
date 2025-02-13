@@ -1,6 +1,10 @@
 import "./DashboardSideMenu.css";
 import {NavLink} from "react-router-dom";
+import {AuthContext} from "../../context/authContext/AuthContext.jsx";
+import {useContext} from "react";
+
 function DashboardSideMenu(prop) {
+    const {user} = useContext(AuthContext);
     return(
             <ul className="dashboard-side-menu-list">
                 <li>
@@ -14,9 +18,12 @@ function DashboardSideMenu(prop) {
                     </NavLink>
                 </li>
                 <li>
-                    <NavLink to="/portal/employee" className ={({isActive})=> isActive ? 'active-menu-link' : 'default-menu-link'} onClick={prop.onClick}>
-                        Employees
-                    </NavLink>
+                    {
+                        user &&  (user.role === "ADMIN" || user.role === "CHEF") &&
+                        (<NavLink to="/portal/employee" className ={({isActive})=> isActive ? 'active-menu-link' : 'default-menu-link'} onClick={prop.onClick}>
+                            Employees
+                        </NavLink>)
+                    }
                 </li>
                 <li>
                     <NavLink to="/portal/recipe" className ={({isActive})=> isActive ? 'active-menu-link' : 'default-menu-link'} onClick={prop.onClick}>

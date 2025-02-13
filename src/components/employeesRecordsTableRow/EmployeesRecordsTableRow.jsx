@@ -3,8 +3,11 @@ import PropTypes from 'prop-types';
 import { useNavigate } from "react-router-dom";
 import Button from "../button/Button.jsx";
 import { EDIT_ICON } from "../../constants/AssetsFilesNames.js";
+import {useContext} from "react";
+import {AuthContext} from "../../context/authContext/AuthContext.jsx";
 
 function EmployeesRecordsTableRow({ employee }) {
+    const {user} = useContext(AuthContext);
     const navigate = useNavigate();
     const handleUsernameClick = () => {
         navigate(`/portal/employee/${employee.username}`);
@@ -26,16 +29,19 @@ function EmployeesRecordsTableRow({ employee }) {
                 {employee.username}
             </td>
             <td>{employee.role || 'Employee'}</td>
-            <td>
-                <div className="table-action-buttons">
-                    <Button
-                        size="icon"
-                        iconSrc={EDIT_ICON}
-                        onClick={handleEditClick}
-                        className="edit-button"
-                    />
-                </div>
-            </td>
+            {
+                user && ( user.role === "ADMIN") &&
+                (<td>
+                    <div className="table-action-buttons">
+                        <Button
+                            size="icon"
+                            iconSrc={EDIT_ICON}
+                            onClick={handleEditClick}
+                            className="edit-button"
+                        />
+                    </div>
+                </td>)
+            }
         </tr>
     );
 }
