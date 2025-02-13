@@ -2,8 +2,9 @@ import "./MenuItemRecordRow.css";
 import Button from "../button/Button.jsx";
 import {DELETE_ICON} from "../../constants/AssetsFilesNames.js";
 import {useLocation, useNavigate} from "react-router-dom";
-import {useState} from "react";
+import {useContext, useState} from "react";
 import {deleteMenuItem} from "../../helpers/APIOperations.js";
+import {AuthContext} from "../../context/authContext/AuthContext.jsx";
 
 function MenuItemRecordRow(prop){
     const [error, setError] = useState(null);
@@ -11,27 +12,27 @@ function MenuItemRecordRow(prop){
     const navigate = useNavigate();
     const location = useLocation();
     const isPortalPath = location.pathname.includes("/portal");
+    const {user} = useContext(AuthContext);
 
     const handleDeleteClick = async () => {
-        try {
+        if(user.role === "ADMIN" || user.role === "CHEF") {
+            try {
+                const response = await deleteMenuItem(prop.item.id); // Call the delete API with the item ID
+                if (response[0] === 1) {
 
-            const response = await deleteMenuItem(prop.item.id); // Call the delete API with the item ID
-            if (response[0] === 1) {
-
-                //better to confirm before deleting
-                setSuccess("Item deleted successfully");
-                setError("");
-                navigate(`/portal/menu`);
-
-                window.location.reload();
+                    setSuccess("Item deleted successfully");
+                    setError("");
+                    navigate(`/portal/menu`);
+                    window.location.reload();
+                }
+            } catch (error) {
+                console.error(`Failed to delete item with id: ${prop.id}`);
+                setError("Failed to delete item");
+                setSuccess("");
             }
         }
-        catch (error) {
-            console.error(`Failed to delete item with id: ${prop.id}`);
-            setError("Failed to delete item");
-            setSuccess("");
-        }
     }
+
     return(
         <tr className="menu-item-record-row">
             <td>{prop.item.name}</td>
@@ -39,7 +40,8 @@ function MenuItemRecordRow(prop){
             <td>{prop.item.category}</td>
             <td>
 
-                {isPortalPath && (
+                { isPortalPath && (
+                    (user.role ==="ADMIN" || user.role === "CHEF") ? (
                     <div className="table-action-buttons">
                         <Button
                             size="icon"
@@ -48,7 +50,9 @@ function MenuItemRecordRow(prop){
                             text="Delete"
                         />
                     </div>
-                )}
+                    ):(<></>)
+                )
+                }
             </td>
         </tr>
     );

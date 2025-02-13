@@ -1,5 +1,5 @@
 import "./RecipeDetailsForm.css";
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import {
     getCategoriesList,
     getRecipeResponseData,
@@ -8,6 +8,7 @@ import {
 import {useNavigate, useParams, useSearchParams} from "react-router-dom";
 import Button from "../button/Button.jsx";
 import {deoudegrachtApi, ingredientsEndpoint} from "../../deoudegrachtApi.js";
+import {AuthContext} from "../../context/authContext/AuthContext.jsx";
 
 function RecipeDetailsForm(){
     const {id} = useParams();
@@ -25,6 +26,8 @@ function RecipeDetailsForm(){
     const navigate = useNavigate();
     const [success, setSuccess] = useState("");
     const [error, setError] = useState("");
+    const {user} = useContext(AuthContext)
+    console.log("user here", user);
 
     useEffect(() => {
         const editable = searchParams.get('edit') === 'true';
@@ -95,19 +98,21 @@ function RecipeDetailsForm(){
             recipeIngredients: requestIngredients,
             instructionsSteps: instructions
         };
-
-
         const updateRecipeResponse = await updateRecipeData(id, requestData);
 
         if (updateRecipeResponse[0] === 1) {
             setIsEditMode(false);
             setSuccess(`Recipe edited successfully! ID: ${updateRecipeResponse.data.id}`);
             setError("");
+            window.location.reload();
+            navigate(`/portal/recipe`);
+
         } else {
             setError("Error editing recipe " + updateRecipeResponse.data);
             setSuccess("");
             console.error("Error updating recipe data", updateRecipeResponse[1]);
         }
+
     };
     const handleIngredientSelect = (event) => {
         const selectedName = event.target.value;
@@ -158,6 +163,7 @@ function RecipeDetailsForm(){
         return <div>Loading...</div>;
     }
 
+    console.log("user", user);
     return(
         <div className="login-form-container">
             <form className="login-form recipe-details-form" onSubmit={handleSaveClick}>
@@ -308,22 +314,29 @@ function RecipeDetailsForm(){
                     </div>
                 }
 
-                {isEditMode ? (
+                {
+                    isEditMode ? (
                     <Button
+                        type="button"
                         buttonName="Save"
                         className="submit-login-button"
                         onClick={handleSaveClick}
                     />
                 ):(
-                    <Button
-                        buttonName="Edit"
-                        className="submit-login-button"
-                        onClick={handleEditClick}
-                    />
-                )}
-                {error && <p className="error-message">{error}</p>}
-                {success && <p className="success-message">{success}</p>}
+                    (user.role === "ADMIN"|| user.role ==="CHEF") && (
+                        <Button
+                            type="button"
+                            buttonName="Edit"
+                            className="submit-login-button"
+                            onClick={handleEditClick}
+                        />
+                    )
+
+                )
+                }
             </form>
+            {error && <p className="error-message">{error}</p>}
+            {success && <p className="success-message">{success}</p>}
         </div>
     );
 }

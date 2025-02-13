@@ -27,6 +27,7 @@ function MainMenu(){
                                      className={({isActive}) => isActive ? 'active-menu-link' : 'default-menu-link'}>
                                 Profile
                             </NavLink>
+
                             ) : user ? (
                             <NavLink to="/portal"
                                      className={({isActive}) => isActive ? 'active-menu-link' : 'default-menu-link'}>

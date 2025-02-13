@@ -11,7 +11,7 @@ function AuthContextProvider({children}) {
     function logout() {
         localStorage.clear();
         setLogedinUserData(null);
-        navigate("//localhost:5173");
+        navigate("/");
 
     }
     function login(userData){

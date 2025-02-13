@@ -22,7 +22,6 @@ function Dashboard() {
             if (success === 1) {
                 setDashboardData(data);
             } else {
-
                 setError(data);
             }
             setLoading(false);

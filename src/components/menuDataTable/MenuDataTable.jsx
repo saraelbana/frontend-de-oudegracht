@@ -18,7 +18,6 @@ function MenuDataTable(){
             setFilteredMenu(menu); // Show all items when no category is selected
         }
     };
-
     useEffect(() => {
         const fetchMenuData = async () => {
             try {

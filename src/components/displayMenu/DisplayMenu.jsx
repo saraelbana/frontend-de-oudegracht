@@ -23,7 +23,7 @@ function DisplayMenu(){
             {isPortalPath && (
                 <div className="add-button-container">
                     {
-                        user && ( user.role === "ADMIN" || user.role === "CHEF") &&
+                        ( user.role === "ADMIN" || user.role === "CHEF") &&
                         <Button iconSrc={ADD_ICON} text="Add New Item" onClick={handleAddMenuItem} />
                     }
                 </div>

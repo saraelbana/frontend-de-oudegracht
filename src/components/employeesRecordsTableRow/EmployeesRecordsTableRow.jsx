@@ -30,17 +30,19 @@ function EmployeesRecordsTableRow({ employee }) {
             </td>
             <td>{employee.role || 'Employee'}</td>
             {
-                user && ( user.role === "ADMIN") &&
-                (<td>
-                    <div className="table-action-buttons">
-                        <Button
-                            size="icon"
-                            iconSrc={EDIT_ICON}
-                            onClick={handleEditClick}
-                            className="edit-button"
-                        />
-                    </div>
-                </td>)
+                (user.role === "ADMIN") &&
+                (
+                    <td>
+                        <div className="table-action-buttons">
+                            <Button
+                                size="icon"
+                                iconSrc={EDIT_ICON}
+                                onClick={handleEditClick}
+                                className="edit-button"
+                            />
+                        </div>
+                    </td>
+                )
             }
         </tr>
     );

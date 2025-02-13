@@ -59,7 +59,6 @@ function AddMenuItem(){
             const response = await deoudegrachtApi.post(menuEndpoint, requestData);
             setSuccess(`Menu item created successfully! ID: ${response.data.id}`);
             setError("");
-            window.location.reload();
         } catch (e) {
 
             setError("Error creating a menu item " + e.response.data);
@@ -139,7 +138,7 @@ function AddMenuItem(){
                         ))}
                     </select>
                 )}
-                <Button type="submit" text="Add Menu Item" onClick={handleSubmit} className="submit-add-menu-item-button"/>
+                <Button type="button" text="Add Menu Item" onClick={handleSubmit} className="submit-add-menu-item-button"/>
                 {error && <p className="error-message">{error}</p>}
                 {success && <p className="success-message">{success}</p>}
             </form>

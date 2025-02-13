@@ -9,29 +9,40 @@ function DashboardSideMenu(prop) {
             <ul className="dashboard-side-menu-list">
                 <li>
                     <NavLink 
-                        to="/portal" 
-                        end 
+                        to="/portal"
                         className={({isActive}) => isActive ? 'active-menu-link' : 'default-menu-link'} 
-                        onClick={prop.onClick}
-                    >
+                        onClick={prop.onClick}>
+
                         Dashboard
                     </NavLink>
                 </li>
                 <li>
                     {
-                        user &&  (user.role === "ADMIN" || user.role === "CHEF") &&
-                        (<NavLink to="/portal/employee" className ={({isActive})=> isActive ? 'active-menu-link' : 'default-menu-link'} onClick={prop.onClick}>
+                        (user.role === "ADMIN" || user.role === "CHEF") &&
+                        (<NavLink
+                            to="/portal/employee"
+                            className ={({isActive})=> isActive ? 'active-menu-link' : 'default-menu-link'}
+                            onClick={prop.onClick}>
+
                             Employees
                         </NavLink>)
                     }
                 </li>
                 <li>
-                    <NavLink to="/portal/recipe" className ={({isActive})=> isActive ? 'active-menu-link' : 'default-menu-link'} onClick={prop.onClick}>
+                    <NavLink
+                        to="/portal/recipe"
+                        className ={({isActive})=> isActive ? 'active-menu-link' : 'default-menu-link'}
+                        onClick={prop.onClick}>
+
                         Recipes
                     </NavLink>
                 </li>
                 <li>
-                    <NavLink to="/portal/menu" className ={({isActive})=> isActive ? 'active-menu-link' : 'default-menu-link'} onClick={prop.onClick}>
+                    <NavLink
+                        to="/portal/menu"
+                        className ={({isActive})=> isActive ? 'active-menu-link' : 'default-menu-link'}
+                        onClick={prop.onClick}>
+
                         Menu
                     </NavLink>
                 </li>

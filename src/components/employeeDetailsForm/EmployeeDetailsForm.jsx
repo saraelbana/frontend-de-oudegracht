@@ -35,7 +35,7 @@ function EmployeeDetailsForm() {
     }, [searchParams]);
     useEffect(() => {
         const fetchEmployeeData = async () => {
-            if(user.role === "admin" || user.role === "CHEF" || user.username === username) {
+            if(user.role === "ADMIN" || user.role === "CHEF" || user.username === username) {
                 const response = await getEmployeeResponseData(username);
                 if (response[0] === 1) {
                     setEmployeeData(response[1]);
@@ -175,7 +175,7 @@ function EmployeeDetailsForm() {
                     </label>
                 </div>
             </form>
-            { (user.role === "admin" || user.username === username) &&
+            { (user.role === "ADMIN" || user.username === username) &&
                 <Button buttonName={isEditMode ? "Save" : "Edit"}
                         onClick={isEditMode ? handleSaveClick : handleEditClick}/>
             }

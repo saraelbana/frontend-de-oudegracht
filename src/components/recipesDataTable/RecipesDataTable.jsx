@@ -1,11 +1,12 @@
 import "./RecipesDataTable.css";
-import { useEffect, useState } from "react";
+import {useContext, useEffect, useState} from "react";
 import { deoudegrachtApi, recipesEndpoint } from "../../deoudegrachtApi.js";
 import RecipesRecordsTableRow from "../recipesRecordsTableRow/RecipesRecordsTableRow.jsx";
 import FoodCategoryNavbar from "../foodCategoryNavbar/FoodCategoryNavbar.jsx";
 import { ADD_ICON } from "../../constants/AssetsFilesNames.js";
 import Button from "../button/Button.jsx";
 import { useNavigate } from "react-router-dom";
+import {AuthContext} from "../../context/authContext/AuthContext.jsx";
 
 function RecipesDataTable() {
     const [recipes, setRecipes] = useState([]);
@@ -14,6 +15,7 @@ function RecipesDataTable() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const navigate = useNavigate();
+    const {user} = useContext(AuthContext);
 
     const handleAddClick = () => {
         navigate('/portal/recipe/new');
@@ -75,13 +77,16 @@ function RecipesDataTable() {
                 )}
                 </tbody>
             </table>
-            <div className="add-button-container">
-                <Button
-                    iconSrc={ADD_ICON}
-                    text="Add New Recipe"
-                    onClick={handleAddClick}
-                />
-            </div>
+            {
+                (user.role === "ADMIN" || user.role === "CHEF") &&
+                <div className="add-button-container">
+                    <Button
+                        iconSrc={ADD_ICON}
+                        text="Add New Recipe"
+                        onClick={handleAddClick}
+                    />
+                </div>
+            }
         </div>
     );
 }
