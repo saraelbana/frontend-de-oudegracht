@@ -23,7 +23,6 @@ function Home()
                 <Route path="/" element={<MainDisplay/>}/>
                 <Route path="/about" element={<About/>}/>
                 <Route path="/menu" element={<Menu/>}/>
-                {/*<Route path="/reservations" element={<Reservations/>}/>*/}
                 <Route path="/contact" element={<Contact/>}/>
                 <Route path="/login" element={<Login/>}/>
                 <Route path={"/guest-profile/:username"} element={<GuestProfile/>}/>

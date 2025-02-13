@@ -23,7 +23,7 @@ function AddNewIngredient(){
 
         try {
             const response = await deoudegrachtApi.post(ingredientsEndpoint, requestData);
-            console.log(response.data);
+
             setSuccess(`ingredient created successfully! ID: ${response.data.id}`);
             setError("");
         }
@@ -54,7 +54,6 @@ function AddNewIngredient(){
                     </label>
                     <MandatoryTag/>
                     <Button iconSrc = {ADD_ICON} size = "icon" onClick ={handleAddClick}/>
-                    {/*/>*/}
                 </div>
                 <Button text="save" onClick={handleSave}/>
                 {error && <p className="error-message">{error}</p>}

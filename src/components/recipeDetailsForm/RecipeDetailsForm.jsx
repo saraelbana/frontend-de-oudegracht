@@ -35,7 +35,7 @@ function RecipeDetailsForm(){
     useEffect(() => {
         const fetchRecipeData = async () => {
             const response = await getRecipeResponseData(id);
-            console.log(response);
+
             if(response[0] === 1){
                 setRecipeData(response[1]);
                 setRecipeName(response[1].recipeName);
@@ -65,10 +65,10 @@ function RecipeDetailsForm(){
         const getIngredientsList= async () => {
             try {
                 const response = await deoudegrachtApi.get(ingredientsEndpoint);
-                console.log(response.data);
+
                 setAllIngredients(response.data);
-            } catch (e) {
-                console.log("Error fetching ingredienta list", e.data);
+            } catch (e){
+                console.error("Error fetching ingredients list", e);
             }
         };
         getIngredientsList();
@@ -95,20 +95,10 @@ function RecipeDetailsForm(){
             recipeIngredients: requestIngredients,
             instructionsSteps: instructions
         };
-        console.log(requestData);
+
 
         const updateRecipeResponse = await updateRecipeData(id, requestData);
-        // try {
-        //     console.error("to be updated recipe data", requestData);
-        //     const updateRecipeResponse = await deoudegrachtApi.put(`${recipesEndpoint}/${id}`, requestData);
-        //     setIsEditMode(false);
-        //     setSuccess(`Recipe edited successfully! ID: ${updateRecipeResponse.data.id}`);
-        //     setError("");
-        // } catch (error) {
-        //     console.error("Error updating recipe data", error);
-        //     setError("Error editing recipe " + updateRecipeResponse.data);
-        //     setSuccess("");
-        // }
+
         if (updateRecipeResponse[0] === 1) {
             setIsEditMode(false);
             setSuccess(`Recipe edited successfully! ID: ${updateRecipeResponse.data.id}`);

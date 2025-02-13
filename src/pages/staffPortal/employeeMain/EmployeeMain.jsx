@@ -63,8 +63,6 @@ function EmployeeMain() {
                             <Route path="/recipe/new" element={<AddNewRecipe/>}/>
                             <Route path="/ingredient/new" element={<AddNewIngredient/>}/>
                         </Routes>
-                        {/*{activeComponent === "Dashboard" ? <Dashboard/> :*/}
-                        {/* <EmployeeDetailsForm employeeData={{ /* pass employee data here *!/}/>}*/}
                     </section>
                 </section>
             </article>

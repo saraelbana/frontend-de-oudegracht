@@ -23,11 +23,11 @@ function AddMenuItem(){
         const fetchCategoriesList = async () => {
             const categoriesResponse = await getCategoriesList();
             if (categoriesResponse[0] === 1) {
-                console.log("Categories fetched successfully:", categoriesResponse[1]);
+
                 setCategories(categoriesResponse[1]);
                 setLoading(false);
             } else {
-                console.error("Error fetching categories:", categoriesResponse[1]);
+
                 setError(categoriesResponse[1]);
                 setLoading(false);
             }
@@ -38,11 +38,11 @@ function AddMenuItem(){
         const fetchRecipesList = async () => {
             const recipesResponse = await getRecipesList();
             if (recipesResponse[0] === 1) {
-                console.log("Recipes fetched successfully:", recipesResponse[1]);
+
                 setRecipesList(recipesResponse[1]);
                 setLoading(false);
             } else {
-                console.error("Error fetching recipes:", recipesResponse[1]);
+
                 setError(recipesResponse[1]);
                 setLoading(false);
             }
@@ -53,15 +53,15 @@ function AddMenuItem(){
     const handleSubmit = async (e) => {
         e.preventDefault();
         const requestData = createRequestData({itemName, itemDescription, itemPrice, selectedCategory, selectedRecipe});
-        console.log("Request data", requestData);
+
         try {
-            console.log("Request data", requestData);
+
             const response = await deoudegrachtApi.post(menuEndpoint, requestData);
             setSuccess(`Menu item created successfully! ID: ${response.data.id}`);
             setError("");
             window.location.reload();
         } catch (e) {
-            console.error("Error creating new menu item", e);
+
             setError("Error creating a menu item " + e.response.data);
             setSuccess("");
         }

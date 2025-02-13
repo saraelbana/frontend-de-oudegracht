@@ -13,7 +13,6 @@ function PopupModel({ isOpen, onClose, children, title }) {
             onClose={() => setIsModalOpen(false)}
             title="Add New Ingredient"
         >
-            {/* Modal content */}
         </PopupModel>
     );
 }

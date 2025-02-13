@@ -1,4 +1,4 @@
-/* Clean and modern table styling */
+
 .employee-table {
     width: 100%;
     border-collapse: separate;
@@ -35,7 +35,6 @@
     transition: background-color 0.3s ease;
 }
 
-/* Responsive table */
 @media screen and (max-width: 600px) {
     .employee-table, 
     .employee-table thead, 
@@ -76,7 +75,6 @@
     }
 }
 
-/* Action buttons in table */
 .table-action-buttons {
     display: flex;
     gap: 10px;

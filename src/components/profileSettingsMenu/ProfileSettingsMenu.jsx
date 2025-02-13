@@ -1,5 +1,4 @@
 import  "./ProfileSettingsMenu.css";
-import {NavLink} from "react-router-dom";
 import {useNavigate} from "react-router-dom";
 import Button from "../button/Button.jsx";
 
@@ -11,7 +10,7 @@ function ProfileSettingsMenu() {
     };
     const handleProfileClick = () => {
         const username = localStorage.getItem("user_username");
-        console.log("Username", username);
+
         navigate(`/portal/employee/${username}`);
     };
     return(

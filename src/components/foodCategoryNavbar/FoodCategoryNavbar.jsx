@@ -12,7 +12,7 @@ function FoodCategoryNavbar({ onCategorySelect, selectedCategory, showAllRecipes
         const fetchCategoriesList = async () => {
             const categoriesResponse = await getCategoriesList();
             if (categoriesResponse[0] === 1) {
-                console.log("Categories fetched successfully:", categoriesResponse[1]);
+
                 setCategories(categoriesResponse[1]);
                 setLoading(false);
             } else {

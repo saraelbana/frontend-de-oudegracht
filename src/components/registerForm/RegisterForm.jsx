@@ -5,9 +5,7 @@ function RegisterForm(){
     const {register, handleSubmit, formState:{errors}} = useForm();
 
     function handleFormSubmit(data){
-        console.log(data);
     }
-    console.log(errors);
 
     return(
         <form onSubmit={handleSubmit(handleFormSubmit)}>

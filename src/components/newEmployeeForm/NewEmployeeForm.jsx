@@ -28,13 +28,13 @@ function NewEmployeeForm(){
                 const response = await deoudegrachtApi.get(rolesEndpoint);
                 setRoles(response.data.allRoles);
             } catch (e) {
-                console.log("Error fetching roles", e.data);
+
             }
         };
         getRoles();
     }, []);
     const handleSubmit = async (e) => {
-        e.preventDefault(); //needs investigation if it is necessary or not
+        e.preventDefault();
         if (password !== confirmPassword) {
             setError("Passwords do not match");
             return;

@@ -23,12 +23,12 @@ function RecipesDataTable() {
         const fetchAllRecipes = async () => {
             try {
                 const response = await deoudegrachtApi.get(recipesEndpoint);
-                console.log("Recipes data fetched", response.data);
+
                 setRecipes(response.data);
                 setFilteredRecipes(response.data); // Initialize filtered recipes with all recipes
                 setLoading(false);
             } catch (e) {
-                console.log("Error fetching recipes", e.data);
+
                 setError(e);
                 setLoading(false);
             }

@@ -8,9 +8,8 @@ function TestComponent() {
     try {
         const response = await deoudegrachtApi.get(rolesEndpoint);
         setRoles(response.data.allRoles);
-        console.log("Roles fetched successfully!", response.data.allRoles);
-    } catch (e) {
-        console.log("Error fetching roles", e);
+
+    } catch (e){
     }
   };
 

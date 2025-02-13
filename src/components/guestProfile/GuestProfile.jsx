@@ -10,13 +10,13 @@ function GuestProfile(){
     const [error, setError] = useState("");
     useEffect(() => {
         const fetchGuestData = async () => {
-            console.log("hello Fetching guest data for", username);
+
             try {
                 const response = await deoudegrachtApi.get(`${guestEndpoint}/${username}`);
-                console.log(response.data);
+
                 setGuestData(response.data);
             } catch (error) {
-                console.error("Error fetching guest data", error);
+
                 setError("Error fetching guest data" + error);
             }
         };
@@ -50,9 +50,6 @@ function GuestProfile(){
                             <label>
                                 {guestData.email}
                             </label>
-                            {/*<label id="phone-number-label">*/}
-                            {/*    Phone Number: guestData.phone}*/}
-                            {/*</label>*/}
                         </div>
                     </form>
                 </div>

@@ -22,7 +22,7 @@ function Dashboard() {
             if (success === 1) {
                 setDashboardData(data);
             } else {
-                console.log("Error fetching dashboard data", data);
+
                 setError(data);
             }
             setLoading(false);

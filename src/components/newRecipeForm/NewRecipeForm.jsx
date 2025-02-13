@@ -33,10 +33,10 @@ function NewRecipeForm() {
         const getCategories = async () => {
             try {
                 const response = await deoudegrachtApi.get(categoriesEndpoint);
-                console.log(response.data);
+
                 setCategories(response.data.allFoodCategoryTypes);
             } catch (e) {
-                console.log("Error fetching food categories", e.data);
+
             }
         };
         getCategories();
@@ -45,10 +45,10 @@ function NewRecipeForm() {
         const getIngredientsList = async () => {
             try {
                 const response = await deoudegrachtApi.get(ingredientsEndpoint);
-                console.log(response.data);
+
                 setAllAvailableIngredients(response.data);
             } catch (e) {
-                console.log("Error fetching ingredienta list", e.data);
+
             }
         };
         getIngredientsList();
@@ -68,12 +68,11 @@ function NewRecipeForm() {
     };
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(instructions);
+
         const requestData = createNewRecipeRequestData({ recipeName, category, description, recipeIngredients: selectedIngredients, instructionsSteps: instructions });
-        console.log("request data", requestData);
+
         try {
             const response = await deoudegrachtApi.post(recipesEndpoint, requestData);
-            console.log("response data", response.data);
             setSuccess(`Recipe created successfully! ID: ${response.data.id}`);
             setError("");
             navigate("/portal/recipe");

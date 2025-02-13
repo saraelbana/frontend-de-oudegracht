@@ -11,14 +11,13 @@ function MenuItemRecordRow(prop){
     const navigate = useNavigate();
     const location = useLocation();
     const isPortalPath = location.pathname.includes("/portal");
-    console.log('Current path:', location.pathname);
-    console.log('Is portal path:', isPortalPath);
+
     const handleDeleteClick = async () => {
         try {
-            console.log(`Deleting item with id: ${prop.item.id}`);
+
             const response = await deleteMenuItem(prop.item.id); // Call the delete API with the item ID
             if (response[0] === 1) {
-                console.log(`Item with id: ${prop.id} deleted successfully`);
+
                 //better to confirm before deleting
                 setSuccess("Item deleted successfully");
                 setError("");
@@ -39,7 +38,7 @@ function MenuItemRecordRow(prop){
             <td>€{prop.item.price}</td>
             <td>{prop.item.category}</td>
             <td>
-                {console.log('Delete icon path:', DELETE_ICON)}
+
                 {isPortalPath && (
                     <div className="table-action-buttons">
                         <Button

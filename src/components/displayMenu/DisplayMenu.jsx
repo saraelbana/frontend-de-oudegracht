@@ -1,5 +1,4 @@
 import "./DisplayMenu.css";
-import FoodCategoryNavbar from "../foodCategoryNavbar/FoodCategoryNavbar.jsx";
 import Button from "../button/Button.jsx";
 import {ADD_ICON} from "../../constants/AssetsFilesNames.js";
 import {useLocation, useNavigate} from "react-router-dom";

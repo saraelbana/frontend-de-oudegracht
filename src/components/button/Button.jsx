@@ -9,7 +9,7 @@ function Button(prop) {
         return "default-button";
     };
 
-    console.log('Button props:', { ...prop });
+
 
     return (
         <button

@@ -20,20 +20,19 @@ function EmployeesDataTable(){
         const fetchAllEmployees = async ()=>{
             try {
                 const response = await deoudegrachtApi.get(employeesEndpoint);
-                console.log("Employees data fetched", response.data);
+
                 setEmployees(response.data);
                 setLoading(false);
             }
             catch (e){
 
-                console.log("Error fetching employees", e.data);
                 setError(e);
             }
         }
         fetchAllEmployees();
     },[]);
     useEffect(() => {
-        console.log("Employees data set", employees);
+
         setLoading(false);
     }, [employees]);
 

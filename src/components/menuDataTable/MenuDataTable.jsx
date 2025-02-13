@@ -23,12 +23,12 @@ function MenuDataTable(){
         const fetchMenuData = async () => {
             try {
                 const response = await deoudegrachtApi.get(menuEndpoint);
-                console.log("Menu data fetched", response.data);
+
                 setMenu(response.data);
                 setFilteredMenu(response.data);
                 setLoading(false);
             } catch (e) {
-                console.log("Error fetching menu data", e);
+
                 setError(e);
                 setLoading(false);
             }
@@ -63,7 +63,6 @@ function MenuDataTable(){
                     </tr>
                 ):(
                         filteredMenu.map((item, index) => (
-                            console.log(item),
                             <MenuItemRecordRow key={index} item={item}/>
                     ))
                 )}

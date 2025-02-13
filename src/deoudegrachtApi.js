@@ -25,7 +25,7 @@ export const loginEndpoint = DE_OUGRACHT_API_URL + "/auth/login";
 deoudegrachtApi.interceptors.request.use(
     (config) => {
         const token = localStorage.getItem("authToken");
-        console.log(token);
+
         if (token) {
             config.headers.Authorization = `Bearer ${token}`;
         }

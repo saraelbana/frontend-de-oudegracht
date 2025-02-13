@@ -14,9 +14,6 @@ function App() {
             <MainHeader/>
             <Routes>
                 <Route path="/*" element={<Home/>}/>
-                {/*this is the correct path*/}
-                {/*<Route path="/portal" element={<PortalLogin/>}/>*/}
-                {/*although let's navigate to this so that we can implement later the securely authentic authorised user login module*/}
                 <Route path="/portal/*" element={<EmployeeMain/>}/>
                 <Route path={"/test"} element={<TestComponent/>}/>
                 <Route path="*" element={<NotFound/>}/>

@@ -18,17 +18,16 @@ function LoginForm() {
 
     const handleLogin = async (e) => {
         e.preventDefault();
-        console.log("Attempting to login with:", username, password);
+
         try {
             const requestData = authRequestData({ username, password });
             const response = await axios.post(loginEndpoint, requestData);
-            console.log("Full login response:", response.data);
+
 
             const token = response.data.token;
             const user_username = response.data.name || response.data.username || "Employee";
             const user_role = response.data.userRole;
-            console.log("User role:", user_role);
-            console.log("User name:", user_username);
+
             const user_firstname = response.data.firstname;
 
             if (token) {
@@ -36,16 +35,10 @@ function LoginForm() {
                 localStorage.setItem("user_username", user_username);
                 localStorage.setItem("user_role", user_role);
                 localStorage.setItem("user_firstname", user_firstname);
-                console.log("Token and name stored successfully:", {
-                    token: token,
-                    user_username: user_username,
-                    user_role: user_role,
-                    user_firstname: user_firstname
-                });
             }
             setSuccess("Login successful");
             setError("");
-            console.log("Successful login", response.data);
+
             if(user_role === "GUEST")
                 navigate(`/guest-profile/${user_username}`);
                 else

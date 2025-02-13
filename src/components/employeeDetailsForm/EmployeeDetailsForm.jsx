@@ -32,9 +32,9 @@ function EmployeeDetailsForm() {
     }, [searchParams]);
     useEffect(() => {
         const fetchEmployeeData = async () => {
-            console.log("Fetching employee data username form here", username);
+
             const response = await getEmployeeResponseData(username);
-            console.log("Employee data response", response);
+
             if (response[0] === 1) {
                 setEmployeeData(response[1]);
             }
@@ -78,7 +78,7 @@ function EmployeeDetailsForm() {
             role: updatedRole
 
         }
-        console.log("Saving employee data:", toUpdateEmployeeData);
+
         try {
 
             const updatedResponseData = await deoudegrachtApi.put(`${employeesEndpoint}/${username}`, toUpdateEmployeeData);
@@ -98,11 +98,7 @@ function EmployeeDetailsForm() {
     }
     return (
         <div className="main-employee-details-form">
-            {/* <section className="Employee-details-header">
-                <Button buttonName="← Back" onClick={handleBackClick}/>
-                <h2>{employeeData.role} {employeeData.firstname} profile</h2>
-                {console.log("Employee data", employeeData)}
-            </section> */}
+
             <form className="display-employee">
                 <div className="new-employee-name">
                     <div className="new-employee-firstname">

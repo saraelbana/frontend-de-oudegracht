@@ -1,4 +1,4 @@
-/* EmployeesRecordsTableRow.css */
+
 .username-navlink {
     color: blue;
 }
@@ -29,7 +29,3 @@
     cursor: pointer;
     text-decoration: underline;
 }
-/*.employee-username-data-navlink:hover {*/
-/*    color: #f1f1f1;*/
-/*    background-color: #2563eb;*/
-/*}*/
