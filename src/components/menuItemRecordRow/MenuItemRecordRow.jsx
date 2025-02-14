@@ -39,7 +39,9 @@ function MenuItemRecordRow(prop){
             <td>€{prop.item.price}</td>
             <td>{prop.item.category}</td>
             <td>
-
+                {prop.item.imagePath && (
+                    <img src={`http://localhost:8080/uploads/${prop.item.imagePath}`} alt={prop.item.name} style={{ width: '100px', height: 'auto' }} />
+                )}
                 { isPortalPath && (
                     (user.role ==="ADMIN" || user.role === "CHEF") ? (
                     <div className="table-action-buttons">
