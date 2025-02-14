@@ -26,7 +26,7 @@ function RecipesRecordsTableRow({ recipe }) {
                     setSuccess("Recipe deleted successfully");
                     setError("");
                     setTimeout(() => {
-                        navigate("/portal/recipes");
+                        navigate("/portal/recipe");
                     }, 5000);
                 }
 
@@ -43,12 +43,10 @@ function RecipesRecordsTableRow({ recipe }) {
         <tr>
             <td
                 onClick={handleRecipeNameClick}
-                className="recipe-name-data-table-cell"
-            >
+                className="recipe-name-data-table-cell">
                 {/* eslint-disable-next-line react/prop-types */}
                 {recipe.recipeName}
             </td>
-            {/* eslint-disable-next-line react/prop-types */}
             <td>{recipe.category || 'Uncategorized'}</td>
             {   (user.role === "ADMIN" || user.role === "CHEF") &&
                 <td>

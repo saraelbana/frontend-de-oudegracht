@@ -4,7 +4,8 @@ import {
     employeesEndpoint,
     recipesEndpoint,
     rolesEndpoint,
-    ingredientsEndpoint, guestEndpoint, menuEndpoint
+    guestEndpoint,
+    menuEndpoint
 } from "../deoudegrachtApi.js";
 
 //this is a flag obj. with 2 values first element a flag 0/1 second is either the successfully returned obj or the failure error
@@ -16,14 +17,6 @@ export async function getEmployeeResponseData(username) {
         } catch (error) {
             return [0, error];
         }
-}
-export async function updateEmployeeData(username, data) {
-    try {
-        const response = await deoudegrachtApi.put(`${employeesEndpoint}/${username}`, data);
-        return [1, response.data]; // 1 indicates success
-    } catch (error) {
-        return [0, error]; // 0 indicates failure
-    }
 }
 export async function getRecipeResponseData(id) {
     try {
@@ -123,41 +116,3 @@ export async function deleteEmployee(username){
         return [0, error];
     }
 }
-export async function getGuestResponseData(username) {
-    try {
-        const response = await deoudegrachtApi.get(`${guestEndpoint}/${username}`);
-
-        return [1, response.data];
-    } catch (error) {
-
-        return [0, error];
-    }
-}
-export async function getIngredientsList(){
-    try {
-        const response = await deoudegrachtApi.get(ingredientsEndpoint);
-        return [1, response.data.allIngredients];
-    } catch (error) {
-
-        return [0, error];
-    }
-}
-export async function postEmployee(requestData) {
-    try {
-        const response = await deoudegrachtApi.post(employeesEndpoint, requestData);
-        return [1, response.data];
-    } catch (error) {
-
-        return [0, error];
-    }
-}
-export async function postRecipeData(requestData){
-    try {
-        const response = await deoudegrachtApi.post(recipesEndpoint, requestData);
-        return [1, response.data];
-    } catch (error) {
-
-        return [0, error];
-    }
-}
-

@@ -46,8 +46,7 @@ function EmployeesRecordsTableRow({ employee }) {
             <td>{employee.phone || 'N/A'}</td>
             <td
                 onClick={handleUsernameClick}
-                className="employee-username-data-navlink"
-            >
+                className="employee-username-data-navlink">
                 {employee.username}
             </td>
             <td>{employee.role || 'Employee'}</td>
