@@ -170,7 +170,7 @@ function NewRecipeForm() {
             <form className="login-form new-recipe-form" onSubmit={handleSubmit}>
                 <h2>Add New Recipe</h2>
                 <div className="recipe-input">
-                    <label htmlFor="recipe-name">Recipe Name</label>
+                    <label className="recipe-label" htmlFor="recipe-name">Recipe Name</label>
                     <MandatoryTag />
                     <input
                         id="recipe-name"
@@ -182,7 +182,7 @@ function NewRecipeForm() {
                     />
                 </div>
                 <div className="recipe-input">
-                    <label htmlFor="recipe-description">Description</label>
+                    <label className="recipe-label" htmlFor="recipe-description">Description</label>
                     <MandatoryTag />
                     <textarea
                         id="recipe-description"
@@ -193,7 +193,7 @@ function NewRecipeForm() {
                     />
                 </div>
                 <div className="recipe-input">
-                    <label htmlFor="category-select">Category</label>
+                    <label className="recipe-label" htmlFor="category-select">Category</label>
                     <select
                         id="category-select"
                         className="login-form-text-field full-width height-40 margin-0"
@@ -207,7 +207,7 @@ function NewRecipeForm() {
                     </select>
                 </div>
                 <div className="recipe-input">
-                    <label>Ingredients</label>
+                    <label className="recipe-label" >Ingredients</label>
                     <div className="flex-align-center">
                         <Button type="button"
                                 buttonName="Add Ingredient"
@@ -237,7 +237,7 @@ function NewRecipeForm() {
                         <div className="modal-content">
                             <h3>Add New Ingredient</h3>
                             <div className="recipe-input">
-                                <label htmlFor="ingredient-select">Ingredient</label>
+                                <label className="recipe-label" htmlFor="ingredient-select">Ingredient</label>
                                 <select
                                     id="ingredient-select"
                                     className="login-form-text-field full-width height-40 margin-0"
@@ -266,7 +266,7 @@ function NewRecipeForm() {
                                 />
                             </div>
                             <div className="recipe-input">
-                                <label htmlFor="ingredient-quantity">Quantity</label>
+                                <label className="recipe-label" htmlFor="ingredient-quantity">Quantity</label>
                                 <input
                                     id="ingredient-quantity"
                                     type="number"
@@ -277,7 +277,7 @@ function NewRecipeForm() {
                                 />
                             </div>
                             <div className="recipe-input">
-                                <label htmlFor="ingredient-unit">Unit</label>
+                                <label className="recipe-label" htmlFor="ingredient-unit">Unit</label>
                                 <input
                                     id="ingredient-unit"
                                     type="text"
@@ -308,7 +308,7 @@ function NewRecipeForm() {
                     </div>
                 )}
                 <div className="recipe-input">
-                    <label>Instructions</label>
+                    <label className="recipe-label">Instructions</label>
                     {instructions.map((instruction, index) => (
                         <div key={index} className="margin-5-0 flex-align-center">
                             <span className="margin-10">{index + 1}.</span>

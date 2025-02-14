@@ -104,7 +104,7 @@ function EmployeeDetailsForm() {
             <form className="display-employee">
                 <div className="new-employee-name">
                     <div className="new-employee-firstname">
-                        <label id="firstname-label">
+                        <label className="employee-label" id="firstname-label">
                             Firstname:
                             {
                             isEditMode ?
@@ -117,25 +117,25 @@ function EmployeeDetailsForm() {
                         </label>
                     </div>
                     <div className="new-employee-lastname">
-                        <label id="lastname-label">
+                        <label className="employee-label" id="lastname-label">
                             Lastname: {isEditMode ?
                             <input type="text" defaultValue={employeeData.lastname} onChange={(event) => setLastname(event.target.value)}/> : employeeData.lastname}
                         </label>
                     </div>
                 </div>
                 <div className="new-employee-contact">
-                    <label id="email-label">
+                    <label className="employee-label" id="email-label">
                         Email: {isEditMode ?
                         <input type="email" defaultValue={employeeData.email} onChange={(event) => setEmail(event.target.value)} /> : employeeData.email}
                     </label>
-                    <label id="phone-number-label">
+                    <label className="employee-label" id="phone-number-label">
                         Phone Number: {isEditMode ?
                         <input type="text" defaultValue={employeeData.phone} onChange={(event) => setPhone(event.target.value)}/> : employeeData.phone}
                     </label>
                 </div>
                 <div className="new-employee-credentials">
                     <div className="new-employee-username">
-                        <label id="username-label">
+                        <label className="employee-label" id="username-label">
                             Username: {isEditMode ? (
                                 <div>
                                     {employeeData.username}
@@ -146,7 +146,7 @@ function EmployeeDetailsForm() {
                         </label>
                     </div>
                     <div className="new-employee-password">
-                        <label id="password-label">
+                        <label className="employee-label" id="password-label">
                             Password: {isEditMode ?
                             <div>
                                 {"*****"}
@@ -158,7 +158,7 @@ function EmployeeDetailsForm() {
                     </div>
                 </div>
                 <div className="new-employee-role">
-                    <label id="role-label">
+                    <label className="employee-label" id="role-label">
                         Role: {isEditMode ? (
                         <select defaultValue={employeeData.role} onChange={(event) => setRole(event.target.value)}>
                             <option disabled selected>select role</option>

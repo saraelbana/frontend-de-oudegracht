@@ -110,7 +110,7 @@ function AddMenuItem(){
             <h1>Add New Menu Item</h1>
             <form className="add-menu-item-form">
                 <div className="form-field-label">
-                    <label htmlFor="itemName">Item Name</label>
+                    <label className="menuItem-label" htmlFor="itemName">Item Name</label>
                     <MandatoryTag/>
                 </div>
                 <input type="text" id="itemName" name="itemName" required
@@ -118,7 +118,7 @@ function AddMenuItem(){
                        onChange={(e) => setItemName(e.target.value)}/>
 
                 <div className="form-field-label">
-                    <label htmlFor="itemDescription">Item Description</label>
+                    <label className="menuItem-label" htmlFor="itemDescription">Item Description</label>
                     <MandatoryTag/>
                 </div>
                 <textarea id="itemDescription" name="itemDescription" required
@@ -126,7 +126,7 @@ function AddMenuItem(){
                           onChange={(e) => setItemDescription(e.target.value)}/>
 
                 <div className="form-field-label">
-                    <label htmlFor="itemPrice">Item Price</label>
+                    <label className="menuItem-label" htmlFor="itemPrice">Item Price</label>
                     <MandatoryTag/>
                 </div>
                 <input type="number" id="itemPrice" name="itemPrice" required min="0" step="0.01"
@@ -134,7 +134,7 @@ function AddMenuItem(){
                        onChange={(e) => setItemPrice(e.target.value)}/>
 
                 <div className="form-field-label">
-                    <label htmlFor="itemImage">Item Image</label>
+                    <label className="menuItem-label" htmlFor="itemImage">Item Image</label>
                 </div>
                 <input type="file" 
                        id="itemImage" 
@@ -144,7 +144,7 @@ function AddMenuItem(){
                        onChange={(e) => handleImageSelect(e.target.files[0])}/>
 
                 <div className="form-field-label">
-                    <label htmlFor="itemCategory">Item Category</label>
+                    <label className="menuItem-label" htmlFor="itemCategory">Item Category</label>
                     <MandatoryTag/>
                 </div>
                 {loading ? (<p> loading...</p>) : (
@@ -166,7 +166,7 @@ function AddMenuItem(){
                     </select>)}
 
                 <div className="form-field-label">
-                    <label htmlFor="recipesList">Select Recipe</label>
+                    <label className="menuItem-label" htmlFor="recipesList">Select Recipe</label>
                     <MandatoryTag/>
                 </div>
                 {loading ? (<p>Loading...</p>) : (

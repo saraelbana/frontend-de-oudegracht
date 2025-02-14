@@ -178,7 +178,7 @@ function RecipeDetailsForm(){
                     <h2>{recipeData.recipeName}</h2>
                 </div>
                 <div>
-                    <label htmlFor="name-field">Recipe Name</label>
+                    <label className="recipe-label" htmlFor="name-field">Recipe Name</label>
                     <input 
                         type="text" 
                         id="name-field" 
@@ -191,7 +191,7 @@ function RecipeDetailsForm(){
                     />
                 </div>
                 <div>
-                    <label htmlFor="description-field">Description</label>
+                    <label className="recipe-label" htmlFor="description-field">Description</label>
                     <textarea 
                         id="description-field"
                         name="description"
@@ -204,7 +204,7 @@ function RecipeDetailsForm(){
                     />
                 </div>
                 <div>
-                    <label htmlFor="category-field">Category</label>
+                    <label className="recipe-label" htmlFor="category-field">Category</label>
                     <select
                         id="category-field"
                         name="category"
@@ -222,7 +222,7 @@ function RecipeDetailsForm(){
 
                 {isEditMode && (
                     <div>
-                        <label>Ingredients</label>
+                        <label className="recipe-label">Ingredients</label>
                         <select 
                             className="login-form-text-field"
                             onChange={handleIngredientSelect}
@@ -240,9 +240,17 @@ function RecipeDetailsForm(){
                             className="submit-login-button"
                         />
                     </div>
-                )}
-
-                {isEditMode ? (
+                )
+                }
+                <div>
+                <label className="recipe-label">Ingredients</label>
+                {ingredients.map((ingredient, index) => (
+                    <div key={index} className="ingredient-input">
+                        <p>{ingredient.quantity} {ingredient.unit} {ingredient.name}</p>
+                    </div>
+                ))}
+            </div>
+                {isEditMode && (
                     selectedIngredients.map((ingredient) => (
                     <div key={ingredient.name} className="ingredient-input">
                         <input 
@@ -280,18 +288,10 @@ function RecipeDetailsForm(){
                         />
                     </div>
                     )
-                )): (<div>
-                    <label>Ingredients</label>
-                    {ingredients.map((ingredient, index) => (
-                        <div key={index} className="ingredient-input">
-                            <p>{ingredient.quantity} {ingredient.unit} {ingredient.name}</p>
-                        </div>
-                    ))}
-                </div>)}
-
+                ))}
                 {
                     <div className="instructions-container">
-                        <label>Instructions</label>
+                        <label className="recipe-label">Instructions</label>
                         {instructions.map((instruction, index) => (
                             <div key={index} className="instruction-input">
                                 <label>Step {index + 1}</label>
