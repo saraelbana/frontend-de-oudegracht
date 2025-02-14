@@ -22,11 +22,9 @@ function MenuItemRecordRow(prop){
 
                     setSuccess("Item deleted successfully");
                     setError("");
-                    //wait for 5 seconds and then navigaet
                     setTimeout(() => {
                         navigate("/portal/menu");
-                    }, 5000); // Wait for 5 seconds before navigating
-                    //window.location.reload();
+                    }, 5000);
                 }
             } catch (error) {
                 console.error(`Failed to delete item with id: ${prop.id}`);

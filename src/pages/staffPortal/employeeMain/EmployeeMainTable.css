@@ -89,7 +89,7 @@
     transition: background-color 0.3s ease;
 }
 
-.table-action-buttons .edit-btn {
+.table-action-buttons .edit-btn .delete-btn{
     background-color: #4CAF50;
     color: white;
 }

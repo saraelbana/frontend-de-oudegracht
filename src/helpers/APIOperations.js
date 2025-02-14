@@ -110,6 +110,15 @@ export async function deleteMenuItem(id){
         return [0, error];
     }
 }
+export async function deleteRecipe(id){
+    try {
+        const response = await deoudegrachtApi.delete(`${recipesEndpoint}/${id}`);
+        return [1, response.data];
+    } catch (error) {
+
+        return [0, error];
+    }
+}
 export async function getGuestResponseData(username) {
     try {
         const response = await deoudegrachtApi.get(`${guestEndpoint}/${username}`);
