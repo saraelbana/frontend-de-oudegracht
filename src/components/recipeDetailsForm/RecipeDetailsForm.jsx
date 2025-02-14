@@ -104,8 +104,10 @@ function RecipeDetailsForm(){
             setIsEditMode(false);
             setSuccess(`Recipe edited successfully! ID: ${updateRecipeResponse.data.id}`);
             setError("");
-            window.location.reload();
-            navigate(`/portal/recipe`);
+            setTimeout(() => {
+                navigate("/portal/recipe");
+            }, 5000);
+           // navigate(`/portal/recipe/${id}?edit=false`, { replace: true });
 
         } else {
             setError("Error editing recipe " + updateRecipeResponse.data);
@@ -288,7 +290,6 @@ function RecipeDetailsForm(){
                 </div>)}
 
                 {
-
                     <div className="instructions-container">
                         <label>Instructions</label>
                         {instructions.map((instruction, index) => (
@@ -314,8 +315,7 @@ function RecipeDetailsForm(){
                     </div>
                 }
 
-                {
-                    isEditMode ? (
+                {isEditMode ? (
                     <Button
                         type="button"
                         buttonName="Save"
@@ -331,7 +331,6 @@ function RecipeDetailsForm(){
                             onClick={handleEditClick}
                         />
                     )
-
                 )
                 }
             </form>
