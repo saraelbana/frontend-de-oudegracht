@@ -88,7 +88,6 @@ export async function getDashboardData() {
 
         return [1, dashboardData.filter(data => data !== null)];
     } catch (error) {
-
         return [0, error];
     }
 }
@@ -97,7 +96,6 @@ export async function getRecipesList(){
         const response = await deoudegrachtApi.get(recipesEndpoint);
         return [1, response.data];
     } catch (error) {
-
         return [0, error];
     }
 }
@@ -106,7 +104,6 @@ export async function deleteMenuItem(id){
         const response = await deoudegrachtApi.delete(`${menuEndpoint}/${id}`);
         return [1, response.data];
     } catch (error) {
-
         return [0, error];
     }
 }
@@ -115,7 +112,14 @@ export async function deleteRecipe(id){
         const response = await deoudegrachtApi.delete(`${recipesEndpoint}/${id}`);
         return [1, response.data];
     } catch (error) {
-
+        return [0, error];
+    }
+}
+export async function deleteEmployee(username){
+    try {
+        const response = await deoudegrachtApi.delete(`${employeesEndpoint}/${username}`);
+        return [1, response.data];
+    } catch (error) {
         return [0, error];
     }
 }
