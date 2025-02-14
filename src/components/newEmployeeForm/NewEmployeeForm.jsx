@@ -68,7 +68,7 @@ function NewEmployeeForm(){
             <form className="login-form new-employee-form" onSubmit={handleSubmit}>
                 <div className="new-employee-name">
                     <div className="new-employee-firstname">
-                        <label htmlFor="firstname-field">Firstname</label>
+                        <label className="employee-label" htmlFor="firstname-field">Firstname</label>
                         <MandatoryTag />
                         <input 
                             type='text'
@@ -81,7 +81,7 @@ function NewEmployeeForm(){
                         />
                     </div>
                     <div className="new-employee-lastname">
-                        <label htmlFor="lastname-field">Lastname</label>
+                        <label className="employee-label" htmlFor="lastname-field">Lastname</label>
                         <MandatoryTag />
                         <input 
                             type='text'
@@ -95,7 +95,7 @@ function NewEmployeeForm(){
                     </div>
                 </div>
                 <div className="new-employee-contact">
-                    <label htmlFor="email-field">Email</label>
+                    <label className="employee-label" htmlFor="email-field">Email</label>
                     <input 
                         type='email'
                         id="email-field"
@@ -104,7 +104,7 @@ function NewEmployeeForm(){
                         className="login-form-text-field"
                         onChange={(event) => setEmail(event.target.value)}
                     />
-                    <label htmlFor="phone-number-field">Mobile Number</label>
+                    <label className="employee-label" htmlFor="phone-number-field">Mobile Number</label>
                     <input 
                         type='tel'
                         id="phone-number-field"
@@ -115,7 +115,7 @@ function NewEmployeeForm(){
                     />
                 </div>
                 <div className="new-employee-credentials">
-                    <label htmlFor="username-field">Username</label>
+                    <label className="employee-label" htmlFor="username-field">Username</label>
                     <MandatoryTag />
                     <input 
                         type='text'
@@ -127,8 +127,9 @@ function NewEmployeeForm(){
                         onChange={(event) => setUsername(event.target.value)}
                     />
                     <div className="password-container">
-                        <label htmlFor="password-field">Password</label>
+                        <label className="employee-label" htmlFor="password-field">Password</label>
                         <MandatoryTag restrictionMessage ="Min 8 characters"/>
+                        <div>
                         <input 
                             type={showPassword ? "text" : "password"}
                             id="password-field"
@@ -144,9 +145,10 @@ function NewEmployeeForm(){
                             onClick={toggleShowPassword}
                             type="button"
                         />
+                        </div>
                     </div>
                     <div className="password-container">
-                        <label htmlFor="confirm-password-field">Confirm Password</label>
+                        <label className="employee-label" htmlFor="confirm-password-field">Confirm Password</label>
                         <MandatoryTag />
                         <input 
                             type={showPassword ? "text" : "password"}
@@ -161,7 +163,7 @@ function NewEmployeeForm(){
 
                 </div>
                 <div className="new-employee-role">
-                    <label htmlFor="role-field">Role</label>
+                    <label className="employee-label" htmlFor="role-field">Role</label>
                     <select
                         id="role-field"
                         name="role"

@@ -341,6 +341,7 @@ function NewRecipeForm() {
                         buttonName="Save Recipe"
                         textWidth={true}
                         className="padding-15-40 font-bold border-radius-10"
+                        disable={success}
                         onClick={handleSubmit}
                     />
                 </div>

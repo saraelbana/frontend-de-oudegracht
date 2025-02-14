@@ -3,7 +3,9 @@
     flex-direction: column;
     gap: 15px;
 }
-
+.employee-label{
+    color: #0088ff;
+}
 .new-employee-name {
     display: flex;
     justify-content: space-between;
