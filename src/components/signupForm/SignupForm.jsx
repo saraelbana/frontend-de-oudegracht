@@ -114,6 +114,7 @@ function SignupForm(){
                             type={showPassword ? "text" : "password"}
                             id="confirm-password-field"
                             name="confirm-password"
+                            minLength={8}
                             required
                             placeholder="Confirm Password*"
                             className="signup-form-text-field"

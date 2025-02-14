@@ -60,9 +60,6 @@ function EmployeeDetailsForm() {
         fetchRolesList();
     }, []);
 
-    const handleBackClick = () => {
-        navigate("/portal/employee");
-    }
     const handleEditClick = () => {
         setIsEditMode(!isEditMode);
     };

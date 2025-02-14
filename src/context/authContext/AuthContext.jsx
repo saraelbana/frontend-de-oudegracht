@@ -4,7 +4,6 @@ import {useNavigate} from "react-router-dom";
 export const AuthContext = createContext({});
 
 function AuthContextProvider({children}) {
-    // const username = localStorage.getItem("user_username") || "there!";
     const [logedinUserData, setLogedinUserData] = useState(null);
     const navigate = useNavigate();
 
