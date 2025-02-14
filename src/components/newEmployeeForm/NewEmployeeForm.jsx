@@ -6,6 +6,7 @@ import {deoudegrachtApi, employeesEndpoint, rolesEndpoint} from "../../deoudegra
 import {createRequestData} from "../../helpers/EmployeesOperations.js";
 import {Default_Employee_Role} from "../../constants/EmployeesConstants.js";
 import {useNavigate} from "react-router-dom";
+import {HIDE_PASSWORD_ICON, SHOW_PASSWORD_ICON} from "../../constants/AssetsFilesNames.js";
 
 function NewEmployeeForm(){
 
@@ -14,6 +15,7 @@ function NewEmployeeForm(){
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
     const [email, setEmail] = useState("");
     const [role, setRole] = useState(Default_Employee_Role);
     const [roles, setRoles] = useState([]);
@@ -36,7 +38,12 @@ function NewEmployeeForm(){
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (password !== confirmPassword) {
+
             setError("Passwords do not match");
+            return;
+        }
+        else if(password.length < 8) {
+            setError("Password must be at least 8 characters long");
             return;
         }
         const requestData = createRequestData({firstname, lastname, email, username, password, phone, role});
@@ -52,6 +59,9 @@ function NewEmployeeForm(){
             setSuccess("");
         }
     }
+    const toggleShowPassword = () => {
+        setShowPassword(!showPassword);
+    };
 
     return(
         <div className="login-form-container">
@@ -118,9 +128,9 @@ function NewEmployeeForm(){
                     />
                     <div className="password-container">
                         <label htmlFor="password-field">Password</label>
-                        <MandatoryTag />
+                        <MandatoryTag restrictionMessage ="Min 8 characters"/>
                         <input 
-                            type='password'
+                            type={showPassword ? "text" : "password"}
                             id="password-field"
                             name="password"
                             placeholder="Password*"
@@ -128,12 +138,18 @@ function NewEmployeeForm(){
                             className="login-form-text-field"
                             onChange={(event) => setPassword(event.target.value)}
                         />
+                        <Button
+                            size="icon"
+                            iconSrc={showPassword ? HIDE_PASSWORD_ICON : SHOW_PASSWORD_ICON}
+                            onClick={toggleShowPassword}
+                            type="button"
+                        />
                     </div>
                     <div className="password-container">
                         <label htmlFor="confirm-password-field">Confirm Password</label>
                         <MandatoryTag />
                         <input 
-                            type='password'
+                            type={showPassword ? "text" : "password"}
                             id="confirm-password-field"
                             name="confirm-password"
                             placeholder="Confirm Password*"
