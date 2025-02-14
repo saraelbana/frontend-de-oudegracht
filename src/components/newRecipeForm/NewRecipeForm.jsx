@@ -9,6 +9,7 @@ import {
 import { createNewRecipeRequestData } from "../../helpers/RecipesOperations.js";
 import { DEFAULT_RECIPE_CATEGORY } from "../../constants/RecipesConstants.js";
 import { useNavigate } from "react-router-dom";
+import MandatoryTag from "../mandatoryTag/MandatoryTag.jsx";
 
 function NewRecipeForm() {
     const [recipeName, setRecipeName] = useState("");
@@ -67,9 +68,15 @@ function NewRecipeForm() {
         setInstructions(newInstructions);
     };
     const handleSubmit = async (e) => {
-        e.preventDefault();
+        if(recipeName && description && category ){e.preventDefault();
 
-        const requestData = createNewRecipeRequestData({ recipeName, category, description, recipeIngredients: selectedIngredients, instructionsSteps: instructions });
+        const requestData = createNewRecipeRequestData({
+            recipeName,
+            category,
+            description,
+            recipeIngredients: selectedIngredients,
+            instructionsSteps: instructions
+        });
 
         try {
             const response = await deoudegrachtApi.post(recipesEndpoint, requestData);
@@ -79,6 +86,16 @@ function NewRecipeForm() {
         } catch (e) {
             setError("Error creating new recipe " + e.response.data);
             setSuccess("");
+        }
+    }
+        else {
+            if (!recipeName) {
+                setError("Please enter a recipe name");
+            } else if (!description) {
+                setError("Please enter a description");
+            } else {
+                setError("Please fill in all fields");
+            }
         }
     };
     const handleRemoveIngredient = (ingredientToRemove) => {
@@ -154,6 +171,7 @@ function NewRecipeForm() {
                 <h2>Add New Recipe</h2>
                 <div className="recipe-input">
                     <label htmlFor="recipe-name">Recipe Name</label>
+                    <MandatoryTag />
                     <input
                         id="recipe-name"
                         type="text"
@@ -165,6 +183,7 @@ function NewRecipeForm() {
                 </div>
                 <div className="recipe-input">
                     <label htmlFor="recipe-description">Description</label>
+                    <MandatoryTag />
                     <textarea
                         id="recipe-description"
                         className="login-form-text-field full-width min-height-100 margin-0 resize-vertical"
@@ -318,16 +337,16 @@ function NewRecipeForm() {
                 <br /><br />
                 <div className="flex-center">
                     <Button
-                        buttonName="Create Recipe"
-                        type="submit"
+                        type="button"
+                        buttonName="Save Recipe"
                         textWidth={true}
                         className="padding-15-40 font-bold border-radius-10"
-                        disabled={!recipeName || !description || !category}
+                        onClick={handleSubmit}
                     />
                 </div>
-                {error && <p className="error-message">{error}</p>}
-                {success && <p className="success-message">{success}</p>}
             </form>
+            {error && <p className="error-message">{error}</p>}
+            {success && <p className="success-message">{success}</p>}
         </div>
     );
 }

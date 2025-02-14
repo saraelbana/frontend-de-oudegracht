@@ -73,7 +73,7 @@ function RegisterForm(){
                 <input type='text' id="email-field" {...register("email")}/>
                 {errors.email && <p>{errors.email.message}</p>}
             </label>
-            <button type="submit">
+            <button type="button">
                 Submit
             </button>
         </form>
