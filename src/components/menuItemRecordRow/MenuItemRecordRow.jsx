@@ -40,7 +40,7 @@ function MenuItemRecordRow(prop){
             <td>{prop.item.category}</td>
             <td>
                 {prop.item.imagePath && (
-                    <img src={`http://localhost:9090/uploads/${prop.item.imagePath}`} alt={prop.item.name} style={{ width: '100px', height: 'auto' }} />
+                    <img src={`http://localhost:9090/uploads/${prop.item.imagePath}`} alt={prop.item.name} className="menu-item-image" />
                 )}
                 { isPortalPath && (
                     (user.role ==="ADMIN" || user.role === "CHEF") ? (
