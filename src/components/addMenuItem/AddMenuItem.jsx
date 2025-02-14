@@ -83,7 +83,7 @@ function AddMenuItem(){
         setSelectedRecipe(recipeId);
     };
     function handleImageSelect(e) {
-        const file = e.target.files[0];
+        const file = e;
         const maxSizeInBytes = 5 * 1024 * 1024; // 5 MB
 
         if (file) {
