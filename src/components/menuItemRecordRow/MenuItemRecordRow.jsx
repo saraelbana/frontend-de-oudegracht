@@ -22,8 +22,11 @@ function MenuItemRecordRow(prop){
 
                     setSuccess("Item deleted successfully");
                     setError("");
-                    navigate(`/portal/menu`);
-                    window.location.reload();
+                    //wait for 5 seconds and then navigaet
+                    setTimeout(() => {
+                        navigate("/portal/menu");
+                    }, 5000); // Wait for 5 seconds before navigating
+                    //window.location.reload();
                 }
             } catch (error) {
                 console.error(`Failed to delete item with id: ${prop.id}`);
@@ -46,6 +49,7 @@ function MenuItemRecordRow(prop){
                     (user.role ==="ADMIN" || user.role === "CHEF") ? (
                     <div className="table-action-buttons">
                         <Button
+                            type="button"
                             size="icon"
                             iconSrc={DELETE_ICON}
                             onClick={handleDeleteClick}
@@ -56,6 +60,8 @@ function MenuItemRecordRow(prop){
                 )
                 }
             </td>
+            { error && <td> {error} </td>}
+            { success && <td> {success} </td>}
         </tr>
     );
 }
