@@ -28,7 +28,6 @@ function RecipesRecordsTableRow({ recipe }) {
                     setTimeout(() => {
                         navigate("/portal/recipes");
                     }, 5000);
-
                 }
 
             } catch (error) {
