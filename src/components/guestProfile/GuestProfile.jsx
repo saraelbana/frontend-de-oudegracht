@@ -4,6 +4,7 @@ import {useNavigate, useParams} from "react-router-dom";
 import {useContext, useEffect, useState} from "react";
 import {deoudegrachtApi, guestEndpoint} from "../../deoudegrachtApi.js";
 import {AuthContext} from "../../context/authContext/AuthContext.jsx";
+import Button from "../button/Button.jsx";
 
 function GuestProfile(){
     const {username} = useParams();
@@ -11,6 +12,7 @@ function GuestProfile(){
     const [error, setError] = useState("");
     const {user} = useContext(AuthContext);
     const navigate = useNavigate();
+    const{logoutHandler} = useContext(AuthContext);
 
     useEffect(() => {
         const fetchGuestData = async () => {
@@ -35,6 +37,7 @@ function GuestProfile(){
         guestData ?
                 <div className="guest-profile">
                     <WelcomeMessage name={guestData.firstname}/>
+                    <Button buttonName="logout" onClick={logoutHandler} />
                     <form className="guest-profile-form">
                         <div className="guest-name">
                             <div className="guest-firstname">
