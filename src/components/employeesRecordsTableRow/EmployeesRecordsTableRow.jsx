@@ -21,7 +21,6 @@ function EmployeesRecordsTableRow({ employee }) {
     const handleDeleteClick = async () => {
         if (user.role === "ADMIN" && employee.role !== "ADMIN") {
             try {
-                console.log(employee.username);
                 const response = await deleteEmployee(employee.username);
                 if (response[0] === 1) {
                     setSuccess("Employee deleted successfully");

@@ -8,6 +8,7 @@ import {
 } from "../../helpers/APIOperations.js";
 import {deoudegrachtApi, employeesEndpoint} from "../../deoudegrachtApi.js";
 import {AuthContext} from "../../context/authContext/AuthContext.jsx";
+import MandatoryTag from "../mandatoryTag/MandatoryTag.jsx";
 
 function EmployeeDetailsForm() {
     const {username} = useParams();
@@ -108,24 +109,32 @@ function EmployeeDetailsForm() {
                             Firstname:
                             {
                             isEditMode ?
-                            <input
-                                type="text"
-                                defaultValue={employeeData.firstname}
-                                onChange={(event) => setFirstname(event.target.value)}
-                            /> : employeeData.firstname
+                                <>
+                                    <input
+                                        type="text"
+                                        defaultValue={employeeData.firstname}
+                                        onChange={(event) => setFirstname(event.target.value)}
+                                    />
+                                    <MandatoryTag restrictionMessage="No space"/>
+                                </> : employeeData.firstname
                             }
                         </label>
                     </div>
                     <div className="new-employee-lastname">
                         <label className="employee-label" id="lastname-label">
                             Lastname: {isEditMode ?
-                            <input type="text" defaultValue={employeeData.lastname} onChange={(event) => setLastname(event.target.value)}/> : employeeData.lastname}
+                            <>
+                                <input type="text" defaultValue={employeeData.lastname} onChange={(event) => setLastname(event.target.value)}/>
+                                <MandatoryTag restrictionMessage="No space"/>
+                            </>
+                            : employeeData.lastname}
                         </label>
                     </div>
                 </div>
                 <div className="new-employee-contact">
                     <label className="employee-label" id="email-label">
-                        Email: {isEditMode ?
+                        Email: {
+                        isEditMode ?
                         <input type="email" defaultValue={employeeData.email} onChange={(event) => setEmail(event.target.value)} /> : employeeData.email}
                     </label>
                     <label className="employee-label" id="phone-number-label">

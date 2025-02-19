@@ -142,6 +142,7 @@ function AddMenuItem(){
                        accept="image/*"
                        className="item-image-input"
                        onChange={(e) => handleImageSelect(e.target.files[0])}/>
+                <MandatoryTag restrictionMessage="Only JPEG, PNG, and GIF files are allowed."/>
 
                 <div className="form-field-label">
                     <label className="menuItem-label" htmlFor="itemCategory">Item Category</label>

@@ -27,7 +27,6 @@ function RecipeDetailsForm(){
     const [success, setSuccess] = useState("");
     const [error, setError] = useState("");
     const {user} = useContext(AuthContext)
-    console.log("user here", user);
 
     useEffect(() => {
         const editable = searchParams.get('edit') === 'true';
@@ -165,7 +164,6 @@ function RecipeDetailsForm(){
         return <div>Loading...</div>;
     }
 
-    console.log("user", user);
     return(
         <div className="login-form-container">
             <form className="login-form recipe-details-form" onSubmit={handleSaveClick}>

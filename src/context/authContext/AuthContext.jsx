@@ -19,7 +19,7 @@ function AuthContextProvider({children}) {
     }
     useEffect(() => {
         if (logedinUserData) {
-            console.log("Logged in as", logedinUserData);
+            console.log("Logged in");
         }
     }, [logedinUserData]);
 
