@@ -51,7 +51,9 @@ function LoginForm() {
                 else
                     navigate("/portal");
         } catch (error) {
-            console.error("Full error response:", error.response);
+            if(error.response?.status === 401 || error.response?.status === 403 || error.response?.status === 400)
+                setError("Invalid username or password");
+            else
             setError("Login failed: " + (error.response?.data || "Unknown error"));
             setSuccess("");
         }
